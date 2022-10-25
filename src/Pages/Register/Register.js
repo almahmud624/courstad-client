@@ -1,6 +1,27 @@
 import React from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Register = () => {
+  const { userGoogleSignIn } = useContext(AuthContext);
+  // google signin
+  const handleGoogleSignIn = () => {
+    userGoogleSignIn()
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  };
+  // create user
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+  };
   return (
     <div>
       <section>
@@ -18,7 +39,27 @@ const Register = () => {
 
               <div class="mt-8">
                 <div class="mt-6">
-                  <form action="#" method="POST" class="space-y-6">
+                  <form onSubmit={handleSubmit} method="POST" class="space-y-6">
+                    <div>
+                      <label
+                        for="name"
+                        class="block text-sm font-medium text-neutral-600"
+                      >
+                        {" "}
+                        Your Name{" "}
+                      </label>
+                      <div class="mt-1">
+                        <input
+                          id="name"
+                          name="name"
+                          type="text"
+                          autocomplete="name"
+                          required=""
+                          placeholder="Your Name"
+                          class="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                        />
+                      </div>
+                    </div>
                     <div>
                       <label
                         for="email"
@@ -112,13 +153,13 @@ const Register = () => {
                   </div>
                   <div>
                     <button
+                      onClick={handleGoogleSignIn}
                       type="submit"
                       class="w-full items-center block px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                     >
                       <div class="flex items-center justify-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          xmlns:xlink="http://www.w3.org/1999/xlink"
                           class="w-6 h-6"
                           viewBox="0 0 48 48"
                         >
@@ -128,9 +169,6 @@ const Register = () => {
                               d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"
                             ></path>
                           </defs>
-                          <clipPath id="b">
-                            <use xlink:href="#a" overflow="visible"></use>
-                          </clipPath>
                           <path
                             clip-path="url(#b)"
                             fill="#FBBC05"
