@@ -30,7 +30,7 @@ const Navbar = () => {
                 <rect x="14" y="11" width="7" height="12" />
               </svg>
               <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
-                Company
+                Courstad
               </span>
             </Link>
             <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -41,7 +41,7 @@ const Navbar = () => {
                   title="Our product"
                   class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                 >
-                  Product
+                  Home
                 </Link>
               </li>
               <li>
