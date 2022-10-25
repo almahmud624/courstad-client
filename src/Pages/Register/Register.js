@@ -3,7 +3,8 @@ import { useContext } from "react";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Register = () => {
-  const { userGoogleSignIn } = useContext(AuthContext);
+  const { userGoogleSignIn, createUser, updateUserProfie } =
+    useContext(AuthContext);
   // google signin
   const handleGoogleSignIn = () => {
     userGoogleSignIn()
@@ -21,6 +22,21 @@ const Register = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
+    console.log(password);
+
+    createUser(email, password)
+      .then((res) => {
+        handleUserProfileUpdate(name);
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  };
+  const handleUserProfileUpdate = (name) => {
+    updateUserProfie({ displayName: name })
+      .then(() => {})
+      .catch((error) => {});
   };
   return (
     <div>

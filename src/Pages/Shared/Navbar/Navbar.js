@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
+import avater from "../../../Assets/avatar.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -91,7 +92,7 @@ const Navbar = () => {
                 <li class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
                   <img
                     class="w-10 h-10 rounded-full"
-                    src={user?.photoURL}
+                    src={user?.photoURL ? user?.photoURL : avater}
                     alt=""
                   />
                 </li>

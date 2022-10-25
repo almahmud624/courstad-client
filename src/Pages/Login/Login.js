@@ -1,6 +1,24 @@
 import React from "react";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Login = () => {
+  const { userLogIn } = useContext(AuthContext);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    userLogIn(email, password)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  };
   return (
     <div>
       <div class="bg-white py-6 sm:py-8 lg:py-12">
@@ -9,7 +27,10 @@ const Login = () => {
             Login
           </h2>
 
-          <form class="max-w-lg border rounded-lg mx-auto">
+          <form
+            onSubmit={handleSubmit}
+            class="max-w-lg border rounded-lg mx-auto"
+          >
             <div class="flex flex-col gap-4 p-4 md:p-8">
               <div>
                 <label
@@ -98,12 +119,12 @@ const Login = () => {
             <div class="flex justify-center items-center bg-gray-100 p-4">
               <p class="text-gray-500 text-sm text-center">
                 Don't have an account?{" "}
-                <a
-                  href="#"
+                <Link
+                  to="/register"
                   class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
                 >
                   Register
-                </a>
+                </Link>
               </p>
             </div>
           </form>
