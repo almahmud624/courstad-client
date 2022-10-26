@@ -1,12 +1,15 @@
 import React from "react";
+import { useRef } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import ReactToPdf from "react-to-pdf";
 
 const CourseDetails = () => {
   const course = useLoaderData();
+  const ref = useRef();
   return (
     <div>
       <div class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="max-w-screen-lg px-4 md:px-8 mx-auto">
+        <div ref={ref} class="max-w-screen-lg px-4 md:px-8 mx-auto">
           <div class="">
             <div class="space-y-4">
               <div class="bg-gray-100 rounded-lg overflow-hidden relative h-72">
@@ -46,6 +49,9 @@ const CourseDetails = () => {
                 >
                   Add to cart
                 </Link>
+                <ReactToPdf targetRef={ref} filename="div-blue.pdf">
+                  {({ toPdf }) => <button onClick={toPdf}>Generate pdf</button>}
+                </ReactToPdf>
               </div>
               <div class="mt-5 md:mt-10 lg:mt-12">
                 <div class="text-gray-800 text-lg font-semibold mb-3">

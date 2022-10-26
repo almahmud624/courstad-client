@@ -17,7 +17,7 @@ export const routes = createBrowserRouter([
       {
         path: "/courses",
         element: <Courses />,
-        loader: () => fetch("http://localhost:4000/courses"),
+        loader: () => fetch("https://courstad-server.vercel.app/courses"),
       },
       {
         path: "/courses/:id",
@@ -27,7 +27,7 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/courses/${params.id}`),
+          fetch(`https://courstad-server.vercel.app/courses/${params.id}`),
       },
       {
         path: "/login",
