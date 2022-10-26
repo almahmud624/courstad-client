@@ -24,14 +24,16 @@ const Register = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
+    const photo = form.picUrl.value;
     const email = form.email.value;
     const password = form.password.value;
     setErr("");
 
     createUser(email, password)
       .then((res) => {
-        handleUserProfileUpdate(name);
+        handleUserProfileUpdate(name, photo);
         console.log(res.user);
+        form.reset();
       })
       .catch((error) => {
         setErr(error.code);
@@ -39,8 +41,8 @@ const Register = () => {
   };
 
   // update user profile
-  const handleUserProfileUpdate = (name) => {
-    updateUserProfie({ displayName: name })
+  const handleUserProfileUpdate = (name, photo) => {
+    updateUserProfie({ displayName: name, photoURL: photo })
       .then(() => {})
       .catch((error) => {
         setErr(error.code);

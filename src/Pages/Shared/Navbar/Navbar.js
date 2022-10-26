@@ -5,13 +5,13 @@ import { AuthContext } from "../../../Contexts/AuthProvider";
 import avater from "../../../Assets/avatar.png";
 import logo from "../../../Assets/logo.png";
 
-const Navbar = () => {
+const Navbar = ({ darkSwitch, switchTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, userSignOut } = useContext(AuthContext);
   const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div class="bg-gray-900">
+    <div class="bg-white dark:bg-gray-900 border-b">
       <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div class="relative flex items-center justify-between">
           <div class="flex items-center justify-between w-full">
@@ -22,8 +22,8 @@ const Navbar = () => {
               class="inline-flex items-center mr-8"
             >
               <img className="w-7" src={logo} alt="" />
-              <span class="ml-2 text-xl font-bold tracking-wide text-green-300 capitalize">
-                Cour<span className="text-white">stad</span>
+              <span class="ml-2 text-xl font-bold tracking-wide text-green-500 capitalize">
+                Cour<span className="dark:text-white text-slate-800">stad</span>
               </span>
             </Link>
             <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -32,7 +32,7 @@ const Navbar = () => {
                   to="/"
                   aria-label="Our product"
                   title="Our product"
-                  class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   Home
                 </Link>
@@ -42,7 +42,7 @@ const Navbar = () => {
                   to="/courses"
                   aria-label="Our product"
                   title="Our product"
-                  class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   Courses
                 </Link>
@@ -52,7 +52,7 @@ const Navbar = () => {
                   to="/blog"
                   aria-label="Blog"
                   title="Blog"
-                  class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   Blog
                 </Link>
@@ -62,7 +62,7 @@ const Navbar = () => {
                   to="/faq"
                   aria-label="FAQ"
                   title="FAQ"
-                  class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   FAQ
                 </Link>
@@ -73,11 +73,11 @@ const Navbar = () => {
                     <>
                       <li
                         onClick={userSignOut}
-                        class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                        class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                       >
                         Sign Out
                       </li>
-                      <li class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                      <li class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400">
                         <img
                           class="w-10 h-10 rounded-full"
                           src={user?.photoURL ? user?.photoURL : avater}
@@ -93,7 +93,7 @@ const Navbar = () => {
                           to="/login"
                           aria-label="Log in"
                           title="Log in"
-                          class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                          class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                         >
                           Log in
                         </Link>
@@ -111,11 +111,11 @@ const Navbar = () => {
                   value=""
                   id="dark-toggle"
                   class="sr-only peer"
-                  onChange={() => setDarkMode(!darkMode)}
+                  onClick={darkSwitch}
                 />
-                <div class="w-11 h-6 bg-white-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-200 dark:peer-focus:ring-slate-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
+                <div class="w-11 h-6 bg-slate-800 rounded-full peer peer-focus:ring-4 peer-focus:ring-slate-500 dark:peer-focus:ring-gray-200 dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
                 <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  {darkMode ? "Dark" : "Light"}
+                  {switchTheme === "dark" ? "Light" : "Dark"}
                 </span>
               </label>
             </ul>
@@ -153,11 +153,11 @@ const Navbar = () => {
                   value=""
                   id="slate-toggle"
                   class="sr-only peer"
-                  onChange={() => setDarkMode(!darkMode)}
+                  onClick={darkSwitch}
                 />
-                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
+                <div class="w-11 h-6 bg-slate-800 rounded-full peer peer-focus:ring-4 peer-focus:ring-slate-500 dark:peer-focus:ring-gray-200 dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
                 <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  {darkMode ? "Dark" : "Light"}
+                  {switchTheme === "dark" ? "Light" : "Dark"}
                 </span>
               </label>
             </div>
@@ -173,7 +173,7 @@ const Navbar = () => {
                         class="inline-flex items-center"
                       >
                         <img className="w-7" src={logo} alt="" />
-                        <span class="ml-2 text-xl font-bold tracking-wide text-green-500 capitalize text-gray-100 uppercase font-">
+                        <span class="ml-2 text-xl font-bold tracking-wide text-green-500 capitalize dark:text-gray-100 text-slate-800 uppercase font-">
                           Cour<span className="text-slate-800">stad</span>
                         </span>
                       </Link>
