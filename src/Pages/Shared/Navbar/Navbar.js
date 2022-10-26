@@ -79,7 +79,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                       </li>
                       <li class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400">
                         <img
-                          class="w-10 h-10 rounded-full"
+                          class="w-10 h-10 rounded-full object-cover"
                           src={user?.photoURL ? user?.photoURL : avater}
                           alt=""
                           title={user?.displayName}
