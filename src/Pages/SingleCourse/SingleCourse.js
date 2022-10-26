@@ -2,44 +2,40 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SingleCourse = ({ course }) => {
-  const { _id, courseName, coursePrice, courseThumb } = course;
+  const { _id, courseName, coursePrice, courseThumb, courseDescription } =
+    course;
   return (
-    <div className="mt-16 w-11/12">
-      <Link
-        to={`/courses/${_id}`}
-        class="group h-96 block bg-gray-100 rounded-lg overflow-hidden shadow-lg relative mb-2 lg:mb-3"
-      >
-        <img
-          src={courseThumb}
-          loading="lazy"
-          alt="Course Thumbnail"
-          class="w-full h-full object-cover object-center transition duration-200"
-        />
+    <div className="my-8 w-11/12 hover:scale-95 transition-all duration-500">
+      <Link to={`/courses/${_id}`} class="bg-white py-6 sm:py-8 lg:py-12">
+        <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+          <div class="md:h-68 flex flex-col sm:flex-row bg-transparent border border-gray-300 shadow dark:border-none dark:bg-gray-900 rounded-lg overflow-hidden">
+            <div class="w-7/12 flex flex-col p-4 sm:p-8">
+              <h2 class="dark:text-white text-gray-900 text-2xl font-semibold mb-4">
+                {courseName}
+              </h2>
 
-        <div class="flex gap-2 absolute left-0 bottom-2">
-          <span class="bg-red-500 text-white text-sm font-semibold tracking-wider uppercase rounded-r-lg px-3 py-1.5">
-            -50%
-          </span>
-          <span class="bg-white text-gray-800 text-sm font-bold tracking-wider uppercase rounded-lg px-3 py-1.5">
-            New
-          </span>
+              <p class="max-w-md text-gray-800 dark:text-gray-400">
+                {courseDescription.slice(0, 150)}
+                {"..."}
+              </p>
+
+              <div class="mt-auto">
+                <p class="inline-block dark:text-white text-gray-800 text-sm md:text-base font-semibold text-center bg-gray-300 dark:bg-gray-600 px-5 py-1 rounded">
+                  ${coursePrice}
+                </p>
+              </div>
+            </div>
+            <div class="w-1/2  order-first sm:order-none bg-gray-700">
+              <img
+                src={courseThumb}
+                loading="lazy"
+                alt="Course Thumb"
+                class="w-full h-full object-cover object-center"
+              />
+            </div>
+          </div>
         </div>
       </Link>
-
-      <div class="flex justify-between items-start gap-2 px-2">
-        <div class="flex flex-col">
-          <a
-            href="#"
-            class="text-gray-800 hover:text-gray-500 text-lg lg:text-xl font-bold transition duration-100"
-          >
-            {courseName}
-          </a>
-        </div>
-
-        <div class="flex flex-col items-end">
-          <span class="text-gray-600 lg:text-lg font-bold">${coursePrice}</span>
-        </div>
-      </div>
     </div>
   );
 };
