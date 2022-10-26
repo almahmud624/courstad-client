@@ -3,38 +3,27 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 import avater from "../../../Assets/avatar.png";
+import logo from "../../../Assets/logo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, userSignOut } = useContext(AuthContext);
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <div class="bg-gray-900">
-      <div class="px-4 py-3 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+      <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div class="relative flex items-center justify-between">
-          <div class="flex items-center">
+          <div class="flex items-center justify-between w-full">
             <Link
               to="/"
-              aria-label="Company"
-              title="Company"
+              aria-label="courstad"
+              title="courstad"
               class="inline-flex items-center mr-8"
             >
-              <svg
-                class="w-8 text-teal-accent-400"
-                viewBox="0 0 24 24"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeMiterlimit="10"
-                stroke="currentColor"
-                fill="none"
-              >
-                <rect x="3" y="1" width="7" height="12" />
-                <rect x="3" y="17" width="7" height="6" />
-                <rect x="14" y="1" width="7" height="6" />
-                <rect x="14" y="11" width="7" height="12" />
-              </svg>
-              <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
-                Courstad
+              <img className="w-7" src={logo} alt="" />
+              <span class="ml-2 text-xl font-bold tracking-wide text-green-300 capitalize">
+                Cour<span className="text-white">stad</span>
               </span>
             </Link>
             <ul class="flex items-center hidden space-x-8 lg:flex">
@@ -60,90 +49,117 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/"
-                  aria-label="Product pricing"
-                  title="Product pricing"
+                  to="/blog"
+                  aria-label="Blog"
+                  title="Blog"
                   class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                 >
-                  Pricing
+                  Blog
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/"
-                  aria-label="About us"
-                  title="About us"
+                  to="/faq"
+                  aria-label="FAQ"
+                  title="FAQ"
                   class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
                 >
-                  About us
+                  FAQ
                 </Link>
               </li>
+              <li>
+                <ul class="flex items-center hidden space-x-8 lg:flex">
+                  {user?.uid ? (
+                    <>
+                      <li
+                        onClick={userSignOut}
+                        class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                      >
+                        Sign Out
+                      </li>
+                      <li class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
+                        <img
+                          class="w-10 h-10 rounded-full"
+                          src={user?.photoURL ? user?.photoURL : avater}
+                          alt=""
+                        />
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li>
+                        <Link
+                          to="/login"
+                          aria-label="Log in"
+                          title="Log in"
+                          class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                        >
+                          Log in
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </li>
+              <label
+                for="dark-toggle"
+                class="inline-flex relative items-center mr-5 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  value=""
+                  id="dark-toggle"
+                  class="sr-only peer"
+                  onChange={() => setDarkMode(!darkMode)}
+                />
+                <div class="w-11 h-6 bg-white-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-gray-200 dark:peer-focus:ring-slate-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  {darkMode ? "Dark" : "Light"}
+                </span>
+              </label>
             </ul>
           </div>
-          <ul class="flex items-center hidden space-x-8 lg:flex">
-            {user?.uid ? (
-              <>
-                <li
-                  onClick={userSignOut}
-                  class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-                >
-                  Sign Out
-                </li>
-                <li class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400">
-                  <img
-                    class="w-10 h-10 rounded-full"
-                    src={user?.photoURL ? user?.photoURL : avater}
-                    alt=""
-                  />
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link
-                    to="/login"
-                    aria-label="Sign in"
-                    title="Sign in"
-                    class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-                  >
-                    Sign in
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/register"
-                    class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                    aria-label="Sign up"
-                    title="Sign up"
-                  >
-                    Sign up
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
+
           <div class="lg:hidden">
-            <button
-              aria-label="Open Menu"
-              title="Open Menu"
-              class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
-              onClick={() => setIsMenuOpen(true)}
-            >
-              <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
+            <div className="flex items-center gap-2">
+              <button
+                aria-label="Open Menu"
+                title="Open Menu"
+                class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
+                onClick={() => setIsMenuOpen(true)}
+              >
+                <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
+                  />
+                </svg>
+              </button>
+              <label
+                for="slate-toggle"
+                class="inline-flex relative items-center mr-5 cursor-pointer"
+              >
+                <input
+                  type="checkbox"
+                  value=""
+                  id="slate-toggle"
+                  class="sr-only peer"
+                  onChange={() => setDarkMode(!darkMode)}
                 />
-                <path
-                  fill="currentColor"
-                  d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
-                />
-                <path
-                  fill="currentColor"
-                  d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
-                />
-              </svg>
-            </button>
+                <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-slate-300 dark:peer-focus:ring-slate-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                  {darkMode ? "Dark" : "Light"}
+                </span>
+              </label>
+            </div>
             {isMenuOpen && (
               <div class="absolute top-0 left-0 w-full">
                 <div class="p-5 bg-white border rounded shadow-sm">
@@ -151,27 +167,13 @@ const Navbar = () => {
                     <div>
                       <Link
                         to="/"
-                        aria-label="Company"
-                        title="Company"
+                        aria-label="courstad"
+                        title="courstad"
                         class="inline-flex items-center"
                       >
-                        <svg
-                          class="w-8 text-deep-purple-accent-400"
-                          viewBox="0 0 24 24"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeMiterlimit="10"
-                          stroke="currentColor"
-                          fill="none"
-                        >
-                          <rect x="3" y="1" width="7" height="12" />
-                          <rect x="3" y="17" width="7" height="6" />
-                          <rect x="14" y="1" width="7" height="6" />
-                          <rect x="14" y="11" width="7" height="12" />
-                        </svg>
-                        <span class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
-                          Company
+                        <img className="w-7" src={logo} alt="" />
+                        <span class="ml-2 text-xl font-bold tracking-wide text-green-500 capitalize text-gray-100 uppercase font-">
+                          Cour<span className="text-slate-800">stad</span>
                         </span>
                       </Link>
                     </div>
@@ -216,8 +218,8 @@ const Navbar = () => {
                       <li>
                         <Link
                           to="/"
-                          aria-label="Product pricing"
-                          title="Product pricing"
+                          aria-label="Blog"
+                          title="Blog"
                           class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Pricing
@@ -226,11 +228,11 @@ const Navbar = () => {
                       <li>
                         <Link
                           to="/"
-                          aria-label="About us"
-                          title="About us"
+                          aria-label="FAQ"
+                          title="FAQ"
                           class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
-                          About us
+                          FAQ
                         </Link>
                       </li>
                       <li>
