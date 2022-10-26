@@ -4,10 +4,13 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Login = () => {
-  const { userLogIn } = useContext(AuthContext);
+  const { userLogIn, userGoogleSignIn, userGitHubSignIn } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
+
+  // login with email and password
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,6 +21,27 @@ const Login = () => {
       .then((res) => {
         navigate(from, { replace: true });
         console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  };
+  // login with google
+  const handleGoogleSignIn = () => {
+    userGoogleSignIn()
+      .then((res) => {
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error.code);
+      });
+  };
+
+  // login with gitHub
+  const handleGitHubSignIn = () => {
+    userGitHubSignIn()
+      .then((res) => {
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error.code);
@@ -73,7 +97,10 @@ const Login = () => {
                 </span>
               </div>
 
-              <button class="flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+              <button
+                onClick={handleGitHubSignIn}
+                class="flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+              >
                 <svg
                   class="w-5 h-5 shrink-0"
                   width="24"
@@ -87,10 +114,13 @@ const Login = () => {
                     fill="white"
                   />
                 </svg>
-                Continue with Facebook
+                Continue with GitHub
               </button>
 
-              <button class="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+              <button
+                onClick={handleGoogleSignIn}
+                class="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+              >
                 <svg
                   class="w-5 h-5 shrink-0"
                   width="24"

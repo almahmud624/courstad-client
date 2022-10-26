@@ -82,6 +82,7 @@ const Navbar = () => {
                           class="w-10 h-10 rounded-full"
                           src={user?.photoURL ? user?.photoURL : avater}
                           alt=""
+                          title={user?.displayName}
                         />
                       </li>
                     </>
