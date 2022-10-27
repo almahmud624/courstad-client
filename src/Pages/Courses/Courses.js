@@ -1,6 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import { Navigate, useLoaderData, useLocation } from "react-router-dom";
+import { useLoaderData, useLocation } from "react-router-dom";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import SingleCourse from "../SingleCourse/SingleCourse";
 
@@ -13,10 +12,14 @@ const Courses = () => {
   return (
     <div className="flex gap-x-5 dark:bg-gray-800 bg-white">
       {location.pathname !== "/" && (
-        <LeftSideBar className="relative" courses={courses} />
+        <LeftSideBar
+          className="relative"
+          key={Math.random()}
+          courses={courses}
+        />
       )}
       <div
-        class={`${
+        className={`${
           location.pathname === "/"
             ? "grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 max-w-screen-xl m-auto"
             : "grid grid-cols-1"

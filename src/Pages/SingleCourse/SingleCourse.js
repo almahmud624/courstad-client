@@ -14,46 +14,46 @@ const SingleCourse = ({ course }) => {
 
   return (
     <div className="my-5 w-11/12 m-auto hover:scale-[99%] transition-all duration-500">
-      <Link to={`/courses/${_id}`} class="bg-white py-6 sm:py-8 lg:py-12">
-        <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+      <Link to={`/courses/${_id}`} className="bg-white py-6 sm:py-8 lg:py-12">
+        <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
           <div
-            class={`${
+            className={`${
               location.pathname === "/"
                 ? "md:h-68 flex flex-col md:flex-col-reverse bg-transparent border border-gray-300 shadow dark:border-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden"
                 : "md:h-68 flex flex-col sm:flex-row bg-transparent border border-gray-300 shadow dark:border-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden"
             }`}
           >
             <div
-              class={`${
+              className={`${
                 location.pathname === "/"
                   ? "w-full flex flex-col p-4 sm:p-8"
                   : "w-full md:w-7/12 flex flex-col p-4 sm:p-8"
               }`}
             >
-              <h2 class="dark:text-white text-gray-900 text-xl md:text-2xl font-semibold mb-4">
+              <h2 className="dark:text-white text-gray-900 text-xl md:text-2xl font-semibold mb-4">
                 {courseName}
               </h2>
 
-              <p class="max-w-md text-gray-800 dark:text-gray-400">
+              <p className="max-w-md text-gray-800 dark:text-gray-400">
                 {courseDescription.slice(0, 150)}
                 {"..."}
               </p>
 
               <div className="flex justify-between items-center">
-                <div class="mt-auto">
-                  <p class="inline-block dark:text-white text-gray-800 text-sm md:text-base font-semibold text-center bg-green-300 dark:bg-green-600 px-5 py-1 mt-5 rounded">
+                <div className="mt-auto">
+                  <p className="inline-block dark:text-white text-gray-800 text-sm md:text-base font-semibold text-center bg-green-300 dark:bg-green-600 px-5 py-1 mt-5 rounded">
                     ${coursePrice}
                   </p>
                 </div>
-                <div class="mt-auto">
-                  <p class="inline-block dark:text-white text-gray-800 text-sm md:text-base font-semibold text-center bg-green-300 dark:bg-green-600 px-5 py-1 mt-5 rounded">
+                <div className="mt-auto">
+                  <p className="inline-block dark:text-white text-gray-800 text-sm md:text-base font-semibold text-center bg-green-300 dark:bg-green-600 px-5 py-1 mt-5 rounded">
                     {courseEnrollment} Enrolled
                   </p>
                 </div>
               </div>
             </div>
             <div
-              class={`${
+              className={`${
                 location.pathname === "/"
                   ? "w-full  order-first sm:order-none bg-gray-700"
                   : "w-full md:w-1/2 order-first sm:order-none bg-gray-700"
@@ -63,7 +63,7 @@ const SingleCourse = ({ course }) => {
                 src={courseThumb}
                 loading="lazy"
                 alt="Course Thumb"
-                class="w-full h-full object-cover object-center"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </div>
