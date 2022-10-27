@@ -1,10 +1,12 @@
 import React from "react";
-import { useLoaderData, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { useLocation } from "react-router-dom";
+import { CourseDataContext } from "../../Contexts/CourseData";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import SingleCourse from "../SingleCourse/SingleCourse";
 
 const Courses = () => {
-  let courses = useLoaderData();
+  let { courses } = useContext(CourseDataContext);
   const location = useLocation();
   if (location.pathname === "/home" || location.pathname === "/") {
     courses = courses.slice(0, 3);

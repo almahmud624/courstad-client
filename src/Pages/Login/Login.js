@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { FaGithub, FaGoogle, FaLink, FaUserAlt } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const { userLogIn, userGoogleSignIn, userGitHubSignIn } =
+  const { userLogIn, userGoogleSignIn, userGitHubSignIn, resetPassword } =
     useContext(AuthContext);
   const [err, setErr] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
@@ -21,10 +23,12 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+
+    setUserEmail(email);
     userLogIn(email, password)
       .then((res) => {
         navigate(from, { replace: true });
-        console.log(res.user);
+        setErr("");
         form.reset();
       })
       .catch((error) => {
@@ -47,6 +51,18 @@ const Login = () => {
     userGitHubSignIn()
       .then((res) => {
         navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        setErr(error.code);
+      });
+  };
+
+  // password reset
+  const handleResetPassword = () => {
+    resetPassword(userEmail)
+      .then(() => {
+        setErr("");
+        toast.success("Password reset email sent to your email");
       })
       .catch((error) => {
         setErr(error.code);
@@ -105,7 +121,6 @@ const Login = () => {
                           name="password"
                           className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                           placeholder="Your Password"
-                          required
                         />
                         <span className="rounded-r-lg inline-flex  items-center px-3 border-t bg-white border border-gray-300 text-gray-500 shadow-sm text-sm">
                           <RiLockPasswordFill />
@@ -113,44 +128,24 @@ const Login = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <input
-                          id="remember-me"
-                          name="remember-me"
-                          type="checkbox"
-                          placeholder="Your password"
-                          className="w-4 h-4 text-blue-600 border-gray-200 rounded focus:ring-blue-500"
-                        />
-                        <label
-                          htmlFor="remember-me"
-                          className="block ml-2 text-sm text-neutral-600 dark:text-gray-200"
-                        >
-                          {" "}
-                          Remember me{" "}
-                        </label>
-                      </div>
-
-                      <div className="text-sm">
-                        <a
-                          href="#"
-                          className="font-medium text-blue-600 hover:text-blue-500"
-                        >
-                          {" "}
-                          Forgot your password?{" "}
-                        </a>
-                      </div>
-                    </div>
-
                     <div>
                       <button
                         type="submit"
-                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                       >
                         Login
                       </button>
                     </div>
                   </form>
+                  <div className="text-sm text-center mt-5">
+                    <button
+                      onClick={handleResetPassword}
+                      className="font-base text-gray-400 hover:text-gray-500"
+                    >
+                      {" "}
+                      Forgot your password?{" "}
+                    </button>
+                  </div>
                   <div className="relative my-4">
                     <div className="absolute inset-0 flex items-center">
                       <div className="w-full border-t border-gray-300"></div>
@@ -170,7 +165,7 @@ const Login = () => {
                       GitHub <FaGithub className="ml-2" />
                     </button>
                     <button
-                      className="inline-flex items-center justify-center rounded-md border-2 border-green-700 bg-green-700 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-green-700 focus:outline-none focus:ring active:opacity-75 w-full dark:text-white"
+                      className="inline-flex items-center justify-center rounded-md border-2 border-red-800 bg-red-800 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-red-700 focus:outline-none focus:ring active:opacity-75 w-full dark:text-white"
                       onClick={handleGoogleSignIn}
                     >
                       Google <FaGoogle className="ml-2" />

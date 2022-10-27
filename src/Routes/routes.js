@@ -15,30 +15,19 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <Home />,
-        loader: () =>
-          fetch("https://courstad-server.vercel.app/courses").catch(
-            (error) => {}
-          ),
       },
       {
         path: "/home",
         element: <Home />,
-        loader: () =>
-          fetch("https://courstad-server.vercel.app/courses").catch(
-            (error) => {}
-          ),
       },
       {
         path: "/courses",
         element: <Courses />,
-        loader: () =>
-          fetch("https://courstad-server.vercel.app/courses").catch(
-            (error) => {}
-          ),
       },
       {
         path: "/courses/:id",

@@ -27,7 +27,11 @@ const Main = () => {
   };
   return (
     <div>
-      <Navbar darkSwitch={handleThemeSwitch} switchTheme={theme} />
+      <Navbar
+        darkSwitch={handleThemeSwitch}
+        key={Math.random()}
+        switchTheme={theme}
+      />
       <Outlet />
       <Footer />
     </div>

@@ -32,7 +32,6 @@ const Register = () => {
     createUser(email, password)
       .then((res) => {
         handleUserProfileUpdate(name, photo);
-        console.log(res.user);
         form.reset();
       })
       .catch((error) => {
@@ -147,39 +146,10 @@ const Register = () => {
                       </div>
                     </div>
 
-                    {/* <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <input
-                          id="remember-me"
-                          name="remember-me"
-                          type="checkbox"
-                          placeholder="Your password"
-                          className="w-4 h-4 text-blue-600 border-gray-200 rounded focus:ring-blue-500"
-                        />
-                        <label
-                          htmlFor="remember-me"
-                          className="block ml-2 text-sm text-neutral-600"
-                        >
-                          {" "}
-                          Remember me{" "}
-                        </label>
-                      </div>
-
-                      <div className="text-sm">
-                        <a
-                          href="#"
-                          className="font-medium text-blue-600 hover:text-blue-500"
-                        >
-                          {" "}
-                          Forgot your password?{" "}
-                        </a>
-                      </div>
-                    </div> */}
-
                     <div>
                       <button
                         type="submit"
-                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                       >
                         Create an Account
                       </button>
@@ -205,7 +175,7 @@ const Register = () => {
                       GitHub <FaGithub className="ml-2" />
                     </button>
                     <button
-                      className="inline-flex items-center justify-center rounded-md border-2 border-green-700 bg-green-700 py-3 text-sm font-medium text-white transition-colors dark:text-white hover:bg-transparent hover:text-green-700 focus:outline-none focus:ring active:opacity-75 w-full"
+                      className="inline-flex items-center justify-center rounded-md border-2 border-red-800 bg-red-800 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-red-700 focus:outline-none focus:ring active:opacity-75 w-full dark:text-white"
                       onClick={handleGoogleSignIn}
                     >
                       Google <FaGoogle className="ml-2" />

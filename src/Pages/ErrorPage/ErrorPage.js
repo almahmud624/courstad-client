@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import errImg from "../../Assets/error-img.jpg";
 
 const ErrorPage = () => {
   return (
@@ -9,7 +10,7 @@ const ErrorPage = () => {
           <div className="grid sm:grid-cols-2 gap-8">
             <div className="h-80 md:h-auto bg-gray-100 overflow-hidden shadow-lg rounded-lg">
               <img
-                src="https://img.freepik.com/free-photo/human-face-expressions-emotions-forgetful-dark-skinned-man-holding-his-hand-his-head-with-painstaking-expression-as-he-struggling-remember-something_273609-5932.jpg?w=740&t=st=1666836318~exp=1666836918~hmac=5d37eca3937dc3dc32d6c56f4f44fdc6e9ea11b2ab34118bcb5306426c8d614a"
+                src={errImg}
                 loading="lazy"
                 alt="Error Thumb"
                 className="w-full h-full object-cover object-center"

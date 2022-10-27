@@ -1,11 +1,13 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import banner from "../../Assets/banner.png";
+import { CourseDataContext } from "../../Contexts/CourseData";
 import Courses from "../Courses/Courses";
 import Teachers from "../Teachers/Teachers";
 
 const Home = () => {
-  const courses = useLoaderData();
+  const { courses } = useContext(CourseDataContext);
   return (
     <div>
       <div className="bg-gradient-to-r dark:from-gray-800 dark:via-teal-800 dark:to-green-700 from-white  to-green-800">
@@ -126,7 +128,7 @@ const Home = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 max-w-screen-lg m-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 max-w-screen-lg m-auto">
               {courses.slice(0, 3)?.map((teacher) => (
                 <Teachers key={Math.random()} teacher={teacher} />
               ))}
