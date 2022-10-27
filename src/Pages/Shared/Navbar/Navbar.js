@@ -2,37 +2,38 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
+import { FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import avater from "../../../Assets/avatar.png";
 import logo from "../../../Assets/logo.png";
 
 const Navbar = ({ darkSwitch, switchTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, userSignOut } = useContext(AuthContext);
-  const [darkMode, setDarkMode] = useState(false);
 
   return (
-    <div class="bg-white dark:bg-gray-800 ">
-      <div class="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-        <div class="relative flex items-center justify-between">
-          <div class="flex items-center justify-between w-full">
+    <div className="bg-white dark:bg-gray-800 ">
+      <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+        <div className="relative flex items-center justify-between">
+          <div className="flex items-center justify-between w-full">
             <Link
               to="/"
               aria-label="courstad"
               title="courstad"
-              class="inline-flex items-center mr-8"
+              className="inline-flex items-center mr-8"
             >
               <img className="w-7" src={logo} alt="" />
-              <span class="ml-2 text-xl font-bold tracking-wide text-green-500 capitalize">
+              <span className="ml-2 text-xl font-bold tracking-wide dark:text-green-700 capitalize">
                 Cour<span className="dark:text-white text-slate-800">stad</span>
               </span>
             </Link>
-            <ul class="flex items-center hidden space-x-8 lg:flex">
+            <ul className="flex items-center hidden space-x-8 lg:flex">
               <li>
                 <Link
                   to="/"
                   aria-label="Our product"
                   title="Our product"
-                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   Home
                 </Link>
@@ -42,7 +43,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   to="/courses"
                   aria-label="Our product"
                   title="Our product"
-                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   Courses
                 </Link>
@@ -52,7 +53,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   to="/blog"
                   aria-label="Blog"
                   title="Blog"
-                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   Blog
                 </Link>
@@ -62,24 +63,24 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   to="/faq"
                   aria-label="FAQ"
                   title="FAQ"
-                  class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                 >
                   FAQ
                 </Link>
               </li>
               <li>
-                <ul class="flex items-center hidden space-x-8 lg:flex">
+                <ul className="flex items-center hidden space-x-8 lg:flex">
                   {user?.uid ? (
                     <>
                       <li
                         onClick={userSignOut}
-                        class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                        className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 cursor-pointer hover:text-green-700 dark:hover:text-green-700"
                       >
                         Sign Out
                       </li>
-                      <li class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400">
+                      <li className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400">
                         <img
-                          class="w-10 h-10 rounded-full object-cover"
+                          className="w-10 h-10 rounded-full object-cover"
                           src={user?.photoURL ? user?.photoURL : avater}
                           alt=""
                           title={user?.displayName}
@@ -93,7 +94,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                           to="/login"
                           aria-label="Log in"
                           title="Log in"
-                          class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                          className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
                         >
                           Log in
                         </Link>
@@ -102,79 +103,59 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   )}
                 </ul>
               </li>
-              <label
-                for="dark-toggle"
-                class="inline-flex relative items-center mr-5 cursor-pointer"
+
+              <span
+                className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+                onClick={darkSwitch}
               >
-                <input
-                  type="checkbox"
-                  value=""
-                  id="dark-toggle"
-                  class="sr-only peer"
-                  onClick={darkSwitch}
-                />
-                <div class="w-11 h-6 bg-slate-800 rounded-full peer peer-focus:ring-4 peer-focus:ring-slate-500 dark:peer-focus:ring-gray-200 dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
-                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  {switchTheme === "dark" ? "Light" : "Dark"}
-                </span>
-              </label>
+                {switchTheme === "dark" ? (
+                  <FaMoon className="text-xl cursor-pointer" />
+                ) : (
+                  <FaSun className="text-xl cursor-pointer" />
+                )}
+              </span>
             </ul>
           </div>
 
-          <div class="lg:hidden">
+          <div className="lg:hidden">
             <div className="flex items-center gap-2">
               <button
                 aria-label="Open Menu"
                 title="Open Menu"
-                class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
+                className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline hover:bg-gray-200
+                        dark:hover:bg-gray-900"
                 onClick={() => setIsMenuOpen(true)}
               >
-                <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M23,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,13,23,13z"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="M23,6H1C0.4,6,0,5.6,0,5s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,6,23,6z"
-                  />
-                  <path
-                    fill="currentColor"
-                    d="M23,20H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h22c0.6,0,1,0.4,1,1S23.6,20,23,20z"
-                  />
-                </svg>
+                <HiOutlineMenuAlt1 className="dark:text-gray-200 text-2xl text-gray-800" />
               </button>
-              <label
-                for="slate-toggle"
-                class="inline-flex relative items-center mr-5 cursor-pointer"
+              <span
+                className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
+                onClick={darkSwitch}
               >
-                <input
-                  type="checkbox"
-                  value=""
-                  id="slate-toggle"
-                  class="sr-only peer"
-                  onClick={darkSwitch}
-                />
-                <div class="w-11 h-6 bg-slate-800 rounded-full peer peer-focus:ring-4 peer-focus:ring-slate-500 dark:peer-focus:ring-gray-200 dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-slate-600"></div>
-                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                  {switchTheme === "dark" ? "Light" : "Dark"}
-                </span>
-              </label>
+                {switchTheme === "dark" ? (
+                  <FaMoon className="text-xl cursor-pointer" />
+                ) : (
+                  <FaSun className="text-xl cursor-pointer" />
+                )}
+              </span>
             </div>
             {isMenuOpen && (
-              <div class="absolute top-0 left-0 w-full">
-                <div class="p-5 bg-white border rounded shadow-sm">
-                  <div class="flex items-center justify-between mb-4">
+              <div className="absolute top-0 z-50 left-0 w-full">
+                <div className="p-5 dark:bg-gray-700 dark:text-gray-200 bg-white border rounded shadow">
+                  <div className="flex items-center justify-between mb-4">
                     <div>
                       <Link
                         to="/"
                         aria-label="courstad"
                         title="courstad"
-                        class="inline-flex items-center"
+                        className="inline-flex items-center"
                       >
                         <img className="w-7" src={logo} alt="" />
-                        <span class="ml-2 text-xl font-bold tracking-wide text-green-500 capitalize dark:text-gray-100 text-slate-800 uppercase font-">
-                          Cour<span className="text-slate-800">stad</span>
+                        <span className="ml-2 text-xl font-bold tracking-wide  capitalize dark:text-green-700 text-slate-800 uppercase font-">
+                          Cour
+                          <span className="dark:text-gray-200 text-slate-800">
+                            stad
+                          </span>
                         </span>
                       </Link>
                     </div>
@@ -182,79 +163,91 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                       <button
                         aria-label="Close Menu"
                         title="Close Menu"
-                        class="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200
+                        dark:hover:bg-gray-800 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         onClick={() => setIsMenuOpen(false)}
                       >
-                        <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
-                          <path
-                            fill="currentColor"
-                            d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
-                          />
-                        </svg>
+                        <FaTimes className="dark:text-gray-200 text-gray-800 text-2xl" />
                       </button>
                     </div>
                   </div>
                   <nav>
-                    <ul class="space-y-4">
+                    <ul className="space-y-4">
                       <li>
                         <Link
                           to="/"
-                          aria-label="Our product"
-                          title="Our product"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          aria-label="Our Home"
+                          title="Our Home"
+                          className="font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
                         >
-                          Product
+                          Home
                         </Link>
                       </li>
                       <li>
                         <Link
-                          to="/"
-                          aria-label="Our product"
-                          title="Our product"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          to="/courses"
+                          aria-label="Our Courses"
+                          title="Our Courses"
+                          className="font-medium tracking-wide text-gray-700 transition-colors hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
                         >
-                          Features
+                          Courses
                         </Link>
                       </li>
                       <li>
                         <Link
-                          to="/"
+                          to="/blog"
                           aria-label="Blog"
                           title="Blog"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className="font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
                         >
-                          Pricing
+                          Blog
                         </Link>
                       </li>
                       <li>
                         <Link
-                          to="/"
+                          to="/faq"
                           aria-label="FAQ"
                           title="FAQ"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          className="font-medium tracking-wide text-gray-700 transition-colors hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
                         >
                           FAQ
                         </Link>
                       </li>
+                      <li></li>
                       <li>
-                        <Link
-                          to="/"
-                          aria-label="Sign in"
-                          title="Sign in"
-                          class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                        >
-                          Sign in
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/"
-                          class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          aria-label="Sign up"
-                          title="Sign up"
-                        >
-                          Sign up
-                        </Link>
+                        <ul className="space-y-5">
+                          {user?.uid ? (
+                            <>
+                              <li
+                                onClick={userSignOut}
+                                className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 cursor-pointer hover:text-green-700 dark:hover:text-green-700"
+                              >
+                                Sign Out
+                              </li>
+                              <li className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 block">
+                                <img
+                                  className="w-10 h-10 rounded-full object-cover"
+                                  src={user?.photoURL ? user?.photoURL : avater}
+                                  alt=""
+                                  title={user?.displayName}
+                                />
+                              </li>
+                            </>
+                          ) : (
+                            <>
+                              <li>
+                                <Link
+                                  to="/login"
+                                  aria-label="Log in"
+                                  title="Log in"
+                                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                                >
+                                  Log in
+                                </Link>
+                              </li>
+                            </>
+                          )}
+                        </ul>
                       </li>
                     </ul>
                   </nav>

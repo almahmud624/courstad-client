@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const LeftSideBar = ({ courses }) => {
   return (
-    <div className="w-1/3 p-8">
+    <div className="w-1/3 p-8 hidden lg:block">
       <div class="relative bg-white dark:bg-gray-900 border border-gray-300 shadow rounded-md sticky top-8">
         <div class="flex flex-col sm:flex-row sm:justify-around ">
           <div class="mt-10 px-6 ">

@@ -194,13 +194,14 @@ const Register = () => {
                   </div>
                   <div className="flex justify-center gap-8">
                     <button
-                      class="inline-flex items-center justify-center rounded-md border-2 border-[#171515] bg-[#171515]  py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-[#171515] focus:outline-none focus:ring active:opacity-75 w-full"
+                      class="inline-flex items-center justify-center rounded-md border-2 border-[#171515] bg-[#171515]  py-3 text-sm font-medium text-white 
+                      dark:text-white transition-colors hover:bg-transparent hover:text-[#171515] focus:outline-none focus:ring active:opacity-75 w-full"
                       onClick={handleGitHubSignIn}
                     >
                       GitHub <FaGithub className="ml-2" />
                     </button>
                     <button
-                      class="inline-flex items-center justify-center rounded-md border-2 border-green-700 bg-green-700 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-green-700 focus:outline-none focus:ring active:opacity-75 w-full"
+                      class="inline-flex items-center justify-center rounded-md border-2 border-green-700 bg-green-700 py-3 text-sm font-medium text-white transition-colors dark:text-white hover:bg-transparent hover:text-green-700 focus:outline-none focus:ring active:opacity-75 w-full"
                       onClick={handleGoogleSignIn}
                     >
                       Google <FaGoogle className="ml-2" />

@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <div class="bg-gradient-to-r dark:from-gray-800 dark:via-teal-800 dark:to-green-700 from-white  to-green-800">
-        <section class="max-w-screen-xl  px-4 md:px-8 mx-auto">
+        <section class="max-w-screen-xl px-4 md:px-8 pt-10 md:pt-0 mx-auto">
           <div class="flex flex-wrap justify-between">
             <div class="w-full lg:w-1/2 text-start   flex flex-col justify-center  mb-6 sm:mb-12 lg:mb-0">
               <h1 class="dark:text-gray-200 text-gray-800 text-4xl sm:text-5xl md:text-6xl font-bold  mb-4 md:mb-8">
@@ -48,10 +48,10 @@ const Home = () => {
       </div>
       <section className="dark:bg-gray-800 bg-white pt-16">
         <div className="">
-          <h1 className="text-center text-5xl font-semibold dark:text-gray-200 text-gray-800">
+          <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800">
             Our Courses
           </h1>
-          <p className="text-center my-5 dark:text-gray-400 text-gray-800">
+          <p className="text-center my-3 text-sm md:text-base md:my-5 dark:text-gray-400 text-gray-800 max-w-sm m-auto ">
             Learn more skills, be more competitive,Affordable online courses for
             everyone
           </p>
@@ -83,11 +83,11 @@ const Home = () => {
               </div>
             </div>
             <div className="flex flex-col justify-center p-8 dark:bg-gray-900 dark:text-gray-200 lg:p-16 lg:pl-10 lg:w-1/2">
-              <h5 className="mb-3 text-3xl font-semibold leading-none sm:text-4xl">
+              <h5 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl">
                 Learn the fun way
               </h5>
               <p className="mb-5 dark:text-gray-400 text-gray-800">
-                <span className="font-base">
+                <span className="font-base text-sm md:text-base">
                   Even more important than knowledge is confidence, which you
                   have gained through you learning journey. No matter what you
                   are looking to learn, or gain confidence in, Coursatad has

@@ -34,7 +34,7 @@ const CourseDetails = () => {
                   <ReactToPdf
                     className=""
                     targetRef={ref}
-                    filename="div-blue.pdf"
+                    filename="course.pdf"
                   >
                     {({ toPdf }) => (
                       <button onClick={toPdf}>Generate pdf</button>
@@ -42,7 +42,7 @@ const CourseDetails = () => {
                   </ReactToPdf>
                 </button>
               </div>
-              <div className="flex items-center justify-between py-3">
+              <div className="flex flex-col md:flex-row justify-start items-start md:items-center md:justify-between py-3">
                 <div className="flex items-center ">
                   <span class="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 mr-3">
                     <img
@@ -56,11 +56,13 @@ const CourseDetails = () => {
                     {courseTutor}
                   </div>
                 </div>
-                <div className="text-gray-600 dark:text-gray-400 flex items-center ">
-                  <FaClock className="mr-3" /> Duration: {courseDuration}
-                </div>
-                <div className="text-gray-600 dark:text-gray-400 flex items-center">
-                  <FaUserAlt className="mr-3" /> {courseEnrollment} Enrolled
+                <div className="flex w-full md:mt-0 mt-5 md:w-[57%] justify-between items-center">
+                  <div className="text-gray-600 dark:text-gray-400 flex items-center ">
+                    <FaClock className="mr-3" /> Duration: {courseDuration}
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 flex items-center">
+                    <FaUserAlt className="mr-3" /> {courseEnrollment} Enrolled
+                  </div>
                 </div>
               </div>
               <div class="bg-gray-100 rounded-lg overflow-hidden relative h-72">
@@ -71,14 +73,14 @@ const CourseDetails = () => {
                   class="w-full h-full object-cover object-center"
                 />
 
-                <span class="bg-gray-800 dark:bg-white text-white dark:text-gray-800 text-xl font-semibold tracking-wider uppercase rounded-tr-lg absolute left-0 bottom-0 px-3 py-1.5">
+                <span class="bg-green-300 dark:bg-green-700 dark:text-white text-gray-800 text-xl font-semibold tracking-wider uppercase rounded-tr-lg absolute left-0 bottom-0 px-3 py-1.5">
                   ${coursePrice}{" "}
-                  <span className="text-xs font-thin capitalize text-red-400 dark:text-red-600">
-                    <span className="text-white dark:text-gray-800">/</span> 25%
+                  <span className="text-xs font-thin capitalize text-red-400 dark:text-gray-300">
+                    <span className="dark:text-white text-gray-800">/</span> 25%
                     off
                   </span>
                 </span>
-                <span class="bg-gray-800 dark:bg-white text-white dark:text-gray-800 text-sm font-semibold tracking-wider uppercase rounded-tl-lg absolute right-0 bottom-0 px-3 py-1.5">
+                <span class="bg-green-300 dark:bg-green-700 dark:text-white text-gray-800 text-sm font-semibold tracking-wider uppercase rounded-tl-lg absolute right-0 bottom-0 px-3 py-1.5">
                   {categories}
                 </span>
               </div>
@@ -107,9 +109,9 @@ const CourseDetails = () => {
                 class="group relative inline-block focus:outline-none focus:ring"
                 to={`/checkout/${_id}`}
               >
-                <span class="absolute inset-0 translate-x-0 translate-y-0 bg-green-300 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded"></span>
+                <span class="absolute inset-0 translate-x-0 translate-y-0 bg-green-700 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded"></span>
 
-                <span class="relative inline-block border-2 border-green-500 rounded px-8 py-3 text-sm font-bold tracking-widest capitalize">
+                <span class="relative inline-block border-2 border-green-500 text-green-100 rounded px-8 py-3 text-sm font-bold tracking-widest capitalize">
                   get premium access
                 </span>
               </Link>

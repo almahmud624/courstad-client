@@ -13,25 +13,25 @@ const CheckOut = () => {
   return (
     <div className="dark:bg-gray-800 dark:text-gray-200">
       <div className="max-w-screen-xl m-auto px-20 ">
-        <div class="flex flex-row-reverse justify-center gap-x-20">
+        <div class="flex flex-col md:flex-row-reverse justify-center gap-x-20">
           <div class="px-4 pt-8 w-full">
             <div>
               <p class="text-xl font-medium">Your Order</p>
-              <div class="mt-8 space-y-3 rounded-lg border dark:bg-gray-200 p-2 dark:text-gray-800">
-                <div class="flex flex-col rounded-lg dark:bg-gray-200 sm:flex-row">
+              <div class="mt-8 space-y-3 rounded-lg border border-gray-300 dark:bg-gray-800 p-2 m-2 dark:text-gray-800">
+                <div class="flex flex-col rounded-lg dark:bg-gray-800 md:flex-row">
                   <img
-                    class="m-2 h-24 w-28 rounded-md border object-cover object-center"
+                    class="md:h-auto shadow md:w-28 rounded-md border object-cover object-center"
                     src={course.courseThumb}
                     alt=""
                   />
-                  <div class="flex w-full flex-col px-4 py-4">
+                  <div class="flex w-full shadow ml-0 md:ml-2 md:mt-0 mt-2 rounded border  dark:text-gray-200 text-gray-800 dark:border-gray-300 flex-col px-4 py-4">
                     <span class="font-semibold">{course.courseName}</span>
                     {/* <span class="float-right text-gray-400">42EU - 8.5US</span> */}
                     <p class="text-lg font-bold">${course.coursePrice}</p>
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="md:block hidden">
                 <p class="mt-8 text-lg font-medium">Select Payment Methods</p>
                 <form class="mt-5 grid gap-6">
                   <div class="relative">
@@ -162,15 +162,70 @@ const CheckOut = () => {
                             placeholder="Bangladesh"
                           />
                         </div>
+                        <div className="md:hidden block mb-8">
+                          <p class="mt-8 text-lg font-medium">
+                            Select Payment Methods
+                          </p>
+                          <form class="mt-5 grid gap-6">
+                            <div class="relative">
+                              <input
+                                class="peer hidden"
+                                id="radio_3"
+                                type="radio"
+                                name="radio"
+                                checked
+                              />
+                              <span class="peer-checked:border-green-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 dark:bg-gray-200"></span>
+                              <label
+                                class="peer-checked:border-2  peer-checked:border-green-700 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                                for="radio_3"
+                              >
+                                <img
+                                  class="w-8 object-contain"
+                                  src={bkashLogo}
+                                  alt=""
+                                />
+                                <div class="ml-5 ">
+                                  <span class="font-semibold">bKash</span>
+                                </div>
+                              </label>
+                            </div>
+                            <div class="relative">
+                              <input
+                                class="peer hidden"
+                                id="radio_4"
+                                type="radio"
+                                name="radio"
+                                checked
+                              />
+                              <span class="peer-checked:border-green-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+                              <label
+                                class="peer-checked:border-2 peer-checked:border-green-700  flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+                                for="radio_4"
+                              >
+                                <img
+                                  class="w-8 object-contain"
+                                  src={bankingLogo}
+                                  alt=""
+                                />
+                                <div class="ml-5 items-center flex">
+                                  <span class="font-semibold">
+                                    Mobile Banking
+                                  </span>
+                                </div>
+                              </label>
+                            </div>
+                          </form>
+                        </div>
                         <div class="mb-6">
                           <div class="flex">
                             <Link
                               class="group relative inline-block focus:outline-none focus:ring"
                               to=""
                             >
-                              <span class="absolute inset-0 translate-x-0 translate-y-0 bg-green-300 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded"></span>
+                              <span class="absolute inset-0 translate-x-0 translate-y-0 bg-green-700 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded"></span>
 
-                              <span class="relative inline-block border-2 border-green-500 rounded px-8 py-3 text-md font-bold tracking-widest dark:text-gray-800 capitalize">
+                              <span class="relative inline-block border-2 border-green-500 rounded px-8 py-3 text-md font-semibold tracking-widest text-green-100 dark:text-green-100 capitalize">
                                 Order Now
                               </span>
                             </Link>

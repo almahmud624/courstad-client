@@ -18,7 +18,7 @@ const Courses = () => {
       <div
         class={`${
           location.pathname === "/"
-            ? "grid grid-cols-3 max-w-screen-xl m-auto"
+            ? "grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 max-w-screen-xl m-auto"
             : "grid grid-cols-1"
         }`}
       >
