@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Blog from "../Pages/Blog/Blog";
 import Main from "../Layout/Main";
 import CourseDetails from "../Pages/CourseDetails/CourseDetails";
@@ -18,6 +18,14 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Home />,
+        loader: () =>
+          fetch("https://courstad-server.vercel.app/courses").catch(
+            (error) => {}
+          ),
+      },
+      {
+        path: "/home",
         element: <Home />,
         loader: () =>
           fetch("https://courstad-server.vercel.app/courses").catch(

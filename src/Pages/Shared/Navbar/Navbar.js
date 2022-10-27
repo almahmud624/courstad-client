@@ -30,7 +30,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
             <ul className="flex items-center hidden space-x-8 lg:flex">
               <li>
                 <NavLink
-                  to="/"
+                  to="home"
                   aria-label="Our product"
                   title="Our product"
                   className={({ isActive }) =>
@@ -123,6 +123,20 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                           }
                         >
                           Log in
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          to="/register"
+                          aria-label=""
+                          title="sign up"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                              : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                          }
+                        >
+                          Sign Up
                         </NavLink>
                       </li>
                     </>
@@ -289,10 +303,24 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                                   className={({ isActive }) =>
                                     isActive
                                       ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
-                                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600"
                                   }
                                 >
                                   Log in
+                                </NavLink>
+                              </li>
+                              <li>
+                                <NavLink
+                                  to="/register"
+                                  aria-label="Log in"
+                                  title="Log in"
+                                  className={({ isActive }) =>
+                                    isActive
+                                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                                  }
+                                >
+                                  Sign Up
                                 </NavLink>
                               </li>
                             </>

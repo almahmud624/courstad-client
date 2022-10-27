@@ -6,12 +6,12 @@ import SingleCourse from "../SingleCourse/SingleCourse";
 const Courses = () => {
   let courses = useLoaderData();
   const location = useLocation();
-  if (location.pathname === "/") {
+  if (location.pathname === "/home") {
     courses = courses.slice(0, 3);
   }
   return (
     <div className="flex gap-x-5 dark:bg-gray-800 bg-white">
-      {location.pathname !== "/" && (
+      {location.pathname !== "/home" && (
         <LeftSideBar
           className="relative"
           key={Math.random()}
@@ -20,7 +20,7 @@ const Courses = () => {
       )}
       <div
         className={`${
-          location.pathname === "/"
+          location.pathname === "/home"
             ? "grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 max-w-screen-xl m-auto"
             : "grid grid-cols-1"
         }`}

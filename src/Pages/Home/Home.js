@@ -121,9 +121,8 @@ const Home = () => {
               </h2>
 
               <p className="max-w-screen-md text-gray-500 dark:text-gray-400 md:text-lg text-center mx-auto">
-                This is a section of some simple filler text, also known as
-                placeholder text. It shares some characteristics of a real
-                written text but is random or otherwise generated.
+                he best teacher in life can completely change life in a good
+                way. A teacher is the best guide for everyone
               </p>
             </div>
 
