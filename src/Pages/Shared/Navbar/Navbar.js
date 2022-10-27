@@ -101,12 +101,14 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                             : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
                         }
                       >
-                        <img
-                          className="w-10 h-10 rounded-full object-cover"
-                          src={user?.photoURL ? user?.photoURL : avater}
-                          alt=""
-                          title={user?.displayName}
-                        />
+                        <Link to="/profile-edit">
+                          <img
+                            className="w-10 h-10 rounded-full object-cover cursor-pointer"
+                            src={user?.photoURL ? user?.photoURL : avater}
+                            alt=""
+                            title={user?.displayName}
+                          />
+                        </Link>
                       </li>
                     </>
                   ) : (
@@ -285,12 +287,16 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                                 Sign Out
                               </li>
                               <li className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 block">
-                                <img
-                                  className="w-10 h-10 rounded-full object-cover"
-                                  src={user?.photoURL ? user?.photoURL : avater}
-                                  alt=""
-                                  title={user?.displayName}
-                                />
+                                <Link to="/profile-edit">
+                                  <img
+                                    className="w-10 h-10 rounded-full object-cover cursor-pointer"
+                                    src={
+                                      user?.photoURL ? user?.photoURL : avater
+                                    }
+                                    alt=""
+                                    title={user?.displayName}
+                                  />
+                                </Link>
                               </li>
                             </>
                           ) : (

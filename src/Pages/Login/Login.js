@@ -23,8 +23,6 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-
-    setUserEmail(email);
     userLogIn(email, password)
       .then((res) => {
         navigate(from, { replace: true });
@@ -59,6 +57,8 @@ const Login = () => {
 
   // password reset
   const handleResetPassword = () => {
+    console.log(userEmail);
+
     resetPassword(userEmail)
       .then(() => {
         setErr("");
@@ -107,6 +107,7 @@ const Login = () => {
                           className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                           placeholder="Your email"
                           required
+                          onBlur={(e) => setUserEmail(e.target.value)}
                         />
                         <span className="rounded-r-lg inline-flex  items-center px-3 border-t bg-white border border-gray-300 text-gray-500 shadow-sm text-sm">
                           <GrMail />

@@ -10,6 +10,7 @@ import Register from "../Pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import FrequentlyQuestion from "../Pages/FrequentlyQuestion/FrequentlyQuestion";
 import CheckOut from "../Pages/Checkout/CheckOut";
+import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 
 export const routes = createBrowserRouter([
   {
@@ -50,6 +51,14 @@ export const routes = createBrowserRouter([
       {
         path: "/faq",
         element: <FrequentlyQuestion />,
+      },
+      {
+        path: "/profile-edit",
+        element: (
+          <PrivateRoute>
+            <UpdateProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/checkout/:id",
