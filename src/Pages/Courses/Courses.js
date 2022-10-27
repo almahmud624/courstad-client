@@ -11,7 +11,7 @@ const Courses = () => {
     courses = courses.slice(0, 3);
   }
   return (
-    <div className="flex gap-x-5">
+    <div className="flex gap-x-5 dark:bg-gray-800 bg-white">
       {location.pathname !== "/" && (
         <LeftSideBar className="relative" courses={courses} />
       )}

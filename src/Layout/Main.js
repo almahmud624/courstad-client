@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
+import Footer from "../Pages/Shared/Footer/Footer";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
 
 const Main = () => {
@@ -28,6 +29,7 @@ const Main = () => {
     <div>
       <Navbar darkSwitch={handleThemeSwitch} switchTheme={theme} />
       <Outlet />
+      <Footer />
     </div>
   );
 };

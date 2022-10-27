@@ -59,12 +59,12 @@ const Register = () => {
   };
   return (
     <div>
-      <section>
+      <section className="dark:bg-gray-800 bg-white">
         <div class="flex overflow-hidden justify-center items-center">
           <div class="flex flex-col justify-center items-center flex-1 px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div class="w-full max-w-xl mx-auto lg:w-96">
               <div>
-                <h2 class="mt-6 text-3xl font-bold text-neutral-600">
+                <h2 class="mt-6 text-3xl font-bold text-neutral-600 dark:text-gray-200">
                   Create an Account
                 </h2>
               </div>
@@ -186,7 +186,7 @@ const Register = () => {
                       <div class="w-full border-t border-gray-300"></div>
                     </div>
                     <div class="relative flex justify-center text-sm">
-                      <span class="px-2 bg-white text-neutral-600">
+                      <span class="px-2 bg-white dark:bg-gray-800 text-neutral-600 dark:text-gray-200">
                         {" "}
                         Or continue with{" "}
                       </span>
@@ -207,11 +207,11 @@ const Register = () => {
                     </button>
                   </div>
                   <div class="flex justify-center items-center mt-3 p-4">
-                    <p class="text-gray-500 text-sm text-center">
+                    <p class="text-gray-500 text-sm text-center dark:text-gray-200">
                       Already Courstad user?{" "}
                       <Link
                         to="/login"
-                        class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
+                        class="text-green-500 hover:text-green-600 active:text-green-700 transition duration-100"
                       >
                         Login
                       </Link>
