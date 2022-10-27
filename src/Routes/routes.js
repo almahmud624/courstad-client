@@ -9,6 +9,7 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import FrequentlyQuestion from "../Pages/FrequentlyQuestion/FrequentlyQuestion";
+import CheckOut from "../Pages/Checkout/CheckOut";
 
 export const routes = createBrowserRouter([
   {
@@ -23,11 +24,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/courses/:id",
-        element: (
-          <PrivateRoute>
-            <CourseDetails />
-          </PrivateRoute>
-        ),
+        element: <CourseDetails />,
         loader: ({ params }) =>
           fetch(`https://courstad-server.vercel.app/courses/${params.id}`),
       },
@@ -46,6 +43,16 @@ export const routes = createBrowserRouter([
       {
         path: "/faq",
         element: <FrequentlyQuestion />,
+      },
+      {
+        path: "/checkout/:id",
+        element: (
+          <PrivateRoute>
+            <CheckOut />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`https://courstad-server.vercel.app/courses/${params.id}`),
       },
     ],
   },
