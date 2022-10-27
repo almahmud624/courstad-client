@@ -141,7 +141,7 @@ const CheckOut = () => {
                             name="Phone Number"
                             required
                             class="border border-gray-300 dark:border-gray-200 pl-3 py-3 shadow-sm rounded bg-transparent text-sm focus:outline-none focus:border-green-700 placeholder-gray-500 text-gray-600 dark:text-gray-400"
-                            placeholder=""
+                            placeholder="+8801700000000"
                           />
                         </div>
 
@@ -159,7 +159,7 @@ const CheckOut = () => {
                             name="country"
                             required
                             class="border bg-transparent border-gray-300 dark:border-gray-200 pl-3 py-3 shadow-sm rounded text-sm focus:outline-none focus:border-green-700 placeholder-gray-500 text-gray-600 dark:text-gray-400"
-                            placeholder="United States"
+                            placeholder="Bangladesh"
                           />
                         </div>
                         <div class="mb-6">
