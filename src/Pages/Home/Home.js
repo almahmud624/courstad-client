@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import banner from "../../Assets/banner.png";
 import Courses from "../Courses/Courses";
+import Teachers from "../Teachers/Teachers";
 
 const Home = () => {
   const courses = useLoaderData();
@@ -107,6 +108,29 @@ const Home = () => {
                   </Link>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="">
+        <div className="dark:bg-gray-800 bg-white py-6 sm:py-8 lg:py-12">
+          <div className="max-w-screen-xl px-4 md:px-8 mx-auto">
+            <div className="mb-10 md:mb-16">
+              <h2 className="text-gray-800 dark:text-gray-200 text-3xl md:text-5xl font-semibold text-center mb-4 md:mb-6">
+                Our Teachers
+              </h2>
+
+              <p className="max-w-screen-md text-gray-500 dark:text-gray-400 md:text-lg text-center mx-auto">
+                This is a section of some simple filler text, also known as
+                placeholder text. It shares some characteristics of a real
+                written text but is random or otherwise generated.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 max-w-screen-lg m-auto">
+              {courses.slice(0, 3)?.map((teacher) => (
+                <Teachers key={Math.random()} teacher={teacher} />
+              ))}
             </div>
           </div>
         </div>
