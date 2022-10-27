@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { FaMoon, FaSun, FaTimes } from "react-icons/fa";
@@ -16,7 +16,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <div className="flex items-center justify-between w-full">
-            <Link
+            <NavLink
               to="/"
               aria-label="courstad"
               title="courstad"
@@ -26,47 +26,63 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               <span className="ml-2 text-xl font-bold tracking-wide dark:text-green-700 capitalize">
                 Cour<span className="dark:text-white text-slate-800">stad</span>
               </span>
-            </Link>
+            </NavLink>
             <ul className="flex items-center hidden space-x-8 lg:flex">
               <li>
-                <Link
+                <NavLink
                   to="/"
                   aria-label="Our product"
                   title="Our product"
-                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                  }
                 >
                   Home
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/courses"
                   aria-label="Our product"
                   title="Our product"
-                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover:text-green-600 "
+                  }
                 >
                   Courses
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/blog"
                   aria-label="Blog"
                   title="Blog"
-                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover:text-green-600 "
+                  }
                 >
                   Blog
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link
+                <NavLink
                   to="/faq"
                   aria-label="FAQ"
                   title="FAQ"
-                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover:text-green-600 "
+                  }
                 >
                   FAQ
-                </Link>
+                </NavLink>
               </li>
               <li>
                 <ul className="flex items-center hidden space-x-8 lg:flex">
@@ -74,11 +90,17 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                     <>
                       <li
                         onClick={userSignOut}
-                        className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 cursor-pointer hover:text-green-700 dark:hover:text-green-700"
+                        className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 cursor-pointer hover:text:green-700 dark:hover:text-green-700"
                       >
                         Sign Out
                       </li>
-                      <li className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400">
+                      <li
+                        className={({ isActive }) =>
+                          isActive
+                            ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                            : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                        }
+                      >
                         <img
                           className="w-10 h-10 rounded-full object-cover"
                           src={user?.photoURL ? user?.photoURL : avater}
@@ -90,14 +112,18 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   ) : (
                     <>
                       <li>
-                        <Link
+                        <NavLink
                           to="/login"
                           aria-label="Log in"
                           title="Log in"
-                          className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                              : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                          }
                         >
                           Log in
-                        </Link>
+                        </NavLink>
                       </li>
                     </>
                   )}
@@ -144,20 +170,20 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                 <div className="p-5 dark:bg-gray-700 dark:text-gray-200 bg-white border rounded shadow">
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <Link
+                      <NavLink
                         to="/"
                         aria-label="courstad"
                         title="courstad"
                         className="inline-flex items-center"
                       >
                         <img className="w-7" src={logo} alt="" />
-                        <span className="ml-2 text-xl font-bold tracking-wide  capitalize dark:text-green-700 text-slate-800 uppercase font-">
+                        <span className="ml-2 text-xl font-bold tracking-wide  capitalize dark:text-green-700 text-slate-800 uppercase">
                           Cour
                           <span className="dark:text-gray-200 text-slate-800">
                             stad
                           </span>
                         </span>
-                      </Link>
+                      </NavLink>
                     </div>
                     <div>
                       <button
@@ -174,44 +200,60 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   <nav>
                     <ul className="space-y-4">
                       <li>
-                        <Link
+                        <NavLink
                           to="/"
                           aria-label="Our Home"
                           title="Our Home"
-                          className="font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "font-medium tracking-wide text-green-600 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-green-600 duration-200 hover:text-deep-purple-accent-400"
+                              : "font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-600 dark:hover:text-green-600 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          }
                         >
                           Home
-                        </Link>
+                        </NavLink>
                       </li>
                       <li>
-                        <Link
+                        <NavLink
                           to="/courses"
                           aria-label="Our Courses"
                           title="Our Courses"
-                          className="font-medium tracking-wide text-gray-700 transition-colors hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "font-medium tracking-wide text-green-600 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-green-600 duration-200 hover:text-deep-purple-accent-400"
+                              : "font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-600 dark:hover:text-green-600 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          }
                         >
                           Courses
-                        </Link>
+                        </NavLink>
                       </li>
                       <li>
-                        <Link
+                        <NavLink
                           to="/blog"
                           aria-label="Blog"
                           title="Blog"
-                          className="font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "font-medium tracking-wide text-green-600 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-green-600 duration-200 hover:text-deep-purple-accent-400"
+                              : "font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-600 dark:hover:text-green-600 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          }
                         >
                           Blog
-                        </Link>
+                        </NavLink>
                       </li>
                       <li>
-                        <Link
+                        <NavLink
                           to="/faq"
                           aria-label="FAQ"
                           title="FAQ"
-                          className="font-medium tracking-wide text-gray-700 transition-colors hover:text-geen-700 dark:hover:text-green-700 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          className={({ isActive }) =>
+                            isActive
+                              ? "font-medium tracking-wide text-green-600 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-green-600 duration-200 hover:text-deep-purple-accent-400"
+                              : "font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-600 dark:hover:text-green-600 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                          }
                         >
                           FAQ
-                        </Link>
+                        </NavLink>
                       </li>
                       <li></li>
                       <li>
@@ -220,7 +262,11 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                             <>
                               <li
                                 onClick={userSignOut}
-                                className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 cursor-pointer hover:text-green-700 dark:hover:text-green-700"
+                                className={({ isActive }) =>
+                                  isActive
+                                    ? "font-medium tracking-wide text-green-600 transition-colors  hover:text-geen-700 dark:hover:text-green-700 dark:text-green-600 duration-200 hover:text-deep-purple-accent-400"
+                                    : "font-medium tracking-wide text-gray-700 transition-colors  hover:text-geen-600 dark:hover:text-green-600 dark:text-gray-200 duration-200 hover:text-deep-purple-accent-400"
+                                }
                               >
                                 Sign Out
                               </li>
@@ -236,14 +282,18 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                           ) : (
                             <>
                               <li>
-                                <Link
+                                <NavLink
                                   to="/login"
                                   aria-label="Log in"
                                   title="Log in"
-                                  className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400"
+                                  className={({ isActive }) =>
+                                    isActive
+                                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                                  }
                                 >
                                   Log in
-                                </Link>
+                                </NavLink>
                               </li>
                             </>
                           )}
