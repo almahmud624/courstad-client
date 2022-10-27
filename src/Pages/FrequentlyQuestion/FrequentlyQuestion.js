@@ -2,86 +2,73 @@ import React from "react";
 
 const FrequentlyQuestion = () => {
   return (
-    <div className="">
-      <div class="max-w-screen-xl mx-auto p-8">
-        <h2 class="text-3xl font-extrabold leading-9 border-b-2 border-gray-100 text-gray-900 mb-12">
-          FAQs
+    <div className="dark:bg-gray-800 bg-white">
+      <div class="max-w-screen-xl mx-auto p-8 ">
+        <h2 class="text-3xl font-bold leading-9 dark:text-gray-200 border-b-2 border-green-100 text-gray-800 dark:text-gray-200 mb-12">
+          Frequently Asked Questions
         </h2>
         <ul class="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <li class="question border-bottom p-3 shadow-sm">
-            <p class="text-lg font-medium leading-6 text-gray-900">
-              What is a home energy rating?
+          <li class="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3">
+            <p class="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
+              How is the Courstad Membership better than just enrolling in
+              Quests separately??
             </p>
             <p class="mt-2">
-              <p class="text-base leading-6 text-gray-500">
-                A home energy rating is an estimated calculation into a homes
-                potential energy usage, which will determine the amount of
-                heating and cooling required to make its occupants comfortable.
-                It produces a star rating dependant on the amount of heating and
-                cooling loads which will be required, from 0 to 10 stars.
+              <p class="text-base leading-6 text-gray-500 dark:text-gray-400">
+                Firstly, you’re saving a lot of money. You’re getting an
+                unlimited access to all Quests that you can consume anytime
+                within the next 12 months, for a small annual or monthly fee.
+                You’re saving up to $15,000 off the original enrollment fees.
+                It’s a great way to experience amazing transformations in every
+                aspect of your life while saving big. And you’ll even get to
+                experience all our best Quests. Money aside, you’re putting
+                yourself in a state of perpetual growth by locking in your
+                education for the next 12 months. Plus, you’re joining a
+                community of the most passionate and committed Courstad
+                students, who will uplift and support you through each Quest you
+                take.
               </p>
             </p>
           </li>
-          <li class="question border-bottom p-3 shadow-sm">
-            <p class="text-lg font-medium leading-6 text-gray-900">
-              Why do I need a 6 Star energy rating?
+          <li class="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3 shadow-sm">
+            <p class="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
+              How do I choose the Quests I want to take?
             </p>
             <p class="mt-2">
-              <p class="text-base leading-6 text-gray-500">
-                In most Australian states the government requires that all new
-                homes and apartments (along with certain types of building
-                extensions) built since 2010 be energy rated and achieve a
-                minimum of 6 Stars.
+              <p class="text-base leading-6 text-gray-500 dark:text-gray-400">
+                Upon confirming your subscription on this page, you’ll
+                immediately have access to our entire library of Quests in your
+                Courstad account.
               </p>
             </p>
           </li>
-          <li class="question border-bottom p-3 shadow-sm">
-            <p class="text-lg font-medium leading-6 text-gray-900">
-              What is the general cost of an energy rating?
+          <li class="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3 shadow-sm">
+            <p class="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
+              How do I cancel or get a refund if I’m not satisfied?
             </p>
             <p class="mt-2">
-              <p class="text-base leading-6 text-gray-500">
-                Simple energy rating prices vary greatly on the size and type of
-                building, generally an energy rating will cost somewhere between
-                $130 to $700+.
+              <p class="text-base leading-6 text-gray-500 dark:text-gray-400">
+                You get a 15-day money back guarantee on your first subscription
+                fee whether annual or monthly. If in this time you decide it’s
+                not for you, get your easy refund at Courstad.com/refund. Upon
+                refunding, you will lose access to all Quests acquired through
+                your Membership (but you will still have access to any Quests
+                previously purchased, since you invested in them separately).
               </p>
             </p>
           </li>
-          <li class="question border-bottom p-3 shadow-sm">
-            <p class="text-lg font-medium leading-6 text-gray-900">
-              What information do I need to supply for an energy rating to be
-              completed??
+          <li class="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3 shadow-sm">
+            <p class="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
+              Can I pay in instalments?
             </p>
             <p class="mt-2">
-              <p class="text-base leading-6 text-gray-500">
-                The information required to complete a full and comprehensive
-                energy report are the following final working drawings: Site
-                Plan, Floor Plan, Elevations, Sections, Lighting layout and
-                window schedule (including sizes of the existing windows).
-              </p>
-            </p>
-          </li>
-          <li class="question border-bottom p-3 shadow-sm">
-            <p class="text-lg font-medium leading-6 text-gray-900">
-              Does building an extension need an energy rating?
-            </p>
-            <p class="mt-2">
-              <p class="text-base leading-6 text-gray-500">
-                Depended on the size of the extension you are building there is
-                a chance that it too will need to be energy rated. It&#x27;s
-                always best to check first before going ahead with construction.
-              </p>
-            </p>
-          </li>
-          <li class="question border-bottom p-3 shadow-sm">
-            <p class="text-lg font-medium leading-6 text-gray-900">
-              What is the general cost of an energy rating?
-            </p>
-            <p class="mt-2">
-              <p class="text-base leading-6 text-gray-500">
-                Depended on the size of the extension you are building there is
-                a chance that it too will need to be energy rated. It&#x27;s
-                always best to check first before going ahead with construction.
+              <p class="text-base leading-6 text-gray-500 dark:text-gray-400">
+                Unfortunately, we are unable to provide this offer with
+                installments. Since this offer is not a single product but an
+                annual or monthly subscription that gives you access to almost
+                all of our programs. However, we provide you with a 15-day
+                money-back guarantee. If you are not fully satisfied, we will
+                refund you, no questions asked.
               </p>
             </p>
           </li>

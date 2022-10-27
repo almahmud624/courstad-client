@@ -17,14 +17,14 @@ const CheckOut = () => {
           <div class="px-4 pt-8 w-full">
             <div>
               <p class="text-xl font-medium">Your Order</p>
-              <div class="mt-8 space-y-3 rounded-lg border border-gray-300 dark:bg-gray-800 p-2 m-2 dark:text-gray-800">
+              <div class="mt-8 space-y-3 rounded-lg border border-gray-400 dark:bg-gray-800 p-2 m-2 dark:text-gray-800">
                 <div class="flex flex-col rounded-lg dark:bg-gray-800 md:flex-row">
                   <img
                     class="md:h-auto shadow md:w-28 rounded-md border object-cover object-center"
                     src={course.courseThumb}
                     alt=""
                   />
-                  <div class="flex w-full shadow ml-0 md:ml-2 md:mt-0 mt-2 rounded border  dark:text-gray-200 text-gray-800 dark:border-gray-300 flex-col px-4 py-4">
+                  <div class="flex w-full shadow ml-0 md:ml-2 md:mt-0 mt-2 rounded border  dark:text-gray-200 text-gray-800 dark:border-gray-400 flex-col px-4 py-4">
                     <span class="font-semibold">{course.courseName}</span>
                     {/* <span class="float-right text-gray-400">42EU - 8.5US</span> */}
                     <p class="text-lg font-bold">${course.coursePrice}</p>
