@@ -6,8 +6,10 @@ import {
   FaGithubSquare,
   FaInstagramSquare,
 } from "react-icons/fa";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
 const Footer = () => {
+  const position = [22.807691, 90.9598646];
   return (
     <div>
       <div className="bg-white dark:bg-gray-800 pt-4  sm:pt-10 lg:pt-12">
@@ -131,80 +133,22 @@ const Footer = () => {
             </div>
             <div>
               <div className="text-gray-800 dark:text-gray-200 font-bold tracking-widest uppercase mb-4">
-                Support
+                join us
               </div>
-
-              <nav className="flex flex-col gap-4">
-                <div>
-                  <Link
-                    to="#"
-                    className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
-                  >
-                    Contact
-                  </Link>
-                </div>
-
-                <div>
-                  <Link
-                    to="#"
-                    className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
-                  >
-                    Documentation
-                  </Link>
-                </div>
-
-                <div>
-                  <Link
-                    to="#"
-                    className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
-                  >
-                    Chat
-                  </Link>
-                </div>
-
-                <div>
-                  <Link
-                    to="#"
-                    className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
-                  >
-                    FAQ
-                  </Link>
-                </div>
-              </nav>
-            </div>
-            <div>
-              <div className="text-gray-800 dark:text-gray-200 font-bold tracking-widest uppercase mb-4">
-                Legal
-              </div>
-
-              <nav className="flex flex-col gap-4">
-                <div>
-                  <Link
-                    to="#"
-                    className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
-                  >
-                    Terms of Service
-                  </Link>
-                </div>
-
-                <div>
-                  <Link
-                    to="#"
-                    className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
-                  >
-                    Privacy Policy
-                  </Link>
-                </div>
-
-                <div>
-                  <Link
-                    to="#"
-                    className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
-                  >
-                    Cookie settings
-                  </Link>
-                </div>
-              </nav>
+              <MapContainer
+                center={position}
+                className="w-72 h-72"
+                zoom={8}
+                scrollWheelZoom={false}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={position}>
+                  <Popup>Noakhali, Sadar Upazila</Popup>
+                </Marker>
+              </MapContainer>
             </div>
           </div>
 

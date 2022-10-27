@@ -18,14 +18,14 @@ const SingleCourse = ({ course }) => {
         <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
           <div
             className={`${
-              location.pathname === "/home"
+              location.pathname === "/home" || location.pathname === "/"
                 ? "md:h-68 flex flex-col md:flex-col-reverse bg-transparent border border-gray-300 shadow dark:border-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden"
                 : "md:h-68 flex flex-col sm:flex-row bg-transparent border border-gray-300 shadow dark:border-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden"
             }`}
           >
             <div
               className={`${
-                location.pathname === "/home"
+                location.pathname === "/home" || location.pathname === "/"
                   ? "w-full flex flex-col p-4 sm:p-8"
                   : "w-full md:w-7/12 flex flex-col p-4 sm:p-8"
               }`}
@@ -54,7 +54,7 @@ const SingleCourse = ({ course }) => {
             </div>
             <div
               className={`${
-                location.pathname === "/home"
+                location.pathname === "/home" || location.pathname === "/"
                   ? "w-full  order-first sm:order-none bg-gray-700"
                   : "w-full md:w-1/2 order-first sm:order-none bg-gray-700"
               }`}
