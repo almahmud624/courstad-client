@@ -51,7 +51,10 @@ const Home = () => {
       <section className="dark:bg-gray-800 bg-white pt-16">
         <div className="">
           <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800">
-            Our Courses
+            Our{" "}
+            <span className="bg-green-700 text-green-100 rounded-t-lg">
+              Courses
+            </span>
           </h1>
           <p className="text-center my-3 text-sm md:text-base md:my-5 dark:text-gray-400 text-gray-800 max-w-sm m-auto ">
             Learn more skills, be more competitive,Affordable online courses for
