@@ -4,14 +4,18 @@ import { createContext } from "react";
 
 export const CourseDataContext = createContext();
 const CourseData = ({ children }) => {
-  const [courses, setCourses] = useState([]);
+  const [coursesData, setCoursesData] = useState([]);
   useEffect(() => {
-    fetch("https://courstad-server.vercel.app/courses")
+    fetch("http://localhost:4000/courses")
       .then((res) => res.json())
-      .then((data) => setCourses(data));
+      .then((data) => setCoursesData(data));
   }, []);
+  if (coursesData.length < 1) {
+    return;
+  }
+  const dataInfo = { coursesData };
   return (
-    <CourseDataContext.Provider value={{ courses }}>
+    <CourseDataContext.Provider value={dataInfo}>
       {children}
     </CourseDataContext.Provider>
   );

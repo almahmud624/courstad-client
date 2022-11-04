@@ -7,7 +7,8 @@ import Courses from "../Courses/Courses";
 import Teachers from "../Teachers/Teachers";
 
 const Home = () => {
-  const { courses } = useContext(CourseDataContext);
+  const { coursesData } = useContext(CourseDataContext);
+  const { courses } = coursesData;
   return (
     <div>
       <div className="bg-gradient-to-r dark:from-gray-800 dark:via-teal-800 dark:to-green-700 from-white  to-green-800">

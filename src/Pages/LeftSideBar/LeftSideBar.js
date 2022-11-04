@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const LeftSideBar = ({ courses }) => {
+  const [categories, setCategories] = useState([]);
+
+  const category = courses.map((f) => {
+    const newCategory = [...categories, f.categories];
+    console.log(newCategory);
+  });
+
   return (
     <div className="w-1/3 p-8 hidden lg:block">
       <div className="relative bg-white dark:bg-gray-900 border border-gray-300 shadow rounded-md sticky top-8">
         <div className="flex flex-col sm:flex-row sm:justify-around ">
           <div className="mt-10 px-6 ">
-            <h4 className="inline-block dark:text-white text-gray-800  font-semibold pl-3 bg-gray-300 dark:bg-gray-600 w-full text-left py-1 rounded text-xl">
-              All Courses
+            <h4 className="inline-block dark:text-white text-gray-800  font-semibold px-3 bg-gray-300 dark:bg-gray-600 w-full text-left py-1 rounded text-xl">
+              All Categories
             </h4>
             <nav className="">
               {courses?.map((course) => (
@@ -17,7 +24,7 @@ const LeftSideBar = ({ courses }) => {
                   to={`/courses/${course._id}`}
                 >
                   <span className="text-md font-normal">
-                    {course.courseName}
+                    {course.categories}
                   </span>
                   <span className="flex-grow text-right"></span>
                 </Link>
