@@ -7,8 +7,18 @@ import SingleCourse from "../SingleCourse/SingleCourse";
 const Courses = () => {
   let { coursesData } = useContext(CourseDataContext);
   let { courses } = coursesData;
-
   let [course, setCourse] = useState([]);
+  const [filterCategoryName, setFilterCategoryName] = useState("");
+
+  // course filter
+  const handleFilter = (categoryName) => {
+    const filterByCategory = courses.filter(
+      (item) => item.categories === categoryName
+    );
+    setFilterCategoryName(categoryName);
+    setCourse(filterByCategory);
+  };
+
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(5);
@@ -32,6 +42,8 @@ const Courses = () => {
           className="relative"
           key={Math.random()}
           courses={courses}
+          handleFilter={handleFilter}
+          filterCategoryName={filterCategoryName}
         />
       )}
       <div
@@ -44,29 +56,32 @@ const Courses = () => {
         {course?.map((course) => (
           <SingleCourse key={Math.random()} course={course} />
         ))}
-        <div className="flex mt-8 justify-center">
-          {[...Array(pages).keys()].map((n) => (
-            <button
-              key={Math.random()}
-              className="group relative inline-block focus:outline-none focus:ring"
-              onClick={() => setPage(n)}
-            >
-              <span
-                className={`"absolute inset-0 translate-x-0 translate-y-0  transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded mx-2" ${
-                  n + 1 === page + 1 && "bg-green-700"
-                }`}
-              ></span>
-
-              <span
-                className={`"relative inline-block border-2 text-green-100 mx-2 border-green-500 rounded px-3 py-1 text-md font-semibold tracking-widest capitalize" ${
-                  n + 1 === page + 1 && "bg-green-500"
-                }`}
+        {location.pathname === "/home" ||
+        location.pathname === "/" ? undefined : (
+          <div className="flex mt-8 justify-center">
+            {[...Array(pages).keys()].map((n) => (
+              <button
+                key={Math.random()}
+                className="group relative inline-block focus:outline-none focus:ring"
+                onClick={() => setPage(n)}
               >
-                {n + 1}
-              </span>
-            </button>
-          ))}
-        </div>
+                <span
+                  className={`"absolute inset-0 translate-x-0 translate-y-0  transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded mx-2" ${
+                    n + 1 === page + 1 && "bg-green-700"
+                  }`}
+                ></span>
+
+                <span
+                  className={`"relative inline-block border-2 text-green-100 mx-2 border-green-500 rounded px-3 py-1 text-md font-semibold tracking-widest capitalize" ${
+                    n + 1 === page + 1 && "bg-green-500"
+                  }`}
+                >
+                  {n + 1}
+                </span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

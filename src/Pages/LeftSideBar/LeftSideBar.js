@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const LeftSideBar = ({ courses }) => {
-  const [categories, setCategories] = useState([]);
-
-  const category = courses.map((f) => {
-    const newCategory = [...categories, f.categories];
-    console.log(newCategory);
-  });
+const LeftSideBar = ({ courses, handleFilter, filterCategoryName }) => {
+  let allCategory = [];
+  for (let course of courses) {
+    allCategory.push(course.categories);
+  }
+  const filterdCategory = allCategory.filter(
+    (v, i) => allCategory.indexOf(v) === i
+  );
 
   return (
     <div className="w-1/3 p-8 hidden lg:block">
@@ -18,14 +19,16 @@ const LeftSideBar = ({ courses }) => {
               All Categories
             </h4>
             <nav className="">
-              {courses?.map((course) => (
+              {filterdCategory?.map((category) => (
                 <Link
-                  className="hover:text-gray-800 hover:bg-gray-300 flex items-center my-3 py-2 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200 text-gray-600 dark:text-gray-400 rounded pl-3"
-                  to={`/courses/${course._id}`}
+                  className={`"hover:text-gray-800 hover:bg-gray-300 flex items-center my-3 py-2 transition-colors dark:hover:text-white dark:hover:bg-gray-600 duration-200 text-gray-600 dark:text-gray-400 rounded pl-3 justify-center" ${
+                    filterCategoryName === category &&
+                    "bg-gray-600 dark:text-gray-100"
+                  }`}
+                  onClick={() => handleFilter(category)}
+                  // to={`/courses/${course._id}`}
                 >
-                  <span className="text-md font-normal">
-                    {course.categories}
-                  </span>
+                  <span className="text-md font-normal">{category}</span>
                   <span className="flex-grow text-right"></span>
                 </Link>
               ))}
