@@ -6,7 +6,7 @@ export const CourseDataContext = createContext();
 const CourseData = ({ children }) => {
   const [coursesData, setCoursesData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:4000/courses")
+    fetch("https://courstad-server.vercel.app/courses")
       .then((res) => res.json())
       .then((data) => setCoursesData(data));
   }, []);

@@ -28,7 +28,9 @@ const Courses = () => {
     course = course.slice(0, 3);
   }
   useEffect(() => {
-    fetch(`http://localhost:4000/courses?page=${page}&size=${size}`)
+    fetch(
+      `https://courstad-server.vercel.app/courses?page=${page}&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setCourse(data.courses);
