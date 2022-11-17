@@ -10,6 +10,7 @@ choice the best course, make you more and more skillful.
 - Added Dark and Light mode switch
 - Also added Blog section
 - User can download course information as pdf
+- Added Pagination
 - Responsive net & clean design
 
 ## Technology:
