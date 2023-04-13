@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
-const SingleCourse = ({ course }) => {
+const SingleCourse = ({ course = {} }) => {
   const {
     _id,
     courseName,

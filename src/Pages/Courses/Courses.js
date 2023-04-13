@@ -13,7 +13,7 @@ const Courses = () => {
 
   // course filter
   const handleFilter = (categoryName) => {
-    const filterByCategory = courses.filter(
+    const filterByCategory = courses?.filter(
       (item) => item.categories === categoryName
     );
     setFilterCategoryName(categoryName);
@@ -26,14 +26,14 @@ const Courses = () => {
   const pages = Math.ceil(parseInt(count) / size);
   const location = useLocation();
   if (location.pathname === "/home" || location.pathname === "/") {
-    course = course.slice(0, 3);
+    course = course?.slice(0, 3);
   }
   useEffect(() => {
     fetch(`http://localhost:4000/api/v1/courses?page=${page}&size=${size}`)
       .then((res) => res.json())
       .then((data) => {
-        setCourse(data.courses);
-        setCount(data.count);
+        setCourse(data?.courses);
+        setCount(data?.count);
       });
   }, [page, size]);
   return (

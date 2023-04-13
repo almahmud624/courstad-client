@@ -2,29 +2,23 @@ import React from "react";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { FaGithub, FaGoogle, FaLink, FaUserAlt } from "react-icons/fa";
+import { FaLink, FaUserAlt } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { SocialLogin } from "../../components/SocialLogin/SocialLogin";
+import { useStoreUserMutation } from "../../features/user/userApi";
 
 const Register = () => {
-  const { userGoogleSignIn, createUser, updateUserProfie, userGitHubSignIn } =
-    useContext(AuthContext);
+  const { createUser, updateUserProfie } = useContext(AuthContext);
   const [err, setErr] = useState("");
   const location = useLocation();
   const [userName, setUserName] = useState("");
   const [userPhoto, setUserPhoto] = useState("");
   const navigate = useNavigate();
+  const [storeUser] = useStoreUserMutation();
 
-  // google signin
-  const handleGoogleSignIn = () => {
-    userGoogleSignIn()
-      .then((res) => {})
-      .catch((error) => {
-        setErr(error.code);
-      });
-  };
   // create user
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,17 +32,9 @@ const Register = () => {
     createUser(email, password)
       .then((res) => {
         handleUserProfileUpdate(name, photo);
+        storeUser({ name, email, photoURL: photo, role: "student" });
         form.reset();
       })
-      .catch((error) => {
-        setErr(error.code);
-      });
-  };
-
-  // login with gitHub
-  const handleGitHubSignIn = () => {
-    userGitHubSignIn()
-      .then((res) => {})
       .catch((error) => {
         setErr(error.code);
       });
@@ -201,21 +187,7 @@ const Register = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="flex justify-center gap-8">
-                        <button
-                          className="inline-flex items-center justify-center rounded-md border-2 border-[#171515] bg-[#171515]  py-3 text-sm font-medium text-white 
-                      dark:text-white transition-colors hover:bg-transparent hover:text-[#171515] focus:outline-none focus:ring active:opacity-75 w-full"
-                          onClick={handleGitHubSignIn}
-                        >
-                          GitHub <FaGithub className="ml-2" />
-                        </button>
-                        <button
-                          className="inline-flex items-center justify-center rounded-md border-2 border-red-800 bg-red-800 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-red-700 focus:outline-none focus:ring active:opacity-75 w-full dark:text-white"
-                          onClick={handleGoogleSignIn}
-                        >
-                          Google <FaGoogle className="ml-2" />
-                        </button>
-                      </div>
+                      <SocialLogin setErr={setErr} />
                       <div className="flex justify-center items-center mt-3 p-4">
                         <p className="text-gray-500 text-sm text-center dark:text-gray-200">
                           Already Courstad user?{" "}

@@ -65,8 +65,6 @@ export const routes = createBrowserRouter([
             <CheckOut />
           </PrivateRoute>
         ),
-        loader: ({ params }) =>
-          fetch(`http://localhost:4000/api/v1/course/${params.id}`),
       },
     ],
   },

@@ -1,12 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../Contexts/AuthProvider";
 import Register from "../Register/Register";
+import { useSelector } from "react-redux";
 
 const UpdateProfile = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useSelector((state) => state.user);
   const [edit, setEdit] = useState(false);
 
   return (
@@ -35,7 +33,7 @@ const UpdateProfile = () => {
                     Name
                   </div>
                   <div className="px-4 capitalize py-2 text-gray-600 dark:text-gray-300">
-                    {user?.displayName}
+                    {user?.name}
                   </div>
                 </div>
                 <div className="px-4 py-2 flex md:w-1/2  w-full justify-between">

@@ -4,10 +4,21 @@ import { Link, useParams } from "react-router-dom";
 import ReactToPdf from "react-to-pdf";
 import { FaClock, FaUserAlt } from "react-icons/fa";
 import { useGetCourseQuery } from "../../features/courses/courseApi";
+import { useGetVideosQuery } from "../../features/videos/videosApi";
+import { BsFillPlayFill } from "react-icons/bs";
+import { BiLock } from "react-icons/bi";
+
+const getVideosLength = (courseVideos, type) => {
+  return courseVideos
+    ?.reduce((acc, cur) => acc + Number(cur?.duration.split(":")[0]) / 60, 0)
+    .toFixed(2)
+    .split(".")[type];
+};
 
 const CourseDetails = () => {
   const { id } = useParams();
-  const { data: course, isLoading } = useGetCourseQuery(id);
+  const { data: course, isLoading: courseLoading } = useGetCourseQuery(id);
+  const { data: videos, isLoading: videoLoading } = useGetVideosQuery();
 
   const {
     _id,
@@ -22,6 +33,10 @@ const CourseDetails = () => {
   } = course || {};
 
   const ref = useRef();
+
+  // find related course video
+  const courseVideos = videos?.filter((video) => video?.course_id === id);
+
   return (
     <div>
       <div className="bg-white py-6 sm:py-8 lg:py-12 dark:bg-gray-800">
@@ -60,7 +75,9 @@ const CourseDetails = () => {
                 </div>
                 <div className="flex w-full md:mt-0 mt-5 md:w-[57%] justify-between items-center">
                   <div className="text-gray-600 dark:text-gray-400 flex items-center ">
-                    <FaClock className="mr-3" /> Duration: {courseDuration}
+                    <FaClock className="mr-3" /> Duration:{" "}
+                    {getVideosLength(courseVideos, 0)}h{" "}
+                    {getVideosLength(courseVideos, 1)}min
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 flex items-center">
                     <FaUserAlt className="mr-3" /> {courseEnrollment} Enrolled
@@ -104,6 +121,34 @@ const CourseDetails = () => {
                       .slice(50, courseDescription.length)
                       .join(" ")}
                 </p>
+              </div>
+            </div>
+            <div className="py-4 pb-6">
+              <div className="">
+                <div className="text-gray-800 dark:text-gray-200 text-lg font-semibold mb-3">
+                  Curriculum - Content
+                </div>
+
+                <p className="text-gray-500 dark:text-gray-400 mb-4">
+                  {courseVideos?.length} videos .{" "}
+                  {getVideosLength(courseVideos, 0)}h{" "}
+                  {getVideosLength(courseVideos, 1)}min length
+                </p>
+                {courseVideos?.map((video) => (
+                  <div
+                    key={video?._id}
+                    className="flex justify-between mb-3 border border-gray-700 p-3 rounded"
+                  >
+                    <p className="text-gray-800 dark:text-gray-200 font-normal flex items-center">
+                      <BsFillPlayFill className="inline-block align-middle mr-2 text-gray-500" />
+                      {video?.title}
+                    </p>
+                    <span className="text-gray-800 dark:text-gray-200 font-normal flex items-center">
+                      {video?.duration}
+                      <BiLock className="inline-block align-middle ml-2 text-gray-500" />
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="flex">

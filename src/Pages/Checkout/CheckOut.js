@@ -1,12 +1,14 @@
 import React from "react";
 import { useContext } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
 import bkashLogo from "../../Assets/bkash-logo.png";
 import bankingLogo from "../../Assets/banking-logo.png";
+import { useGetCourseQuery } from "../../features/courses/courseApi";
 
 const CheckOut = () => {
-  const course = useLoaderData();
+  const { id } = useParams();
+  const { data: course, isLoading } = useGetCourseQuery(id);
   const { user } = useContext(AuthContext);
 
   return (
@@ -20,13 +22,13 @@ const CheckOut = () => {
                 <div className="flex flex-col rounded-lg dark:bg-gray-800 md:flex-row">
                   <img
                     className="md:h-auto shadow md:w-28 rounded-md border object-cover object-center"
-                    src={course.courseThumb}
+                    src={course?.courseThumb}
                     alt=""
                   />
                   <div className="flex w-full shadow ml-0 md:ml-2 md:mt-0 mt-2 rounded border  dark:text-gray-200 text-gray-800 dark:border-gray-400 flex-col px-4 py-4">
-                    <span className="font-semibold">{course.courseName}</span>
+                    <span className="font-semibold">{course?.courseName}</span>
                     {/* <span className="float-right text-gray-400">42EU - 8.5US</span> */}
-                    <p className="text-lg font-bold">${course.coursePrice}</p>
+                    <p className="text-lg font-bold">${course?.coursePrice}</p>
                   </div>
                 </div>
               </div>

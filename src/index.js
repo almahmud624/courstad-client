@@ -11,12 +11,12 @@ import { store } from "./app/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
-      <Toaster />
-      <Provider store={store}>
+    <Toaster />
+    <Provider store={store}>
+      <AuthProvider>
         <App />
-      </Provider>
-    </AuthProvider>
+      </AuthProvider>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -13,6 +13,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.init";
+import { useStoreUserMutation } from "../features/user/userApi";
+import { useDispatch } from "react-redux";
+import { userLogOut } from "../features/user/userSlice";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -21,6 +24,8 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
   const gitHubProvider = new GithubAuthProvider();
+  const [storeUser] = useStoreUserMutation();
+  const dispatch = useDispatch();
 
   // google sign in
   const userGoogleSignIn = () => {
@@ -33,6 +38,7 @@ const AuthProvider = ({ children }) => {
   };
   // user sign out
   const userSignOut = () => {
+    dispatch(userLogOut());
     return signOut(auth);
   };
   // create user by email and password
@@ -55,11 +61,12 @@ const AuthProvider = ({ children }) => {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      storeUser({ email: currentUser?.email });
+      // setUser(currentUser);
       setLoading(false);
     });
     return () => unsubscribe();
-  }, []);
+  }, [storeUser]);
   const userInfo = {
     user,
     userGoogleSignIn,

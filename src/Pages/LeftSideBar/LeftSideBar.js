@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const LeftSideBar = ({ courses, handleFilter, filterCategoryName }) => {
+const LeftSideBar = ({ courses = [], handleFilter, filterCategoryName }) => {
   let allCategory = [];
+
   for (let course of courses) {
     allCategory.push(course.categories);
   }

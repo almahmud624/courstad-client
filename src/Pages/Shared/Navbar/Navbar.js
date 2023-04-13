@@ -6,10 +6,12 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import avater from "../../../Assets/avatar.png";
 import logo from "../../../Assets/logo.png";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ darkSwitch, switchTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, userSignOut } = useContext(AuthContext);
+  const { userSignOut } = useContext(AuthContext);
+  const { user } = useSelector((state) => state.user);
 
   return (
     <div className="bg-white dark:bg-gray-800 ">
@@ -86,7 +88,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               </li>
               <li>
                 <ul className="flex items-center hidden space-x-8 lg:flex">
-                  {user?.uid ? (
+                  {user?.email ? (
                     <>
                       <li
                         onClick={userSignOut}
