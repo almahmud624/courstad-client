@@ -1,11 +1,14 @@
 import React from "react";
 import { useRef } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ReactToPdf from "react-to-pdf";
 import { FaClock, FaUserAlt } from "react-icons/fa";
+import { useGetCourseQuery } from "../../features/courses/courseApi";
 
 const CourseDetails = () => {
-  const course = useLoaderData();
+  const { id } = useParams();
+  const { data: course, isLoading } = useGetCourseQuery(id);
+
   const {
     _id,
     courseName,
@@ -16,7 +19,7 @@ const CourseDetails = () => {
     categories,
     courseDuration,
     courseEnrollment,
-  } = course;
+  } = course || {};
 
   const ref = useRef();
   return (
@@ -66,7 +69,7 @@ const CourseDetails = () => {
               </div>
               <div className="bg-gray-100 rounded-lg overflow-hidden relative h-72">
                 <img
-                  src={course.courseThumb}
+                  src={course?.courseThumb}
                   loading="lazy"
                   alt="course Thumbnail"
                   className="w-full h-full object-cover object-center"

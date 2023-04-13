@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { CourseDataContext } from "../../Contexts/CourseData";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import SingleCourse from "../SingleCourse/SingleCourse";
+import { useGetCoursesQuery } from "../../features/courses/courseApi";
 
 const Courses = () => {
-  let { coursesData } = useContext(CourseDataContext);
-  let { courses } = coursesData;
+  const { data, isLoading, isError } = useGetCoursesQuery();
+
+  let { courses } = data || {};
   let [course, setCourse] = useState([]);
   const [filterCategoryName, setFilterCategoryName] = useState("");
 
@@ -28,9 +29,7 @@ const Courses = () => {
     course = course.slice(0, 3);
   }
   useEffect(() => {
-    fetch(
-      `https://courstad-server.vercel.app/courses?page=${page}&size=${size}`
-    )
+    fetch(`http://localhost:4000/api/v1/courses?page=${page}&size=${size}`)
       .then((res) => res.json())
       .then((data) => {
         setCourse(data.courses);

@@ -4,17 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AuthProvider from "./Contexts/AuthProvider";
-import CourseData from "./Contexts/CourseData";
 import { Toaster } from "react-hot-toast";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <CourseData>
-        <Toaster />
+      <Toaster />
+      <Provider store={store}>
         <App />
-      </CourseData>
+      </Provider>
     </AuthProvider>
   </React.StrictMode>
 );
