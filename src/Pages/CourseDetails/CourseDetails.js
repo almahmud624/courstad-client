@@ -13,7 +13,6 @@ import {
   useStoreEnrolledCourseMutation,
 } from "../../features/enrollCourse/enrollCourseApi";
 import toast from "react-hot-toast";
-import { CustomButton } from "../../components/CustomButton/CustomButton";
 import { CustomLinkButton } from "../../components/CustomLinkButton/CustomLinkButton";
 
 const getVideosLength = (courseVideos, type) => {

@@ -12,6 +12,7 @@ import FrequentlyQuestion from "../Pages/FrequentlyQuestion/FrequentlyQuestion";
 import CheckOut from "../Pages/Checkout/CheckOut";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import { MyClasses } from "../components/MyClasses/MyClasses";
+import { Video } from "../Pages/Video/Video";
 
 export const routes = createBrowserRouter([
   {
@@ -72,6 +73,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyClasses />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/course-video/:courseName/:videoId",
+        element: (
+          <PrivateRoute>
+            <Video />
           </PrivateRoute>
         ),
       },

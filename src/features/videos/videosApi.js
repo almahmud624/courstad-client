@@ -8,7 +8,7 @@ export const videosApi = apiSlice.injectEndpoints({
       query: () => "/videos",
     }),
     getVideo: builder.query({
-      query: (id) => `/videos/${id}`,
+      query: (id) => `/video/${id}`,
     }),
     // addVideo: builder.mutation({
     //   query: (data) => ({

@@ -1,14 +1,14 @@
 import { useGetCourseQuery } from "../../features/courses/courseApi";
-import { CustomButton } from "../CustomButton/CustomButton";
+import useGetCourseVideosById from "../../hooks/useGetCourseVideosById";
 import { CustomLinkButton } from "../CustomLinkButton/CustomLinkButton";
 
 export const EnrolledCourseList = ({ course = {} }) => {
   const { data: enrolledCourse, isLoading } = useGetCourseQuery(
     course?.course_id
   );
+  const userCourses = useGetCourseVideosById(course?.course_id);
 
   const { courseName, courseTutor, courseThumb } = enrolledCourse || {};
-
   return (
     <>
       <div class="p-4 w-full">
@@ -20,11 +20,19 @@ export const EnrolledCourseList = ({ course = {} }) => {
             <h3 class="my-4 text-md text-gray-700 dark:text-gray-300 text-left">
               {courseTutor}
             </h3>
-            <CustomLinkButton
-              link={`/${course?.course_id}`}
-              buttonText={"Start Course"}
-              customEffectStyle={"px-2 py-2 text-sm"}
-            />
+            {userCourses?.length ? (
+              <CustomLinkButton
+                link={`/course-video/${courseName?.split(" ").join("-")}/${
+                  userCourses?.length && userCourses[0]?._id
+                }`}
+                buttonText={"Start Course"}
+                customEffectStyle={"px-2 py-2 text-sm"}
+              />
+            ) : (
+              <span className="text-red-500 underline">
+                Video not added yet
+              </span>
+            )}
           </div>
           <div class="w-56 rounded-full shadow-2xl shadow-gray-700 flex justify-center items-center ">
             <div className="w-full">
