@@ -60,6 +60,19 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               </li>
               <li>
                 <NavLink
+                  to="/my-class"
+                  title="my-class"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover:text-green-600 "
+                  }
+                >
+                  My Classes
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/blog"
                   aria-label="Blog"
                   title="Blog"
@@ -315,20 +328,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                                   }
                                 >
                                   Log in
-                                </NavLink>
-                              </li>
-                              <li>
-                                <NavLink
-                                  to="/register"
-                                  aria-label="Log in"
-                                  title="Log in"
-                                  className={({ isActive }) =>
-                                    isActive
-                                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
-                                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
-                                  }
-                                >
-                                  Sign Up
                                 </NavLink>
                               </li>
                             </>

@@ -11,6 +11,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import FrequentlyQuestion from "../Pages/FrequentlyQuestion/FrequentlyQuestion";
 import CheckOut from "../Pages/Checkout/CheckOut";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
+import { MyClasses } from "../components/MyClasses/MyClasses";
 
 export const routes = createBrowserRouter([
   {
@@ -63,6 +64,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <CheckOut />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-class",
+        element: (
+          <PrivateRoute>
+            <MyClasses />
           </PrivateRoute>
         ),
       },
