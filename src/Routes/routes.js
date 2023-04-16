@@ -13,6 +13,7 @@ import CheckOut from "../Pages/Checkout/CheckOut";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import { MyClasses } from "../components/MyClasses/MyClasses";
 import { Video } from "../Pages/Video/Video";
+import { Quiz } from "../Pages/Quiz/Quiz";
 
 export const routes = createBrowserRouter([
   {
@@ -81,6 +82,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Video />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/course-video/:courseName/:videoId/quiz",
+        element: (
+          <PrivateRoute>
+            <Quiz />
           </PrivateRoute>
         ),
       },

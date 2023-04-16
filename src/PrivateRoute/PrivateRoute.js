@@ -11,13 +11,13 @@ const override = {
   height: "100vh",
 };
 const PrivateRoute = ({ children }) => {
-  const { loading } = useContext(AuthContext);
+  const { loading, authUser } = useContext(AuthContext);
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
   if (loading) {
     return <HashLoader color="#36d7b7" cssOverride={override} />;
   }
-  if (user && user?.email) {
+  if ((user && user?.email) || (authUser && authUser?.uid)) {
     return children;
   }
   return <Navigate to="/login" state={{ from: location }}></Navigate>;

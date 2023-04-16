@@ -34,7 +34,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                 <NavLink
                   to="home"
                   aria-label="Our product"
-                  title="Our product"
                   className={({ isActive }) =>
                     isActive
                       ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
@@ -48,7 +47,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                 <NavLink
                   to="/courses"
                   aria-label="Our product"
-                  title="Our product"
                   className={({ isActive }) =>
                     isActive
                       ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
@@ -61,7 +59,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               <li>
                 <NavLink
                   to="/my-class"
-                  title="my-class"
                   className={({ isActive }) =>
                     isActive
                       ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
@@ -74,8 +71,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               <li>
                 <NavLink
                   to="/blog"
-                  aria-label="Blog"
-                  title="Blog"
                   className={({ isActive }) =>
                     isActive
                       ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
@@ -88,8 +83,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               <li>
                 <NavLink
                   to="/faq"
-                  aria-label="FAQ"
-                  title="FAQ"
                   className={({ isActive }) =>
                     isActive
                       ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"

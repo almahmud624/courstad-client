@@ -10,25 +10,25 @@ export const videosApi = apiSlice.injectEndpoints({
     getVideo: builder.query({
       query: (id) => `/video/${id}`,
     }),
-    // addVideo: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/videos",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    //   async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-    //     try {
-    //       const { data: newVideo } = await queryFulfilled;
-    //       dispatch(
-    //         apiSlice.util.updateQueryData("getVideos", undefined, (draft) => {
-    //           draft.push(newVideo);
-    //         })
-    //       );
-    //     } catch (err) {
-    //       console.log(err);
-    //     }
-    //   },
-    // }),
+    addVideo: builder.mutation({
+      query: (data) => ({
+        url: "/videos",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const { data: newVideo } = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData("getVideos", undefined, (draft) => {
+              draft.push(newVideo);
+            })
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
     // editVideo: builder.mutation({
     //   query: ({ videoId, videoData }) => ({
     //     url: `/videos/${videoId}`,

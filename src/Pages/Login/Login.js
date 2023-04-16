@@ -5,7 +5,6 @@ import { AuthContext } from "../../Contexts/AuthProvider";
 import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
 import toast from "react-hot-toast";
-import { SocialLogin } from "../../components/SocialLogin/SocialLogin";
 import { useStoreUserMutation } from "../../features/user/userApi";
 
 const Login = () => {
@@ -26,7 +25,7 @@ const Login = () => {
     const password = form.password.value;
     userLogIn(email, password)
       .then((res) => {
-        storeUser({ email });
+        storeUser({ name: res?.user?.displayName, email, role: "student" });
         navigate(from, { replace: true });
         setErr("");
         form.reset();
@@ -38,8 +37,6 @@ const Login = () => {
 
   // password reset
   const handleResetPassword = () => {
-    console.log(userEmail);
-
     resetPassword(userEmail)
       .then(() => {
         setErr("");
@@ -128,18 +125,7 @@ const Login = () => {
                       Forgot your password?{" "}
                     </button>
                   </div>
-                  <div className="relative my-4">
-                    <div className="absolute inset-0 flex items-center">
-                      <div className="w-full border-t border-gray-300"></div>
-                    </div>
-                    <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white dark:bg-gray-800 dark:text-gray-200 text-neutral-600">
-                        {" "}
-                        Or Login with{" "}
-                      </span>
-                    </div>
-                  </div>
-                  <SocialLogin setErr={setErr} />
+
                   <div className="flex justify-center items-center mt-3 p-4">
                     <p className="text-gray-500 dark:text-gray-200 text-sm text-center">
                       Don't have an account?{" "}

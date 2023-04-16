@@ -3,11 +3,11 @@ import { apiSlice } from "../api/apiSlice";
 export const quizMarkApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getQuizMark: builder.query({
-      query: () => "/quizMark",
+      query: () => "/quizMarks",
     }),
     updateQuizMark: builder.mutation({
       query: (data) => ({
-        url: "/quizMark",
+        url: "/quizMark/new",
         method: "POST",
         body: data,
       }),

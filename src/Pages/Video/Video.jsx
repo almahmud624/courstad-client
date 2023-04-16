@@ -1,5 +1,4 @@
 import { useParams } from "react-router-dom";
-// import { FormModal } from "../../components/Modal/FormModal";
 import { useEffect, useState } from "react";
 import { useGetVideoQuery } from "../../features/videos/videosApi";
 import { useSelector } from "react-redux";
@@ -10,6 +9,7 @@ import {
 } from "../../features/assignmentMark/assignmentMarkApi";
 import { VideoPlayer } from "../../components/VideoPlayer/VideoPlayer";
 import { VideoList } from "../../components/VideoList/VideoList";
+import { FormModal } from "../../components/Modal/FormModal";
 export const Video = () => {
   const { videoId } = useParams();
   const { data: video, isLoading, isError } = useGetVideoQuery(videoId);
@@ -23,14 +23,14 @@ export const Video = () => {
 
   // find assignments for this video
   const assignment = assignments?.find(
-    (assignment) => assignment?.video_id === Number(videoId)
+    (assignment) => assignment?.video_id === videoId
   );
 
   // check user assignment submisson
   const assignmentSubmisson = assignmentMarks?.some(
     (assignmentMark) =>
-      assignmentMark?.student_id === user?.id &&
-      assignmentMark?.assignment_id === assignment?.id
+      assignmentMark?.student_id === user?._id &&
+      assignmentMark?.assignment_id === assignment?._id
   );
 
   // submit assigenment
@@ -68,13 +68,13 @@ export const Video = () => {
           </div>
         </div>
       </section>
-      {/* <FormModal
+      <FormModal
         showModal={showModal}
         setShowModal={setShowModal}
         handleSubmitAssignment={handleSubmitAssignment}
         setAssignmentLink={setAssignmentLink}
         assignment={assignment}
-      /> */}
+      />
     </>
   );
 };

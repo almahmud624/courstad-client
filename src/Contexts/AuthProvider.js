@@ -61,14 +61,17 @@ const AuthProvider = ({ children }) => {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      storeUser({ email: currentUser?.email });
-      // setUser(currentUser);
+      if (currentUser) {
+        const { displayName, email } = currentUser;
+        storeUser({ name: displayName, email, role: "student" });
+      }
+      setUser(currentUser);
       setLoading(false);
     });
     return () => unsubscribe();
   }, [storeUser]);
   const userInfo = {
-    user,
+    authUser: user,
     userGoogleSignIn,
     userSignOut,
     createUser,

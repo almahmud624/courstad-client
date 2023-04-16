@@ -7,7 +7,6 @@ import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { SocialLogin } from "../../components/SocialLogin/SocialLogin";
 import { useStoreUserMutation } from "../../features/user/userApi";
 
 const Register = () => {
@@ -31,9 +30,11 @@ const Register = () => {
 
     createUser(email, password)
       .then((res) => {
-        handleUserProfileUpdate(name, photo);
-        storeUser({ name, email, photoURL: photo, role: "student" });
-        form.reset();
+        if (res?.user?.uid) {
+          handleUserProfileUpdate(name, photo);
+          storeUser({ name, email, photoURL: photo, role: "student" });
+          form.reset();
+        }
       })
       .catch((error) => {
         setErr(error.code);
@@ -176,18 +177,6 @@ const Register = () => {
                   )}
                   {location.pathname !== "/profile-edit" && (
                     <>
-                      <div className="relative my-4">
-                        <div className="absolute inset-0 flex items-center">
-                          <div className="w-full border-t border-gray-300"></div>
-                        </div>
-                        <div className="relative flex justify-center text-sm">
-                          <span className="px-2 bg-white dark:bg-gray-800 text-neutral-600 dark:text-gray-200">
-                            {" "}
-                            Or continue with{" "}
-                          </span>
-                        </div>
-                      </div>
-                      <SocialLogin setErr={setErr} />
                       <div className="flex justify-center items-center mt-3 p-4">
                         <p className="text-gray-500 text-sm text-center dark:text-gray-200">
                           Already Courstad user?{" "}

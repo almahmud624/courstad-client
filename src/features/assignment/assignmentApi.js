@@ -6,7 +6,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
       query: () => "/assignments",
     }),
     getAssignment: builder.query({
-      query: (id) => `/assignments/${id}`,
+      query: (id) => `/assignment/${id}`,
     }),
     addAssignment: builder.mutation({
       query: (data) => ({
@@ -33,7 +33,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
     }),
     editAssignment: builder.mutation({
       query: ({ id, data }) => ({
-        url: `/assignments/${id}`,
+        url: `/assignment/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -74,7 +74,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
     }),
     deleteAssignment: builder.mutation({
       query: (id) => ({
-        url: `/assignments/${id}`,
+        url: `/assignment/${id}`,
         method: "DELETE",
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {

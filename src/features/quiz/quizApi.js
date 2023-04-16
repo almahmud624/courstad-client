@@ -6,7 +6,7 @@ export const quizApi = apiSlice.injectEndpoints({
       query: () => "/quizzes",
     }),
     getQuiz: builder.query({
-      query: (id) => `/quizzes/${id}`,
+      query: (id) => `/quiz/${id}`,
     }),
     addQuiz: builder.mutation({
       query: (data) => ({
@@ -29,7 +29,7 @@ export const quizApi = apiSlice.injectEndpoints({
     }),
     editQuiz: builder.mutation({
       query: ({ quizId, quizData }) => ({
-        url: `/quizzes/${quizId}`,
+        url: `/quiz/${quizId}`,
         method: "PATCH",
         body: quizData,
       }),
@@ -67,7 +67,7 @@ export const quizApi = apiSlice.injectEndpoints({
     }),
     deleteQuiz: builder.mutation({
       query: (id) => ({
-        url: `/quizzes/${id}`,
+        url: `/quiz/${id}`,
         method: "DELETE",
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
