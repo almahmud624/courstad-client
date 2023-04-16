@@ -8,7 +8,7 @@ export const QuizList = ({ quiz = {}, questionNo, checkAns, setCheckAns }) => {
           <h4 className="text-xl font-semibold text-teal-500">
             Quiz {questionNo} - {quiz?.question}
           </h4>
-          <form className="flex justify-between my-2">
+          <form className="grid grid-cols-2 my-4 gap-4">
             {quiz?.options.map((option, i) => (
               <QuizOptions
                 key={option.id}

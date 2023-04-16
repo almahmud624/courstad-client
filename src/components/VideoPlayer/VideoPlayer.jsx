@@ -5,6 +5,7 @@ import { useGetQuizMarkQuery } from "../../features/quizMark/quizMarkApi";
 import { useGetQuizzesQuery } from "../../features/quiz/quizApi";
 import useGetCourseVideosByTitle from "../../hooks/useGetCourseVideosByTitle";
 import { useState } from "react";
+import { getLocalestringDate } from "../../utils/getLocalestringDate";
 
 export const VideoPlayer = ({
   video,
@@ -24,7 +25,7 @@ export const VideoPlayer = ({
 
   // check users quiz submission
   const checkQuizSubmisson = quizMarks?.some(
-    (mark) => mark?.student_id === user?.id && mark?.video_id === Number(id)
+    (mark) => mark?.student_id === user?._id && mark?.video_id === videoId
   );
 
   // find quizzes for that video
@@ -61,7 +62,7 @@ export const VideoPlayer = ({
             {title}
           </h1>
           <h2 className=" pb-4 text-sm leading-[1.7142857] text-slate-400">
-            {/* Uploaded on {getLocalestringDate(createdAt)} */}
+            Uploaded on {getLocalestringDate(createdAt)}
           </h2>
 
           <div className="flex justify-between">
@@ -78,19 +79,20 @@ export const VideoPlayer = ({
                   {assignmentSubmisson ? "Assignment Submitted" : "Assignment"}
                 </button>
               )}
-
+              {checkQuizSubmisson && (
+                <span className="text-green-600 ">Quiz Submitted</span>
+              )}
               {videoQuizzes?.length !== 0 && (
                 <button
-                  className={`px-3 font-bold py-1 border rounded text-sm disabled:border-slate-700 disabled:text-slate-700 disabled:cursor-not-allowed border-cyan text-teal-500 hover:bg-cyan-500 hover:text-gray-900  disabled:hover:text-slate-700 transition-all duration-300 ${
+                  className={`px-3 font-bold py-1 border rounded text-sm border-cyan text-teal-500 hover:bg-cyan-500 hover:text-gray-900 transition-all duration-300 ${
                     checkQuizSubmisson &&
-                    "bg-green-600 border-green-600 text-white disabled:hover:bg-green-600"
+                    "bg-green-600 border-green-600 !text-gray-800 hover:bg-green-700"
                   }`}
                   onClick={() =>
                     navigate(`/course-video/${courseName}/${videoId}/quiz`)
                   }
-                  disabled={checkQuizSubmisson}
                 >
-                  {checkQuizSubmisson ? "Quiz Submitted" : "Quiz"}
+                  {checkQuizSubmisson ? "Check Ans" : "Quiz"}
                 </button>
               )}
             </div>

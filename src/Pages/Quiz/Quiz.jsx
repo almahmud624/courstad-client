@@ -12,6 +12,7 @@ import {
 import { getQuizMark } from "../../utils/getQuizMark";
 
 import toast from "react-hot-toast";
+import { ConfirmationModal } from "../../components/Modal/ConfirmationModal";
 
 export const Quiz = () => {
   const { videoId } = useParams();
@@ -28,10 +29,10 @@ export const Quiz = () => {
 
   // check users quiz submission
   const checkQuizSubmisson = quizMarks?.find(
-    (mark) => mark?.student_id === user?.id && mark?.video_id === videoId
+    (mark) => mark?.student_id === user?._id && mark?.video_id === videoId
   );
 
-  console.log(checkQuizSubmisson);
+  const [showModal, setShowModal] = useState(checkQuizSubmisson ? true : false);
 
   // find quizzes for that video
   const videoQuizzes = quizzes?.filter((quiz) => quiz?.video_id === videoId);
@@ -51,6 +52,7 @@ export const Quiz = () => {
       return setTrackUnselected(unSelectedQuestion);
     }
     updateQuizMark(userQuizMark);
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export const Quiz = () => {
                 Each question contains 5 Mark
               </p>
 
-              {/* {checkQuizSubmisson && (
+              {checkQuizSubmisson && (
                 <>
                   {" "}
                   <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white mt-5">
@@ -106,42 +108,7 @@ export const Quiz = () => {
                     </li>
                   </ul>
                 </>
-              )} */}
-
-              {/* {checkQuizSubmisson && (
-                <div className="border border-slate-700 inline-block p-3 rounded mt-5">
-                  <p className="text-sm text-slate-200 font-semibold my-1 text-md">
-                    Total Question:{" "}
-                    <span className="font-normal">
-                      {checkQuizSubmisson?.totalQuiz}
-                    </span>
-                  </p>
-                  <p className="text-sm text-slate-200 font-semibold my-1 text-md">
-                    Total Mark:{" "}
-                    <span className="font-normal">
-                      {checkQuizSubmisson?.totalMark}
-                    </span>
-                  </p>
-                  <p className="text-sm text-slate-200 font-semibold my-1 text-md">
-                    Correct Ans:{" "}
-                    <span className="font-normal">
-                      {checkQuizSubmisson?.totalCorrect}
-                    </span>
-                  </p>
-                  <p className="text-sm text-slate-200 font-semibold my-1 text-md">
-                    Wrong Ans:{" "}
-                    <span className="font-normal">
-                      {checkQuizSubmisson?.totalWrong}
-                    </span>
-                  </p>
-                  <p className="text-sm text-slate-200 font-semibold my-1 text-md">
-                    Final Mark:{" "}
-                    <span className="font-normal">
-                      {checkQuizSubmisson?.mark}
-                    </span>
-                  </p>
-                </div>
-              )} */}
+              )}
             </div>
             {videoQuizzes?.map((quiz, i) => (
               <QuizList
@@ -166,13 +133,18 @@ export const Quiz = () => {
             <button
               onClick={handleSubmitAns}
               className="px-4 py-2 rounded font-semibold bg-cyan block ml-auto mt-8 hover:opacity-90 active:opacity-100 active:scale-95 disabled:bg-slate-700 disabled:text-gray-500 disabled:cursor-not-allowed bg-green-700"
-              // disabled={checkQuizSubmisson || submissionLoading}
+              disabled={checkQuizSubmisson || submissionLoading}
             >
-              {"Submit"}
+              {checkQuizSubmisson ? "Submitted" : "Submit"}
             </button>
           </div>
         )}
       </section>
+      <ConfirmationModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        checkQuizSubmisson={checkQuizSubmisson}
+      />
     </>
   );
 };

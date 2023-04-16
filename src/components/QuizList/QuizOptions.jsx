@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useGetQuizMarkQuery } from "../../features/quizMark/quizMarkApi";
 
 export const QuizOptions = ({
   option,
@@ -10,6 +11,7 @@ export const QuizOptions = ({
 }) => {
   const { user } = useSelector((state) => state.user);
   const { videoId } = useParams();
+  const { data: quizMarks } = useGetQuizMarkQuery();
   const gettingAns = (quizId, optionId) => {
     const ansAvail = checkAns.find(
       (ans) => Number(ans[quizId]) === Number(option.id)
@@ -24,33 +26,39 @@ export const QuizOptions = ({
   };
 
   // check user ans
-  const filterCurrentUserAns = quiz?.userAns?.filter(
-    (ans) => ans.studentId === user?.id
+  const findCurrentUserAns = quizMarks?.find(
+    (quiz) => quiz.student_id === user?._id && quiz?.video_id === videoId
   );
-  const checkedAns = filterCurrentUserAns?.find((a) => a[Number(videoId)])?.[
-    Number(videoId)
-  ];
-  const selectedAns = checkedAns?.some((ans) => ans[quiz?.id] === option?.id);
-  const lableStyle =
-    checkedAns?.length > 0
-      ? ` ${selectedAns && "!text-red-500"}  ${
-          option?.isCorrect && "!bg-green-500"
-        }`
-      : "";
+  const selectedAns = findCurrentUserAns?.userAns?.some(
+    (ans) => ans[quiz?._id] === option?.id
+  );
+  const checkingStyle = findCurrentUserAns
+    ? ` ${option?.isCorrect && "!bg-green-500"}`
+    : "";
+
+  // input checked condition
+  const inputChecked = findCurrentUserAns
+    ? option?.isCorrect
+    : checkAns.some((ans) => ans[quiz?._id] === option?.id);
   return (
-    <div className="flex items-center">
+    <div
+      className={`flex items-center bg-gray-700 p-3 w-full rounded ${checkingStyle}`}
+    >
       <input
         type="checkbox"
         id={`option${optionNo}_q${quiz?._id}`}
         name={quiz?._id}
         value={option.option}
-        checked={checkAns.some((ans) => ans[quiz?._id] === option?.id)}
+        checked={inputChecked}
         onChange={() => gettingAns(quiz?._id, option?.id)}
-        // disabled={checkedAns?.length > 0}
+        className="peer-checked:bg-red-500"
+        disabled={findCurrentUserAns}
       />
       <label
         htmlFor={`option${optionNo}_q${quiz?._id}`}
-        class="ml-2 text-md font-medium text-gray-900 dark:text-gray-300 "
+        class={`ml-2 text-md font-medium text-gray-900 dark:text-gray-300 ${
+          selectedAns && "!text-red-500"
+        }  ${option?.isCorrect && "text-gray-700"} `}
       >
         {option.option}
       </label>
