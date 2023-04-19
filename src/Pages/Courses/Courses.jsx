@@ -3,62 +3,66 @@ import { useLocation } from "react-router-dom";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import SingleCourse from "../SingleCourse/SingleCourse";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
+import { useGetEnrolledCourseQuery } from "../../features/enrollCourse/enrollCourseApi";
+import { useDispatch, useSelector } from "react-redux";
+import { coursePagination } from "../../features/courses/courseSlice";
 
 const Courses = () => {
-  const { data, isLoading, isError } = useGetCoursesQuery();
-
-  let { courses } = data || {};
-  let [course, setCourse] = useState([]);
-  const [filterCategoryName, setFilterCategoryName] = useState("");
-
-  // course filter
-  const handleFilter = (categoryName) => {
-    const filterByCategory = courses?.filter(
-      (item) => item.categories === categoryName
-    );
-    setFilterCategoryName(categoryName);
-    setCourse(filterByCategory);
-  };
-
+  const { data: enrolledCourse } = useGetEnrolledCourseQuery();
+  const { user } = useSelector((state) => state.user);
+  const location = useLocation();
+  const isShowing = location.pathname === "/home" || location.pathname === "/";
+  let [courses, setCourse] = useState([]);
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(5);
+  const [size, setSize] = useState(isShowing ? "" : 5);
+  const dispatch = useDispatch();
+  const {
+    data: coursesData,
+    isLoading,
+    isError,
+  } = useGetCoursesQuery({ page, size });
+
   const pages = Math.ceil(parseInt(count) / size);
-  const location = useLocation();
-  if (location.pathname === "/home" || location.pathname === "/") {
-    course = course?.slice(0, 3);
+  if (isShowing) {
+    courses = courses
+      ?.filter(
+        (v) =>
+          !enrolledCourse?.some(
+            (enrolld) =>
+              enrolld?.course_id === v?._id && enrolld?.student_id === user?._id
+          )
+      )
+      ?.slice(0, 3);
   }
+
   useEffect(() => {
-    fetch(`http://localhost:4000/api/v1/courses?page=${page}&size=${size}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setCourse(data?.courses);
-        setCount(data?.count);
-      });
-  }, [page, size]);
+    if (coursesData) {
+      setCourse(coursesData?.courses);
+      setCount(coursesData?.count);
+      dispatch(coursePagination({ page, size }));
+    }
+  }, [page, size, coursesData, dispatch]);
   return (
     <div className="flex gap-x-5 dark:bg-gray-800 bg-white">
-      {location.pathname !== "/home" && location.pathname !== "/" && (
+      {!isShowing && (
         <LeftSideBar
           className="relative"
           key={Math.random()}
-          courses={courses}
-          handleFilter={handleFilter}
-          filterCategoryName={filterCategoryName}
+          // filterCategoryName={filterCategoryName}
         />
       )}
       <div
         className={`${
-          location.pathname === "/home" || location.pathname === "/"
+          isShowing
             ? "grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 max-w-screen-xl m-auto"
             : "grid grid-cols-1"
         }`}
       >
-        {course?.map((course) => (
+        {courses?.map((course) => (
           <SingleCourse key={Math.random()} course={course} />
         ))}
-        {location.pathname === "/home" ||
-        location.pathname === "/" ? undefined : (
+        {isShowing ? undefined : (
           <div className="flex mt-8 justify-center">
             {[...Array(pages).keys()].map((n) => (
               <button

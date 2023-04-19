@@ -8,6 +8,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useStoreUserMutation } from "../../features/user/userApi";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 const Register = () => {
   const { createUser, updateUserProfie } = useContext(AuthContext);
@@ -17,6 +18,7 @@ const Register = () => {
   const [userPhoto, setUserPhoto] = useState("");
   const navigate = useNavigate();
   const [storeUser] = useStoreUserMutation();
+  const [state, setState] = useState("initial");
 
   // create user
   const handleSubmit = (e) => {
@@ -27,12 +29,14 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     setErr("");
+    setState("loading");
 
     createUser(email, password)
       .then((res) => {
         if (res?.user?.uid) {
           handleUserProfileUpdate(name, photo);
           storeUser({ name, email, photoURL: photo, role: "student" });
+          setState("success");
           form.reset();
         }
       })
@@ -43,8 +47,11 @@ const Register = () => {
 
   // update user profile
   const handleUserProfileUpdate = (name, photo) => {
+    setState("loading");
     updateUserProfie({ displayName: name, photoURL: photo })
-      .then(() => {})
+      .then(() => {
+        setState("success");
+      })
       .catch((error) => {
         setErr(error.code);
       });
@@ -92,7 +99,7 @@ const Register = () => {
                           type="text"
                           id="name"
                           name="name"
-                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
+                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent ring-0 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                           placeholder="Your Name"
                           required
                           onBlur={(e) => setUserName(e.target.value)}
@@ -108,7 +115,7 @@ const Register = () => {
                           type="text"
                           id="picUrl"
                           name="picUrl"
-                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
+                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent  ring-0 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                           placeholder="Profile Picture URL"
                           required
                           onBlur={(e) => setUserPhoto(e.target.value)}
@@ -126,7 +133,7 @@ const Register = () => {
                               type="email"
                               id="email"
                               name="email"
-                              className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
+                              className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent ring-0 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                               placeholder="Your email"
                               required
                             />
@@ -141,7 +148,7 @@ const Register = () => {
                               type="password"
                               id="password"
                               name="password"
-                              className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
+                              className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent ring-0 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                               placeholder="Your Password"
                               required
                             />
@@ -157,9 +164,13 @@ const Register = () => {
                       <div>
                         <button
                           type="submit"
-                          className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                          className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:border-transparent ring-0"
                         >
-                          Create an Account
+                          {state === "loading" ? (
+                            <Spinner />
+                          ) : (
+                            "Create an Account"
+                          )}
                         </button>
                       </div>
                     )}
@@ -169,9 +180,9 @@ const Register = () => {
                       <button
                         type="submit"
                         onClick={editProfile}
-                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 mt-5"
+                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:border-transparent ring-0"
                       >
-                        Update Profile
+                        {state === "loading" ? <Spinner /> : "Update Profile"}
                       </button>
                     </div>
                   )}

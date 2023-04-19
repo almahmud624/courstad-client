@@ -3,7 +3,7 @@ import { apiSlice } from "../api/apiSlice";
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCourses: builder.query({
-      query: () => "/courses",
+      query: ({ page, size }) => `/courses?page=${page}&size=${size}`,
     }),
     getCourse: builder.query({
       query: (id) => `/course/${id}`,
@@ -14,38 +14,131 @@ export const courseApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      // async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-      //   try {
-      //     const { data: updatedVideo } = await queryFulfilled;
-      //     dispatch(
-      //       apiSlice.util.updateQueryData("getVideos", undefined, (draft) => {
-      //         const editableVideo = draft.find(
-      //           (video) => video?.id == arg?.videoId
-      //         );
-      //         editableVideo.title = updatedVideo.title;
-      //         editableVideo.description = updatedVideo.description;
-      //         editableVideo.url = updatedVideo.url;
-      //         editableVideo.views = updatedVideo.views;
-      //         editableVideo.duration = updatedVideo.duration;
-      //       })
-      //     );
-      //     dispatch(
-      //       apiSlice.util.updateQueryData(
-      //         "getVideo",
-      //         arg.videoId.toString(),
-      //         (draft) => {
-      //           draft.title = updatedVideo.title;
-      //           draft.description = updatedVideo.description;
-      //           draft.url = updatedVideo.url;
-      //           draft.views = updatedVideo.views;
-      //           draft.duration = updatedVideo.duration;
-      //         }
-      //       )
-      //     );
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
-      // },
+      async onQueryStarted(arg, { queryFulfilled, getState, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          const updatedCourse = data?.data;
+          const { page, size } = getState().course;
+
+          dispatch(
+            apiSlice.util.updateQueryData(
+              "getCourses",
+              { page, size },
+              (draft) => {
+                const editableCourse = draft.courses.find(
+                  (course) => course?._id == arg?.id
+                );
+                editableCourse.courseName = updatedCourse.courseName;
+                editableCourse.categories = updatedCourse.categories;
+                editableCourse.courseTutor = updatedCourse.courseTutor;
+                editableCourse.courseThumb = updatedCourse.courseThumb;
+                editableCourse.coursePrice = updatedCourse.coursePrice;
+                editableCourse.courseEnrollment =
+                  updatedCourse.courseEnrollment;
+                editableCourse.courseDescription =
+                  updatedCourse.courseDescription;
+                editableCourse.teacherThumb = updatedCourse.teacherThumb;
+                editableCourse.teacherSkills = updatedCourse.teacherSkills;
+                editableCourse.teacherSkills = updatedCourse.teacherSkills;
+                editableCourse.rating = updatedCourse.rating;
+              }
+            )
+          );
+          dispatch(
+            apiSlice.util.updateQueryData(
+              "getCourse",
+              arg.id.toString(),
+              (draft) => {
+                draft.courseName = updatedCourse.courseName;
+                draft.categories = updatedCourse.categories;
+                draft.courseTutor = updatedCourse.courseTutor;
+                draft.courseThumb = updatedCourse.courseThumb;
+                draft.coursePrice = updatedCourse.coursePrice;
+                draft.courseEnrollment = updatedCourse.courseEnrollment;
+                draft.courseDescription = updatedCourse.courseDescription;
+                draft.teacherThumb = updatedCourse.teacherThumb;
+                draft.teacherSkills = updatedCourse.teacherSkills;
+                draft.teacherSkills = updatedCourse.teacherSkills;
+                draft.rating = updatedCourse.rating;
+              }
+            )
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    }),
+    removeRating: builder.mutation({
+      query: ({ id, ratingId }) => ({
+        url: `/course/${id}/rating/${ratingId}`,
+        method: "PATCH",
+        body: { type: "remove" },
+      }),
+      async onQueryStarted(arg, { queryFulfilled, getState, dispatch }) {
+        const { data } = await queryFulfilled;
+        const { page, size } = getState().course;
+        dispatch(
+          apiSlice.util.updateQueryData(
+            "getCourses",
+            { page, size },
+            (draft) => {
+              if (draft.courses) {
+                const course = draft.courses.find(
+                  (course) => course._id == arg.id
+                );
+                course.rating = data.rating;
+              }
+            }
+          )
+        );
+        dispatch(
+          apiSlice.util.updateQueryData("getCourse", arg.id, (draft) => {
+            draft.rating = data.rating;
+          })
+        );
+      },
+    }),
+    updateRating: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `/course/${id}/rating/${data?._id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, getState, dispatch }) {
+        const { page, size } = getState().course;
+        dispatch(
+          apiSlice.util.updateQueryData(
+            "getCourses",
+            { page, size },
+            (draft) => {
+              // Find the targeted course
+              const course = draft.courses?.find(
+                (course) => course._id == arg.id
+              );
+              // Find the targeted rating
+              const updatableRating = course.rating.find(
+                (rate) => rate._id == arg.data?._id
+              );
+              // Update the rating
+              updatableRating.userRating = arg.data.userRating;
+            }
+          )
+        );
+        dispatch(
+          apiSlice.util.updateQueryData(
+            "getCourse",
+            arg.id.toString(),
+            (draft) => {
+              // Find the targeted rating
+              const updatableRating = draft.rating.find(
+                (rate) => rate._id == arg.data?._id
+              );
+              // Update the rating
+              updatableRating.userRating = arg.data.userRating;
+            }
+          )
+        );
+      },
     }),
   }),
 });
@@ -54,4 +147,6 @@ export const {
   useGetCourseQuery,
   useGetCoursesQuery,
   useUpdateCourseMutation,
+  useRemoveRatingMutation,
+  useUpdateRatingMutation,
 } = courseApi;

@@ -1,4 +1,8 @@
-import { BsStarHalf, BsFillStarFill } from "react-icons/bs";
+import {
+  BsStarHalf,
+  BsFillStarFill,
+  BsThreeDotsVertical,
+} from "react-icons/bs";
 export const Rating = ({
   rating,
   setRating,
@@ -6,6 +10,7 @@ export const Rating = ({
   userRating,
   setIsEditRating,
   isEditRating,
+  toggleDeleteConfirmation,
 }) => {
   const handleRating = (value) => {
     const newRating = rating === value ? value - 0.5 : value;
@@ -27,9 +32,9 @@ export const Rating = ({
                 onClick={() => handleRating(index)}
               >
                 {rating >= index ? (
-                  <BsFillStarFill className="h-5 w-5 text-green-600" />
+                  <BsFillStarFill className="h-5 w-5 text-green-700" />
                 ) : rating >= halfStar ? (
-                  <BsStarHalf className="h-5 w-5 text-green-600" />
+                  <BsStarHalf className="h-5 w-5 text-green-700" />
                 ) : (
                   <BsFillStarFill className="h-5 w-5 text-gray-700" />
                 )}
@@ -40,7 +45,7 @@ export const Rating = ({
       ) : (
         <div className="flex items-center">
           <span className="text-green-600 text-lg mr-1">
-            {userRating?.rating}
+            {userRating?.userRating}
           </span>
           <BsFillStarFill className="h-4 w-4 text-green-700" />
           <button
@@ -49,6 +54,10 @@ export const Rating = ({
           >
             Edit
           </button>
+          <BsThreeDotsVertical
+            onClick={toggleDeleteConfirmation}
+            className="h-6 w-6 text-gray-500 ml-2 cursor-pointer hover:bg-gray-700 hover:text-gray-900 p-1 rounded-full transition-all duration-300"
+          />
         </div>
       )}
     </>

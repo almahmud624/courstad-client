@@ -14,6 +14,8 @@ import {
 } from "../../features/enrollCourse/enrollCourseApi";
 import toast from "react-hot-toast";
 import { CustomLinkButton } from "../../components/CustomLinkButton/CustomLinkButton";
+import { BsFillStarFill } from "react-icons/bs";
+import { getAvarageCourseRating } from "../../utils/getAvarageCourseRating";
 
 const getVideosLength = (courseVideos, type) => {
   return courseVideos
@@ -109,9 +111,8 @@ const CourseDetails = () => {
                 </div>
                 <div className="flex w-full md:mt-0 mt-5 md:w-[57%] justify-between items-center">
                   <div className="text-gray-600 dark:text-gray-400 flex items-center ">
-                    <FaClock className="mr-3" /> Duration:{" "}
-                    {getVideosLength(courseVideos, 0)}h{" "}
-                    {getVideosLength(courseVideos, 1)}min
+                    <BsFillStarFill className="mr-2" />{" "}
+                    {getAvarageCourseRating(course)}
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 flex items-center">
                     <FaUserAlt className="mr-3" /> {courseEnrollment} Enrolled

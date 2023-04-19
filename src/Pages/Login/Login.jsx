@@ -6,6 +6,7 @@ import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
 import toast from "react-hot-toast";
 import { useStoreUserMutation } from "../../features/user/userApi";
+import { Spinner } from "../../components/Spinner/Spinner";
 
 const Login = () => {
   const { userLogIn, resetPassword } = useContext(AuthContext);
@@ -15,10 +16,12 @@ const Login = () => {
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
   const [storeUser] = useStoreUserMutation();
+  const [state, setState] = useState("initial");
 
   // login with email and password
   const handleSubmit = (e) => {
     e.preventDefault();
+    setState("loading");
     setErr("");
     const form = e.target;
     const email = form.email.value;
@@ -26,6 +29,7 @@ const Login = () => {
     userLogIn(email, password)
       .then((res) => {
         storeUser({ name: res?.user?.displayName, email, role: "student" });
+        setState("success");
         navigate(from, { replace: true });
         setErr("");
         form.reset();
@@ -46,6 +50,7 @@ const Login = () => {
         setErr(error.code);
       });
   };
+
   return (
     <div>
       <section className="dark:bg-gray-800 dark:text-gray-200 bg-white">
@@ -82,7 +87,7 @@ const Login = () => {
                           type="email"
                           id="email"
                           name="email"
-                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
+                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent ring-0 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                           placeholder="Your email"
                           required
                           onBlur={(e) => setUserEmail(e.target.value)}
@@ -98,7 +103,7 @@ const Login = () => {
                           type="password"
                           id="password"
                           name="password"
-                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
+                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent ring-0 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
                           placeholder="Your Password"
                         />
                         <span className="rounded-r-lg inline-flex  items-center px-3 border-t bg-white border border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -110,9 +115,9 @@ const Login = () => {
                     <div>
                       <button
                         type="submit"
-                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:border-transparent ring-0"
                       >
-                        Login
+                        {state === "loading" ? <Spinner /> : "Login"}
                       </button>
                     </div>
                   </form>
