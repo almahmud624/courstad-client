@@ -56,7 +56,7 @@ export const QuizOptions = ({
       />
       <label
         htmlFor={`option${optionNo}_q${quiz?._id}`}
-        class={`ml-2 text-md font-medium text-gray-900 dark:text-gray-300 ${
+        className={`ml-2 text-md font-medium text-gray-900 dark:text-gray-300 ${
           selectedAns && "!text-red-500"
         }  ${option?.isCorrect && "text-gray-700"} `}
       >

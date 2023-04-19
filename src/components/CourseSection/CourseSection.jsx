@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Courses from "../../Pages/Courses/Courses";
+import { CoursesCard } from "../CoursesCard/CoursesCard";
 
 const CourseSection = () => {
   return (
@@ -15,7 +16,7 @@ const CourseSection = () => {
             everyone
           </p>
         </div>
-        <Courses />
+        <CoursesCard />
         <div className="flex mt-8 justify-center">
           <Link
             className="group relative inline-block focus:outline-none focus:ring"

@@ -36,7 +36,7 @@ const SingleCourse = ({ course = {} }) => {
   const [removeRating] = useRemoveRatingMutation();
   const [updateRating] = useUpdateRatingMutation();
 
-  //find current user enrolled course
+  //filter current user enrolled course
   const checkUserEnrollment = enrolledCourse?.filter(
     (enroll) => enroll?.student_id === user?._id
   );
@@ -201,12 +201,14 @@ const SingleCourse = ({ course = {} }) => {
               }`}
             >
               <Link to={`/courses/${_id}`}>
-                <img
-                  src={courseThumb}
-                  loading="lazy"
-                  alt="Course Thumb"
-                  className="w-full h-full object-cover object-center"
-                />
+                <div className="h-52">
+                  <img
+                    src={courseThumb}
+                    loading="lazy"
+                    alt="Course Thumb"
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
               </Link>
             </div>
           </div>

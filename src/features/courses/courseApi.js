@@ -3,7 +3,8 @@ import { apiSlice } from "../api/apiSlice";
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCourses: builder.query({
-      query: ({ page, size }) => `/courses?page=${page}&size=${size}`,
+      query: ({ page = 0, size = 0, enrolled = {} }) =>
+        `/courses?page=${page}&size=${size}&enrolled=${enrolled?.student_id}`,
     }),
     getCourse: builder.query({
       query: (id) => `/course/${id}`,
@@ -18,12 +19,12 @@ export const courseApi = apiSlice.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           const updatedCourse = data?.data;
-          const { page, size } = getState().course;
+          const { page, size, enrolled } = getState().course;
 
           dispatch(
             apiSlice.util.updateQueryData(
               "getCourses",
-              { page, size },
+              { page, size, enrolled },
               (draft) => {
                 const editableCourse = draft.courses.find(
                   (course) => course?._id == arg?.id
@@ -76,11 +77,11 @@ export const courseApi = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled, getState, dispatch }) {
         const { data } = await queryFulfilled;
-        const { page, size } = getState().course;
+        const { page, size, enrolled } = getState().course;
         dispatch(
           apiSlice.util.updateQueryData(
             "getCourses",
-            { page, size },
+            { page, size, enrolled },
             (draft) => {
               if (draft.courses) {
                 const course = draft.courses.find(
@@ -105,11 +106,11 @@ export const courseApi = apiSlice.injectEndpoints({
         body: data,
       }),
       async onQueryStarted(arg, { queryFulfilled, getState, dispatch }) {
-        const { page, size } = getState().course;
+        const { page, size, enrolled } = getState().course;
         dispatch(
           apiSlice.util.updateQueryData(
             "getCourses",
-            { page, size },
+            { page, size, enrolled },
             (draft) => {
               // Find the targeted course
               const course = draft.courses?.find(

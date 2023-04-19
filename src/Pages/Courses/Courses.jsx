@@ -3,13 +3,10 @@ import { useLocation } from "react-router-dom";
 import LeftSideBar from "../LeftSideBar/LeftSideBar";
 import SingleCourse from "../SingleCourse/SingleCourse";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
-import { useGetEnrolledCourseQuery } from "../../features/enrollCourse/enrollCourseApi";
 import { useDispatch, useSelector } from "react-redux";
 import { coursePagination } from "../../features/courses/courseSlice";
 
 const Courses = () => {
-  const { data: enrolledCourse } = useGetEnrolledCourseQuery();
-  const { user } = useSelector((state) => state.user);
   const location = useLocation();
   const isShowing = location.pathname === "/home" || location.pathname === "/";
   let [courses, setCourse] = useState([]);
@@ -17,24 +14,14 @@ const Courses = () => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(isShowing ? "" : 5);
   const dispatch = useDispatch();
+  const { enrolled } = useSelector((state) => state.course);
   const {
     data: coursesData,
     isLoading,
     isError,
-  } = useGetCoursesQuery({ page, size });
+  } = useGetCoursesQuery({ page, size, enrolled });
 
   const pages = Math.ceil(parseInt(count) / size);
-  if (isShowing) {
-    courses = courses
-      ?.filter(
-        (v) =>
-          !enrolledCourse?.some(
-            (enrolld) =>
-              enrolld?.course_id === v?._id && enrolld?.student_id === user?._id
-          )
-      )
-      ?.slice(0, 3);
-  }
 
   useEffect(() => {
     if (coursesData) {
@@ -45,13 +32,7 @@ const Courses = () => {
   }, [page, size, coursesData, dispatch]);
   return (
     <div className="flex gap-x-5 dark:bg-gray-800 bg-white">
-      {!isShowing && (
-        <LeftSideBar
-          className="relative"
-          key={Math.random()}
-          // filterCategoryName={filterCategoryName}
-        />
-      )}
+      {!isShowing && <LeftSideBar className="relative" key={Math.random()} />}
       <div
         className={`${
           isShowing
