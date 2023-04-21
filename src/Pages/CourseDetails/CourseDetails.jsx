@@ -16,6 +16,7 @@ import toast from "react-hot-toast";
 import { CustomLinkButton } from "../../components/CustomLinkButton/CustomLinkButton";
 import { BsFillStarFill } from "react-icons/bs";
 import { getAvarageCourseRating } from "../../utils/getAvarageCourseRating";
+import { useGetUserRatingQuery } from "../../features/rating/ratingApi";
 
 const getVideosLength = (courseVideos, type) => {
   return courseVideos
@@ -32,6 +33,7 @@ const CourseDetails = () => {
   const [storeEnrolledCourse, { isLoading: enrollmentLoading, isSuccess }] =
     useStoreEnrolledCourseMutation();
   const { data: enrolledCourse } = useGetEnrolledCourseQuery();
+  const { data: usersRating } = useGetUserRatingQuery();
   const navigate = useNavigate();
 
   const {
@@ -54,6 +56,11 @@ const CourseDetails = () => {
 
   // find related course video
   const courseVideos = videos?.filter((video) => video?.course_id === id);
+
+  // filter current course ratings
+  const courseRating = usersRating?.filter(
+    (rating) => rating?.course_id === _id
+  );
 
   // enroll course
   const handleEnroll = () => {
@@ -112,7 +119,7 @@ const CourseDetails = () => {
                 <div className="flex w-full md:mt-0 mt-5 md:w-[57%] justify-between items-center">
                   <div className="text-gray-600 dark:text-gray-400 flex items-center ">
                     <BsFillStarFill className="mr-2" />{" "}
-                    {getAvarageCourseRating(course)}
+                    {getAvarageCourseRating(courseRating)}
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 flex items-center">
                     <FaUserAlt className="mr-3" /> {courseEnrollment} Enrolled

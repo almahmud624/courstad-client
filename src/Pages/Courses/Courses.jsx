@@ -5,21 +5,23 @@ import SingleCourse from "../SingleCourse/SingleCourse";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
 import { useDispatch, useSelector } from "react-redux";
 import { coursePagination } from "../../features/courses/courseSlice";
+import useGetSearchParams from "../../hooks/useGetSearchParams";
 
 const Courses = () => {
   const location = useLocation();
   const isShowing = location.pathname === "/home" || location.pathname === "/";
+  const { queryText } = useGetSearchParams();
   let [courses, setCourse] = useState([]);
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(isShowing ? "" : 5);
   const dispatch = useDispatch();
-  const { enrolled } = useSelector((state) => state.course);
+  const { enrolled, categories } = useSelector((state) => state.course);
   const {
     data: coursesData,
     isLoading,
     isError,
-  } = useGetCoursesQuery({ page, size, enrolled });
+  } = useGetCoursesQuery({ page, size, enrolled, categories, queryText });
 
   const pages = Math.ceil(parseInt(count) / size);
 

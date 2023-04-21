@@ -3,8 +3,18 @@ import { apiSlice } from "../api/apiSlice";
 export const courseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCourses: builder.query({
-      query: ({ page = 0, size = 0, enrolled = {} }) =>
-        `/courses?page=${page}&size=${size}&enrolled=${enrolled?.student_id}`,
+      query: ({
+        page = 0,
+        size = 0,
+        enrolled = {},
+        categories = [],
+        queryText = "",
+      }) => {
+        const params = new URLSearchParams({
+          categories: categories.join(","),
+        });
+        return `/courses?page=${page}&size=${size}&enrolled=${enrolled?.student_id}&${params}&search=${queryText}`;
+      },
     }),
     getCourse: builder.query({
       query: (id) => `/course/${id}`,
@@ -19,12 +29,13 @@ export const courseApi = apiSlice.injectEndpoints({
         try {
           const { data } = await queryFulfilled;
           const updatedCourse = data?.data;
-          const { page, size, enrolled } = getState().course;
+          const { page, size, enrolled, categories, queryText } =
+            getState().course;
 
           dispatch(
             apiSlice.util.updateQueryData(
               "getCourses",
-              { page, size, enrolled },
+              { page, size, enrolled, categories, queryText },
               (draft) => {
                 const editableCourse = draft.courses.find(
                   (course) => course?._id == arg?.id
@@ -69,78 +80,6 @@ export const courseApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    removeRating: builder.mutation({
-      query: ({ id, ratingId }) => ({
-        url: `/course/${id}/rating/${ratingId}`,
-        method: "PATCH",
-        body: { type: "remove" },
-      }),
-      async onQueryStarted(arg, { queryFulfilled, getState, dispatch }) {
-        const { data } = await queryFulfilled;
-        const { page, size, enrolled } = getState().course;
-        dispatch(
-          apiSlice.util.updateQueryData(
-            "getCourses",
-            { page, size, enrolled },
-            (draft) => {
-              if (draft.courses) {
-                const course = draft.courses.find(
-                  (course) => course._id == arg.id
-                );
-                course.rating = data.rating;
-              }
-            }
-          )
-        );
-        dispatch(
-          apiSlice.util.updateQueryData("getCourse", arg.id, (draft) => {
-            draft.rating = data.rating;
-          })
-        );
-      },
-    }),
-    updateRating: builder.mutation({
-      query: ({ id, data }) => ({
-        url: `/course/${id}/rating/${data?._id}`,
-        method: "PATCH",
-        body: data,
-      }),
-      async onQueryStarted(arg, { queryFulfilled, getState, dispatch }) {
-        const { page, size, enrolled } = getState().course;
-        dispatch(
-          apiSlice.util.updateQueryData(
-            "getCourses",
-            { page, size, enrolled },
-            (draft) => {
-              // Find the targeted course
-              const course = draft.courses?.find(
-                (course) => course._id == arg.id
-              );
-              // Find the targeted rating
-              const updatableRating = course.rating.find(
-                (rate) => rate._id == arg.data?._id
-              );
-              // Update the rating
-              updatableRating.userRating = arg.data.userRating;
-            }
-          )
-        );
-        dispatch(
-          apiSlice.util.updateQueryData(
-            "getCourse",
-            arg.id.toString(),
-            (draft) => {
-              // Find the targeted rating
-              const updatableRating = draft.rating.find(
-                (rate) => rate._id == arg.data?._id
-              );
-              // Update the rating
-              updatableRating.userRating = arg.data.userRating;
-            }
-          )
-        );
-      },
-    }),
   }),
 });
 
@@ -148,6 +87,4 @@ export const {
   useGetCourseQuery,
   useGetCoursesQuery,
   useUpdateCourseMutation,
-  useRemoveRatingMutation,
-  useUpdateRatingMutation,
 } = courseApi;

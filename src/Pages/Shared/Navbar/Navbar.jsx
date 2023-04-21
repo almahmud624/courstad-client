@@ -7,6 +7,7 @@ import { FaMoon, FaSun, FaTimes } from "react-icons/fa";
 import avater from "../../../Assets/avatar.png";
 import logo from "../../../Assets/logo.png";
 import { useSelector } from "react-redux";
+import { SearchInput } from "../../../components/SearchInput/SearchInput";
 
 const Navbar = ({ darkSwitch, switchTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -92,7 +93,12 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   FAQ
                 </NavLink>
               </li>
-              <li>
+            </ul>
+            <div className="">
+              <SearchInput />
+            </div>
+            <div className="flex items-center gap-2">
+              <div>
                 <ul className="flex items-center hidden space-x-8 lg:flex">
                   {user?.email ? (
                     <>
@@ -135,24 +141,10 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                           Log in
                         </NavLink>
                       </li>
-                      <li>
-                        <NavLink
-                          to="/register"
-                          aria-label=""
-                          title="sign up"
-                          className={({ isActive }) =>
-                            isActive
-                              ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
-                              : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
-                          }
-                        >
-                          Sign Up
-                        </NavLink>
-                      </li>
                     </>
                   )}
                 </ul>
-              </li>
+              </div>
 
               <span
                 className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -164,7 +156,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   <FaSun className="text-xl cursor-pointer" />
                 )}
               </span>
-            </ul>
+            </div>
           </div>
 
           <div className="lg:hidden">
@@ -279,7 +271,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                           FAQ
                         </NavLink>
                       </li>
-                      <li></li>
                       <li>
                         <ul className="space-y-5">
                           {user?.uid ? (

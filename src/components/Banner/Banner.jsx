@@ -36,7 +36,7 @@ const Banner = () => {
                   src={banner}
                   loading="lazy"
                   alt=""
-                  className="w-full h-full object-cover object-center"
+                  className="w-full h-full object-cover object-center z-5"
                 />
               </div>
             </div>

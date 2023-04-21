@@ -1,7 +1,7 @@
-export const getAvarageCourseRating = (course) => {
-  return course?.rating
-    ? course?.rating
-        ?.reduce((acc, cur) => acc + cur.userRating / course?.rating?.length, 0)
+export const getAvarageCourseRating = (courseRating) => {
+  return courseRating?.length > 0
+    ? courseRating
+        ?.reduce((acc, cur) => acc + cur.rating / courseRating?.length, 0)
         .toFixed(1)
     : 0;
 };

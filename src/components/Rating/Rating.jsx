@@ -45,7 +45,7 @@ export const Rating = ({
       ) : (
         <div className="flex items-center">
           <span className="text-green-600 text-lg mr-1">
-            {userRating?.userRating}
+            {userRating?.rating}
           </span>
           <BsFillStarFill className="h-4 w-4 text-green-700" />
           <button

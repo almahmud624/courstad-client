@@ -6,6 +6,8 @@ const initialState = {
   enrolled: {
     student_id: "",
   },
+  queryText: "",
+  categories: [],
 };
 
 const courseSlice = createSlice({
@@ -23,7 +25,19 @@ const courseSlice = createSlice({
         state.enrolled.student_id = "";
       }
     },
+    categorySearch: (state, action) => {
+      const category = action.payload.category;
+      if (state.categories.indexOf(category) === -1) {
+        state.categories = [...state.categories, category];
+      } else {
+        state.categories = state.categories.filter((c) => c !== category);
+      }
+    },
+    courseSearch: (state, action) => {
+      state.queryText = action.payload.queryText;
+    },
   },
 });
 export default courseSlice.reducer;
-export const { coursePagination, courseFilter } = courseSlice.actions;
+export const { coursePagination, courseFilter, courseSearch, categorySearch } =
+  courseSlice.actions;
