@@ -94,7 +94,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                 </NavLink>
               </li>
             </ul>
-            <div className="">
+            <div className="w-64">
               <SearchInput />
             </div>
             <div className="flex items-center gap-2">

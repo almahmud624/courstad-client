@@ -5,6 +5,7 @@ import {
   courseFilter,
 } from "../../features/courses/courseSlice";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
+import "./LeftSideBar.css";
 
 const LeftSideBar = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,10 @@ const LeftSideBar = () => {
             <h4 className="inline-block dark:text-white text-gray-800  font-semibold px-3 bg-gray-300 dark:bg-gray-800 w-full text-left py-1 rounded text-xl">
               Categories
             </h4>
-            <div class="py-5 flex flex-col gap-2">
+            <div
+              class="py-5 flex flex-col gap-2 overflow-y-scroll h-52"
+              id="category"
+            >
               {uniqueCategories?.map((category, i) => (
                 <label key={i} className="text-gray-200">
                   <input
