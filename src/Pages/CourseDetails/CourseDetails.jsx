@@ -32,7 +32,7 @@ const CourseDetails = () => {
   const { user } = useSelector((state) => state.user);
   const [storeEnrolledCourse, { isLoading: enrollmentLoading, isSuccess }] =
     useStoreEnrolledCourseMutation();
-  const { data: enrolledCourse } = useGetEnrolledCourseQuery();
+  const { data: enrolledCourse } = useGetEnrolledCourseQuery({});
   const { data: usersRating } = useGetUserRatingQuery();
   const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ const CourseDetails = () => {
     courseTutor,
     teacherThumb,
     categories,
-    courseEnrollment,
+    enrollment,
   } = course || {};
 
   const ref = useRef();
@@ -122,7 +122,8 @@ const CourseDetails = () => {
                     {getAvarageCourseRating(courseRating)}
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 flex items-center">
-                    <FaUserAlt className="mr-3" /> {courseEnrollment} Enrolled
+                    <FaUserAlt className="mr-3" />{" "}
+                    {enrollment?.length ? enrollment?.length : 0} Enrolled
                   </div>
                 </div>
               </div>

@@ -5,7 +5,9 @@ const initialState = {
   size: 0,
   enrolled: {
     student_id: "",
+    type: "",
   },
+  sort: "",
   queryText: "",
   categories: [],
 };
@@ -19,10 +21,12 @@ const courseSlice = createSlice({
       state.size = action.payload.size;
     },
     courseFilter: (state, action) => {
-      if (!state.enrolled.student_id) {
-        state.enrolled.student_id = action.payload.enrolled;
+      if (action.payload.student_id) {
+        state.enrolled.student_id = action.payload.student_id;
+        state.enrolled.type = action.payload.type;
       } else {
         state.enrolled.student_id = "";
+        state.enrolled.type = "all";
       }
     },
     categorySearch: (state, action) => {
@@ -36,8 +40,16 @@ const courseSlice = createSlice({
     courseSearch: (state, action) => {
       state.queryText = action.payload.queryText;
     },
+    sortCourse: (state, action) => {
+      state.sort = action.payload;
+    },
   },
 });
 export default courseSlice.reducer;
-export const { coursePagination, courseFilter, courseSearch, categorySearch } =
-  courseSlice.actions;
+export const {
+  coursePagination,
+  courseFilter,
+  courseSearch,
+  categorySearch,
+  sortCourse,
+} = courseSlice.actions;

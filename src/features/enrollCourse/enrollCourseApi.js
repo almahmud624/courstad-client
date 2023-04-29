@@ -1,9 +1,12 @@
 import { apiSlice } from "../api/apiSlice";
+import { courseApi } from "../courses/courseApi";
 
 export const enrollCourseApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getEnrolledCourse: builder.query({
-      query: () => "/enrolled",
+      query: ({ courseId = "", userId = "" }) =>
+        `/enrolled?courseId=${courseId}&userId=${userId}`,
+      providesTags: ["enrolled"],
     }),
     storeEnrolledCourse: builder.mutation({
       query: (data) => ({
@@ -11,21 +14,9 @@ export const enrollCourseApi = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
-        try {
-          const { data: newEnrolledCourse } = await queryFulfilled;
-          dispatch(
-            apiSlice.util.updateQueryData(
-              "getEnrolledCourse",
-              undefined,
-              (draft) => {
-                draft.push(newEnrolledCourse);
-              }
-            )
-          );
-        } catch (err) {
-          console.log(err);
-        }
+      invalidatesTags: ["enrolled"],
+      onQueryStarted: (arg, { dispatch }) => {
+        dispatch(courseApi.util.invalidateTags(["courses", "course"]));
       },
     }),
   }),

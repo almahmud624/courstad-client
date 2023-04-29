@@ -5,19 +5,25 @@ export const courseApi = apiSlice.injectEndpoints({
     getCourses: builder.query({
       query: ({
         page = 0,
-        size = 0,
+        size = 5,
         enrolled = {},
         categories = [],
         queryText = "",
+        sort = "",
       }) => {
         const params = new URLSearchParams({
           categories: categories.join(","),
         });
-        return `/courses?page=${page}&size=${size}&enrolled=${enrolled?.student_id}&${params}&search=${queryText}`;
+        return `/courses?page=${page}&size=${size}&userId=${enrolled?.student_id}&enrolled=${enrolled?.type}&${params}&search=${queryText}&sort=${sort}`;
       },
+      providesTags: ["courses"],
     }),
     getCourse: builder.query({
       query: (id) => `/course/${id}`,
+    }),
+    providesTags: ["course"],
+    getCourseCategories: builder.query({
+      query: () => `/courses/categories`,
     }),
     updateCourse: builder.mutation({
       query: ({ id, data }) => ({
@@ -87,4 +93,5 @@ export const {
   useGetCourseQuery,
   useGetCoursesQuery,
   useUpdateCourseMutation,
+  useGetCourseCategoriesQuery,
 } = courseApi;

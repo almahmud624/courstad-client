@@ -2,7 +2,7 @@ import Teachers from "../../Pages/Teachers/Teachers";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
 
 export const TeacherSection = () => {
-  const { data, isLoading, isError } = useGetCoursesQuery({});
+  const { data, isLoading, isError } = useGetCoursesQuery({ size: 3 });
   const { courses } = data || {};
   return (
     <>
@@ -21,7 +21,7 @@ export const TeacherSection = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 max-w-screen-lg m-auto">
-              {courses?.slice(0, 3)?.map((teacher) => (
+              {courses?.map((teacher) => (
                 <Teachers key={Math.random()} teacher={teacher} />
               ))}
             </div>

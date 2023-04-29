@@ -14,12 +14,16 @@ const SingleCourse = ({ course = {} }) => {
     coursePrice,
     courseThumb,
     courseDescription,
-    courseEnrollment,
+    rating,
+    reviews,
+    enrollment,
   } = course;
   const location = useLocation();
   const isShowing = location.pathname === "/home" || location.pathname === "/";
   const { user } = useSelector((state) => state.user);
-  const { data: enrolledCourse } = useGetEnrolledCourseQuery();
+  const { data: enrolledCourse } = useGetEnrolledCourseQuery({
+    courseId: course?._id,
+  });
   const { data: usersRating } = useGetUserRatingQuery();
 
   // filter current course ratings
@@ -34,6 +38,7 @@ const SingleCourse = ({ course = {} }) => {
   const findEnrolledCourse = checkUserEnrollment?.find(
     (en) => en?.course_id === _id
   );
+  console.log(course);
   return (
     <div className="my-5 w-11/12 m-auto hover:scale-[99%] transition-all duration-500 relative overflow-hidden">
       <>
@@ -76,12 +81,10 @@ const SingleCourse = ({ course = {} }) => {
                 )}
               </p>
               <div className="flex gap-1 items-center bg-gray-800 p-2 rounded mt-5">
-                <span className="text-green-600">
-                  {getAvarageCourseRating(courseRating)}
-                </span>
-                <Rating rating={getAvarageCourseRating(courseRating)} />
+                <span className="text-green-600">{rating.toFixed(1)}</span>
+                <Rating rating={rating} />
                 <span className="text-gray-500">
-                  ({courseRating?.length > 0 ? courseRating?.length : 0})
+                  ({reviews?.length > 0 ? reviews?.length : 0})
                 </span>
               </div>
               {findEnrolledCourse ? (
@@ -95,7 +98,7 @@ const SingleCourse = ({ course = {} }) => {
                   </div>
                   <div className="mt-auto">
                     <p className="inline-block dark:text-white text-gray-800 text-sm md:text-base font-semibold text-center bg-green-300 dark:bg-green-600 px-5 py-1 mt-5 rounded">
-                      {courseEnrollment} Enrolled
+                      {enrollment?.length ? enrollment?.length : 0} Enrolled
                     </p>
                   </div>
                 </div>

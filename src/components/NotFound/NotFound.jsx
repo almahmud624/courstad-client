@@ -1,6 +1,6 @@
 import { CustomLinkButton } from "../CustomLinkButton/CustomLinkButton";
 
-export const NotFound = ({ message, linkText, link }) => {
+export const NotFound = ({ message, linkText, link, hideBtn }) => {
   return (
     <>
       <section className="">
@@ -12,7 +12,9 @@ export const NotFound = ({ message, linkText, link }) => {
             <p className="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
               {message}{" "}
             </p>
-            <CustomLinkButton buttonText={linkText} link={link} />
+            <div className={hideBtn}>
+              <CustomLinkButton buttonText={linkText} link={link} />
+            </div>
           </div>
         </div>
       </section>

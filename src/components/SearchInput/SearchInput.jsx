@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export const SearchInput = () => {
   const [queryText, setQueryText] = useState();
   const { data, isLoading, isError } = useGetCoursesQuery(
-    { queryText },
+    { queryText, size: 14 },
     { skip: !queryText }
   );
 

@@ -8,12 +8,7 @@ export const MyClasses = () => {
     data: enrolledCourse,
     isLoading,
     isError,
-  } = useGetEnrolledCourseQuery();
-
-  //   filter user enrolled course
-  const userEnrolledCourse = enrolledCourse?.filter(
-    (enrolled) => enrolled?.student_id === user?._id
-  );
+  } = useGetEnrolledCourseQuery({ userId: user?._id });
 
   return (
     <div className="bg-white dark:bg-gray-800 px-4 py-5 mx-auto  md:px-24 lg:px-8">
@@ -25,7 +20,7 @@ export const MyClasses = () => {
       ) : isError ? (
         "There was an error!"
       ) : (
-        <EnrolledCourse userEnrolledCourse={userEnrolledCourse} />
+        <EnrolledCourse userEnrolledCourse={enrolledCourse} />
       )}
     </div>
   );

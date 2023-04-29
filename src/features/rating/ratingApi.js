@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { courseApi } from "../courses/courseApi";
 
 export const ratingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -6,7 +7,7 @@ export const ratingApi = apiSlice.injectEndpoints({
       query: () => "/ratings",
     }),
     getSingleRating: builder.query({
-      query: (id) => `/ratings/${id}`,
+      query: (userId) => `/rating/${userId}`,
     }),
     storeUserRating: builder.mutation({
       query: (data) => ({
@@ -26,6 +27,7 @@ export const ratingApi = apiSlice.injectEndpoints({
               }
             )
           );
+          dispatch(courseApi.util.invalidateTags(["courses", "course"]));
         } catch (err) {
           console.log(err);
         }
@@ -66,6 +68,7 @@ export const ratingApi = apiSlice.injectEndpoints({
               }
             )
           );
+          dispatch(courseApi.util.invalidateTags(["courses", "course"]));
         } catch (err) {
           console.log(err);
         }
@@ -82,6 +85,7 @@ export const ratingApi = apiSlice.injectEndpoints({
             return draft?.filter((rating) => rating?._id != arg);
           })
         );
+        dispatch(courseApi.util.invalidateTags(["courses", "course"]));
       },
     }),
   }),
@@ -92,4 +96,5 @@ export const {
   useStoreUserRatingMutation,
   useRemoveRatingMutation,
   useUpdateRatingMutation,
+  useGetSingleRatingQuery,
 } = ratingApi;
