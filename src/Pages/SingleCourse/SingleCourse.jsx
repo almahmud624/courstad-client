@@ -1,11 +1,10 @@
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { useGetEnrolledCourseQuery } from "../../features/enrollCourse/enrollCourseApi";
 import { Rating } from "../../components/Rating/Rating";
 import { showingCourseNameConditionally } from "../../utils/showingCourseNameConditionally";
-import { getAvarageCourseRating } from "../../utils/getAvarageCourseRating";
 import { RatingSection } from "../../components/RatingSection/RatingSection";
-import { useGetUserRatingQuery } from "../../features/rating/ratingApi";
+import { useGetCourseRatingQuery } from "../../features/rating/ratingApi";
+import { getAvarageCourseRating } from "../../utils/getAvarageCourseRating";
 
 const SingleCourse = ({ course = {} }) => {
   const {
@@ -14,31 +13,20 @@ const SingleCourse = ({ course = {} }) => {
     coursePrice,
     courseThumb,
     courseDescription,
-    rating,
-    reviews,
     enrollment,
   } = course;
   const location = useLocation();
   const isShowing = location.pathname === "/home" || location.pathname === "/";
   const { user } = useSelector((state) => state.user);
-  const { data: enrolledCourse } = useGetEnrolledCourseQuery({
-    courseId: course?._id,
-  });
-  const { data: usersRating } = useGetUserRatingQuery();
-
-  // filter current course ratings
-  const courseRating = usersRating?.filter(
-    (rating) => rating?.course_id === _id
-  );
+  const { data: courseRating } = useGetCourseRatingQuery(course?._id);
 
   //filter current user enrolled course
-  const checkUserEnrollment = enrolledCourse?.filter(
+  const checkUserEnrollment = enrollment?.filter(
     (enroll) => enroll?.student_id === user?._id
   );
   const findEnrolledCourse = checkUserEnrollment?.find(
     (en) => en?.course_id === _id
   );
-  console.log(course);
   return (
     <div className="my-5 w-11/12 m-auto hover:scale-[99%] transition-all duration-500 relative overflow-hidden">
       <>
@@ -81,10 +69,12 @@ const SingleCourse = ({ course = {} }) => {
                 )}
               </p>
               <div className="flex gap-1 items-center bg-gray-800 p-2 rounded mt-5">
-                <span className="text-green-600">{rating.toFixed(1)}</span>
-                <Rating rating={rating} />
+                <span className="text-green-600">
+                  {getAvarageCourseRating(courseRating)}
+                </span>
+                <Rating rating={getAvarageCourseRating(courseRating)} />
                 <span className="text-gray-500">
-                  ({reviews?.length > 0 ? reviews?.length : 0})
+                  ({courseRating?.length > 0 ? courseRating?.length : 0})
                 </span>
               </div>
               {findEnrolledCourse ? (

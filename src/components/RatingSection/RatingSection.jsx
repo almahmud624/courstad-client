@@ -4,8 +4,7 @@ import { Rating } from "../Rating/Rating";
 import { Popover } from "../Popover/Popover";
 import { DeleteConrfirmation } from "../Popover/DeleteConrfirmation";
 import {
-  useGetSingleRatingQuery,
-  useGetUserRatingQuery,
+  useGetCourseRatingQuery,
   useRemoveRatingMutation,
   useStoreUserRatingMutation,
   useUpdateRatingMutation,
@@ -17,16 +16,16 @@ export const RatingSection = ({ course = {} }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isEditRating, setIsEditRating] = useState(false);
   const [rating, setRating] = useState(0);
-  // const { data: usersRating } = useGetUserRatingQuery();
+  const { data: courseRating } = useGetCourseRatingQuery(course?._id);
   const [storeUserRating, { isSuccess: ratingSuccess }] =
     useStoreUserRatingMutation();
   const [updateRating, { isSuccess: updateSuccess }] =
     useUpdateRatingMutation();
   const [removeRating, { isSuccess: removeSuccess }] =
     useRemoveRatingMutation();
-  // const { data: userRating } = useGetSingleRatingQuery(user?._id);
+
   // find current user rating
-  const findUserRating = course?.reviews?.find(
+  const findUserRating = courseRating?.find(
     (rate) => rate.student_id === user?._id && rate?.course_id === course?._id
   );
 
@@ -51,7 +50,10 @@ export const RatingSection = ({ course = {} }) => {
     setDeleteConfimation(!deleteConfirmation);
   };
   const removeUserRating = () => {
-    removeRating(findUserRating?._id);
+    removeRating({
+      ratingId: findUserRating?._id,
+      courseId: findUserRating?.course_id,
+    });
   };
 
   const isRateTextShow = findUserRating && !isEditRating;

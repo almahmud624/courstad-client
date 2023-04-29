@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useGetEnrolledCourseQuery } from "../../features/enrollCourse/enrollCourseApi";
+import { useGetUserEnrolledCourseQuery } from "../../features/enrollCourse/enrollCourseApi";
 import { EnrolledCourse } from "../EnrolledCourse/EnrolledCourse";
 
 export const MyClasses = () => {
@@ -8,7 +8,7 @@ export const MyClasses = () => {
     data: enrolledCourse,
     isLoading,
     isError,
-  } = useGetEnrolledCourseQuery({ userId: user?._id });
+  } = useGetUserEnrolledCourseQuery(user?._id);
 
   return (
     <div className="bg-white dark:bg-gray-800 px-4 py-5 mx-auto  md:px-24 lg:px-8">

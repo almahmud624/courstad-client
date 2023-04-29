@@ -3,11 +3,8 @@ import { courseApi } from "../courses/courseApi";
 
 export const ratingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getUserRating: builder.query({
-      query: () => "/ratings",
-    }),
-    getSingleRating: builder.query({
-      query: (userId) => `/rating/${userId}`,
+    getCourseRating: builder.query({
+      query: (courseId) => `/ratings/${courseId}`,
     }),
     storeUserRating: builder.mutation({
       query: (data) => ({
@@ -20,14 +17,13 @@ export const ratingApi = apiSlice.injectEndpoints({
           const { data: newRating } = await queryFulfilled;
           dispatch(
             apiSlice.util.updateQueryData(
-              "getUserRating",
-              undefined,
+              "getCourseRating",
+              arg?.course_id,
               (draft) => {
                 draft.push(newRating);
               }
             )
           );
-          dispatch(courseApi.util.invalidateTags(["courses", "course"]));
         } catch (err) {
           console.log(err);
         }
@@ -45,8 +41,8 @@ export const ratingApi = apiSlice.injectEndpoints({
 
           dispatch(
             apiSlice.util.updateQueryData(
-              "getUserRating",
-              undefined,
+              "getCourseRating",
+              arg?.data?.course_id,
               (draft) => {
                 const editableRating = draft.find(
                   (rating) => rating?._id == arg?.id
@@ -59,42 +55,34 @@ export const ratingApi = apiSlice.injectEndpoints({
               }
             )
           );
-          dispatch(
-            apiSlice.util.updateQueryData(
-              "getSingleRating",
-              arg.id.toString(),
-              (draft) => {
-                draft.rating = updatedRating.rating;
-              }
-            )
-          );
-          dispatch(courseApi.util.invalidateTags(["courses", "course"]));
         } catch (err) {
           console.log(err);
         }
       },
     }),
     removeRating: builder.mutation({
-      query: (id) => ({
-        url: `/rating/${id}`,
+      query: ({ ratingId, courseId }) => ({
+        url: `/rating/${ratingId}`,
         method: "DELETE",
       }),
-      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+      async onQueryStarted(arg, { dispatch }) {
         dispatch(
-          apiSlice.util.updateQueryData("getUserRating", undefined, (draft) => {
-            return draft?.filter((rating) => rating?._id != arg);
-          })
+          apiSlice.util.updateQueryData(
+            "getCourseRating",
+            arg?.courseId,
+            (draft) => {
+              return draft.filter((rating) => rating?._id !== arg?.ratingId);
+            }
+          )
         );
-        dispatch(courseApi.util.invalidateTags(["courses", "course"]));
       },
     }),
   }),
 });
 
 export const {
-  useGetUserRatingQuery,
+  useGetCourseRatingQuery,
   useStoreUserRatingMutation,
   useRemoveRatingMutation,
   useUpdateRatingMutation,
-  useGetSingleRatingQuery,
 } = ratingApi;

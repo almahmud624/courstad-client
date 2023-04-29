@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ReactToPdf from "react-to-pdf";
-import { FaClock, FaUserAlt } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 import { useGetCourseQuery } from "../../features/courses/courseApi";
 import { useGetVideosQuery } from "../../features/videos/videosApi";
 import { BsFillPlayFill } from "react-icons/bs";
@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 import { CustomLinkButton } from "../../components/CustomLinkButton/CustomLinkButton";
 import { BsFillStarFill } from "react-icons/bs";
 import { getAvarageCourseRating } from "../../utils/getAvarageCourseRating";
-import { useGetUserRatingQuery } from "../../features/rating/ratingApi";
+import { useGetCourseRatingQuery } from "../../features/rating/ratingApi";
 
 const getVideosLength = (courseVideos, type) => {
   return courseVideos
@@ -32,10 +32,9 @@ const CourseDetails = () => {
   const { user } = useSelector((state) => state.user);
   const [storeEnrolledCourse, { isLoading: enrollmentLoading, isSuccess }] =
     useStoreEnrolledCourseMutation();
-  const { data: enrolledCourse } = useGetEnrolledCourseQuery({});
-  const { data: usersRating } = useGetUserRatingQuery();
+  const { data: enrolledCourse } = useGetEnrolledCourseQuery(id);
+  const { data: courseRating } = useGetCourseRatingQuery(id);
   const navigate = useNavigate();
-
   const {
     _id,
     courseName,
@@ -44,7 +43,6 @@ const CourseDetails = () => {
     courseTutor,
     teacherThumb,
     categories,
-    enrollment,
   } = course || {};
 
   const ref = useRef();
@@ -56,11 +54,6 @@ const CourseDetails = () => {
 
   // find related course video
   const courseVideos = videos?.filter((video) => video?.course_id === id);
-
-  // filter current course ratings
-  const courseRating = usersRating?.filter(
-    (rating) => rating?.course_id === _id
-  );
 
   // enroll course
   const handleEnroll = () => {
@@ -123,7 +116,8 @@ const CourseDetails = () => {
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 flex items-center">
                     <FaUserAlt className="mr-3" />{" "}
-                    {enrollment?.length ? enrollment?.length : 0} Enrolled
+                    {enrolledCourse?.length ? enrolledCourse?.length : 0}{" "}
+                    Enrolled
                   </div>
                 </div>
               </div>
