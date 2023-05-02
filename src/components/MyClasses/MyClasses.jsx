@@ -1,7 +1,13 @@
 import { useSelector } from "react-redux";
 import { useGetUserEnrolledCourseQuery } from "../../features/enrollCourse/enrollCourseApi";
 import { EnrolledCourse } from "../EnrolledCourse/EnrolledCourse";
+import HashLoader from "react-spinners/HashLoader";
 
+const override = {
+  display: "block",
+  margin: "0 auto",
+  height: "100vh",
+};
 export const MyClasses = () => {
   const { user } = useSelector((state) => state.user);
   const {
@@ -16,7 +22,7 @@ export const MyClasses = () => {
         Welcome,<span className="text-green-600">{user?.name}</span>
       </h3>
       {isLoading ? (
-        "Content loading..."
+        <HashLoader color="#36d7b7" cssOverride={override} />
       ) : isError ? (
         "There was an error!"
       ) : (

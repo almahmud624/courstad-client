@@ -28,7 +28,7 @@ const SingleCourse = ({ course = {} }) => {
     (en) => en?.course_id === _id
   );
   return (
-    <div className="my-5 w-11/12 m-auto hover:scale-[99%] transition-all duration-500 relative overflow-hidden">
+    <div className="my-5 w-11/12  m-auto hover:scale-[99%] transition-all duration-500 relative overflow-hidden">
       <>
         <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
           <div
@@ -102,14 +102,12 @@ const SingleCourse = ({ course = {} }) => {
               }`}
             >
               <Link to={`/courses/${_id}`}>
-                <div className="h-52">
-                  <img
-                    src={courseThumb}
-                    loading="lazy"
-                    alt="Course Thumb"
-                    className="w-full h-full object-cover object-center"
-                  />
-                </div>
+                <img
+                  src={courseThumb}
+                  loading="lazy"
+                  alt="Course Thumb"
+                  className="w-full h-full object-cover object-center"
+                />
               </Link>
             </div>
           </div>

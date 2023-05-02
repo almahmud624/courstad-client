@@ -63,7 +63,11 @@ const CourseDetails = () => {
       student_id: user?._id,
       student_name: user?.name,
     };
-    storeEnrolledCourse(enrolledCourse);
+    if (user?._id) {
+      storeEnrolledCourse(enrolledCourse);
+    } else {
+      navigate("/login");
+    }
   };
 
   useEffect(() => {

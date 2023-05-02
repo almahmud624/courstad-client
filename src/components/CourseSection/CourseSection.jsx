@@ -7,15 +7,10 @@ import { useGetCoursesQuery } from "../../features/courses/courseApi";
 const CourseSection = () => {
   const { user } = useSelector((state) => state.user);
   let enrolled = { student_id: user?._id, type: "unenrolled" };
-  const { data, isLoading, isError } = useGetCoursesQuery(
-    {
-      size: 6,
-      enrolled,
-    },
-    {
-      skip: !user?._id,
-    }
-  );
+  const { data, isLoading, isError } = useGetCoursesQuery({
+    size: 6,
+    enrolled,
+  });
   const { courses } = data || {};
   return (
     <>
