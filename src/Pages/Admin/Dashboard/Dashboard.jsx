@@ -37,7 +37,18 @@ export const Dashboard = () => {
         },
       ],
     },
-    { title: "Quiz", icon: MdQuiz, link: "" },
+    {
+      title: "Quiz",
+      icon: MdQuiz,
+      children: [
+        { title: "Quiz", icon: MdAssignment, link: "/admin/quizzes" },
+        {
+          title: "Add Quiz",
+          icon: MdOutlineVideoSettings,
+          link: "/admin/quiz/add",
+        },
+      ],
+    },
     { title: "Assignment Mark ", icon: MdAssignmentTurnedIn, link: "" },
   ];
 

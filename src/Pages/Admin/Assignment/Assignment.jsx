@@ -18,7 +18,7 @@ export const Assignment = () => {
   }
   return (
     <>
-      <section className="relative overflow-x-auto h-screen grid place-content-center">
+      <section className="relative overflow-x-auto h-screen grid place-content-center my-10">
         {content}
       </section>
     </>
