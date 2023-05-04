@@ -17,6 +17,8 @@ import { Quiz } from "../Pages/Quiz/Quiz";
 import { Dashboard } from "../Pages/Admin/Dashboard/Dashboard";
 import { VideoTable } from "../Pages/Admin/VideoTable/VideoTable";
 import { EditableVideo } from "../components/EditableVideo/EditableVideo";
+import { Assignment } from "../Pages/Admin/Assignment/Assignment";
+import { EditableAssignment } from "../components/EditableAssignment/EditableAssignment";
 
 export const routes = createBrowserRouter([
   {
@@ -105,6 +107,12 @@ export const routes = createBrowserRouter([
       { path: "/admin/videos", element: <VideoTable /> },
       { path: "/admin/video/add", element: <EditableVideo /> },
       { path: "/admin/video/edit/:videoId", element: <EditableVideo /> },
+      { path: "/admin/assignments", element: <Assignment /> },
+      { path: "/admin/assignment/add", element: <EditableAssignment /> },
+      {
+        path: "/admin/assignment/edit/:assignmentId",
+        element: <EditableAssignment />,
+      },
     ],
   },
   { path: "*", element: <ErrorPage /> },

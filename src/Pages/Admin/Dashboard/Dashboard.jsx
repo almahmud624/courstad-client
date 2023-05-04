@@ -16,7 +16,6 @@ export const Dashboard = () => {
     {
       title: "Videos",
       icon: MdVideoLibrary,
-      // link: "/admin/videos",
       children: [
         { title: "Videos", icon: MdAssignment, link: "/admin/videos" },
         {
@@ -26,7 +25,18 @@ export const Dashboard = () => {
         },
       ],
     },
-    { title: "Assignment", icon: MdAssignment, link: "/admin/video/add" },
+    {
+      title: "Assignment",
+      icon: MdAssignment,
+      children: [
+        { title: "Assignment", icon: MdAssignment, link: "/admin/assignments" },
+        {
+          title: "Add Assignment",
+          icon: MdOutlineVideoSettings,
+          link: "/admin/assignment/add",
+        },
+      ],
+    },
     { title: "Quiz", icon: MdQuiz, link: "" },
     { title: "Assignment Mark ", icon: MdAssignmentTurnedIn, link: "" },
   ];
@@ -39,7 +49,7 @@ export const Dashboard = () => {
     >
       <div
         className={` ${
-          open ? "w-52" : "w-0 "
+          open ? "w-60" : "w-0 "
         } bg-slate-800 h-screen p-5  pt-8 relative duration-300`}
       >
         <img
