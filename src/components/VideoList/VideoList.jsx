@@ -7,19 +7,17 @@ import { useState } from "react";
 
 export const VideoList = () => {
   const { courseName } = useParams();
-  const [userCourses, isLoading, isError] =
-    useGetCourseVideosByTitle(courseName);
+  const [videos, isLoading, isError] = useGetCourseVideosByTitle(courseName);
   const [queryText, setQueryText] = useState("");
-
   let content;
   if (isLoading) {
     content = "loading...";
   } else if (!isLoading && isError) {
     content = <span>There was an error</span>;
-  } else if (!isLoading && !isError && userCourses?.length === 0) {
+  } else if (!isLoading && !isError && videos?.length === 0) {
     content = <span>Video not found</span>;
-  } else if (!isLoading && !isError && userCourses?.length > 0) {
-    content = userCourses
+  } else if (!isLoading && !isError && videos?.length > 0) {
+    content = videos
       ?.filter((video) => video?.title.includes(queryText))
       ?.map((video) => (
         <VideoListItem key={video.id} video={video} courseName={courseName} />

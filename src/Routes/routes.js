@@ -14,6 +14,9 @@ import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import { MyClasses } from "../components/MyClasses/MyClasses";
 import { Video } from "../Pages/Video/Video";
 import { Quiz } from "../Pages/Quiz/Quiz";
+import { Dashboard } from "../Pages/Admin/Dashboard/Dashboard";
+import { VideoTable } from "../Pages/Admin/VideoTable/VideoTable";
+import { EditableVideo } from "../components/EditableVideo/EditableVideo";
 
 export const routes = createBrowserRouter([
   {
@@ -93,6 +96,15 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <Dashboard />,
+    children: [
+      { path: "/admin/videos", element: <VideoTable /> },
+      { path: "/admin/video/add", element: <EditableVideo /> },
+      { path: "/admin/video/edit/:videoId", element: <EditableVideo /> },
     ],
   },
   { path: "*", element: <ErrorPage /> },

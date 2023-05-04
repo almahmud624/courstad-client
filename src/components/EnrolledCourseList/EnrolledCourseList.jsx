@@ -1,12 +1,13 @@
 import { useGetCourseQuery } from "../../features/courses/courseApi";
-import useGetCourseVideosById from "../../hooks/useGetCourseVideosById";
+import { useGetVideosQuery } from "../../features/videos/videosApi";
 import { showingCourseNameConditionally } from "../../utils/showingCourseNameConditionally";
 import { CustomLinkButton } from "../CustomLinkButton/CustomLinkButton";
 
 export const EnrolledCourseList = ({ course = {} }) => {
   const { data: enrolledCourse } = useGetCourseQuery(course?.course_id);
-  const userCourses = useGetCourseVideosById(course?.course_id);
-
+  const { data: videos } = useGetVideosQuery({
+    id: course?.course_id,
+  });
   const { courseName, courseTutor, courseThumb } = enrolledCourse || {};
   return (
     <>
@@ -22,10 +23,10 @@ export const EnrolledCourseList = ({ course = {} }) => {
             <h3 className="my-4 text-md text-gray-700 dark:text-gray-300 text-left">
               {courseTutor}
             </h3>
-            {userCourses?.length ? (
+            {videos?.length > 0 ? (
               <CustomLinkButton
                 link={`/course-video/${courseName?.split(" ").join("-")}/${
-                  userCourses?.length && userCourses[0]?._id
+                  videos[0]?._id
                 }`}
                 buttonText={"Start Course"}
                 customEffectStyle={"px-2 py-2 text-sm"}

@@ -5,7 +5,7 @@ import { apiSlice } from "../api/apiSlice";
 export const videosApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getVideos: builder.query({
-      query: () => "/videos",
+      query: ({ id = "" }) => `/videos?id=${id}`,
     }),
     getVideo: builder.query({
       query: (id) => `/video/${id}`,
