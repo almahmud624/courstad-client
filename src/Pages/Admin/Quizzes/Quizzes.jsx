@@ -1,6 +1,7 @@
 // import { DataNotFound } from "../../../components/DataNotFound/DataNotFound";
 // import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 // import { Loader } from "../../../components/Loader/Loader";
+import DashboardLayout from "../../../Layout/DashboardLayout";
 import { QuizTable } from "../../../components/QuizTable/QuizTable";
 import { useGetQuizzesQuery } from "../../../features/quiz/quizApi";
 
@@ -18,9 +19,7 @@ export const Quizzes = () => {
   }
   return (
     <>
-      <section className="relative overflow-x-auto grid place-content-center my-10">
-        {content}
-      </section>
+      <DashboardLayout>{content}</DashboardLayout>
     </>
   );
 };

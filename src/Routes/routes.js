@@ -14,7 +14,6 @@ import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import { MyClasses } from "../components/MyClasses/MyClasses";
 import { Video } from "../Pages/Video/Video";
 import { Quiz } from "../Pages/Quiz/Quiz";
-import { Dashboard } from "../Pages/Admin/Dashboard/Dashboard";
 import { VideoTable } from "../Pages/Admin/VideoTable/VideoTable";
 import { EditableVideo } from "../components/EditableVideo/EditableVideo";
 import { Assignment } from "../Pages/Admin/Assignment/Assignment";
@@ -22,6 +21,7 @@ import { EditableAssignment } from "../components/EditableAssignment/EditableAss
 import { Quizzes } from "../Pages/Admin/Quizzes/Quizzes";
 import { AddQuiz } from "../components/EditableQuiz/AddQuiz";
 import { EditQuiz } from "../components/EditableQuiz/EditQuiz";
+import { AssignmentMark } from "../Pages/Admin/AssignmentMark/AssignmentMark";
 
 export const routes = createBrowserRouter([
   {
@@ -103,32 +103,31 @@ export const routes = createBrowserRouter([
       },
     ],
   },
+  { path: "/admin", element: <VideoTable /> },
+  { path: "/admin/videos", element: <VideoTable /> },
+  { path: "/admin/video/add", element: <EditableVideo /> },
+  { path: "/admin/video/edit/:videoId", element: <EditableVideo /> },
+  { path: "/admin/assignments", element: <Assignment /> },
+  { path: "/admin/assignment/add", element: <EditableAssignment /> },
   {
-    path: "/admin",
-    element: <Dashboard />,
-    children: [
-      { path: "/admin/videos", element: <VideoTable /> },
-      { path: "/admin/video/add", element: <EditableVideo /> },
-      { path: "/admin/video/edit/:videoId", element: <EditableVideo /> },
-      { path: "/admin/assignments", element: <Assignment /> },
-      { path: "/admin/assignment/add", element: <EditableAssignment /> },
-      {
-        path: "/admin/assignment/edit/:assignmentId",
-        element: <EditableAssignment />,
-      },
-      {
-        path: "/admin/quizzes",
-        element: <Quizzes />,
-      },
-      {
-        path: "/admin/quiz/add",
-        element: <AddQuiz />,
-      },
-      {
-        path: "/admin/quiz/edit/:quizId",
-        element: <EditQuiz />,
-      },
-    ],
+    path: "/admin/assignment/edit/:assignmentId",
+    element: <EditableAssignment />,
+  },
+  {
+    path: "/admin/quizzes",
+    element: <Quizzes />,
+  },
+  {
+    path: "/admin/quiz/add",
+    element: <AddQuiz />,
+  },
+  {
+    path: "/admin/quiz/edit/:quizId",
+    element: <EditQuiz />,
+  },
+  {
+    path: "/admin/assignmentMark",
+    element: <AssignmentMark />,
   },
   { path: "*", element: <ErrorPage /> },
 ]);

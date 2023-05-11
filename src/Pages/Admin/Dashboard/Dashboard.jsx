@@ -9,48 +9,54 @@ import {
   MdOutlineVideoSettings,
 } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
+
+const Menus = [
+  {
+    title: "Videos",
+    icon: MdVideoLibrary,
+    children: [
+      { title: "Videos", icon: MdAssignment, link: "/admin/videos" },
+      {
+        title: "Add Video",
+        icon: MdOutlineVideoSettings,
+        link: "/admin/video/add",
+      },
+    ],
+  },
+  {
+    title: "Assignment",
+    icon: MdAssignment,
+    children: [
+      { title: "Assignment", icon: MdAssignment, link: "/admin/assignments" },
+      {
+        title: "Add Assignment",
+        icon: MdOutlineVideoSettings,
+        link: "/admin/assignment/add",
+      },
+    ],
+  },
+  {
+    title: "Quiz",
+    icon: MdQuiz,
+    children: [
+      { title: "Quiz", icon: MdAssignment, link: "/admin/quizzes" },
+      {
+        title: "Add Quiz",
+        icon: MdOutlineVideoSettings,
+        link: "/admin/quiz/add",
+      },
+    ],
+  },
+  {
+    title: "Assignment Mark ",
+    icon: MdAssignmentTurnedIn,
+    link: "assignmentMark",
+  },
+];
+
 export const Dashboard = () => {
   const [open, setOpen] = useState(true);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const Menus = [
-    {
-      title: "Videos",
-      icon: MdVideoLibrary,
-      children: [
-        { title: "Videos", icon: MdAssignment, link: "/admin/videos" },
-        {
-          title: "Add Video",
-          icon: MdOutlineVideoSettings,
-          link: "/admin/video/add",
-        },
-      ],
-    },
-    {
-      title: "Assignment",
-      icon: MdAssignment,
-      children: [
-        { title: "Assignment", icon: MdAssignment, link: "/admin/assignments" },
-        {
-          title: "Add Assignment",
-          icon: MdOutlineVideoSettings,
-          link: "/admin/assignment/add",
-        },
-      ],
-    },
-    {
-      title: "Quiz",
-      icon: MdQuiz,
-      children: [
-        { title: "Quiz", icon: MdAssignment, link: "/admin/quizzes" },
-        {
-          title: "Add Quiz",
-          icon: MdOutlineVideoSettings,
-          link: "/admin/quiz/add",
-        },
-      ],
-    },
-    { title: "Assignment Mark ", icon: MdAssignmentTurnedIn, link: "" },
-  ];
+  const [menuOpen, setMenuOpen] = useState(null);
 
   return (
     <div
@@ -90,7 +96,7 @@ export const Dashboard = () => {
         </div>
         <ul className="pt-6">
           {Menus.map((menu, index) => (
-            <li onClick={() => setMenuOpen(!menuOpen)}>
+            <li onClick={() => setMenuOpen(menu?.title)}>
               <Link
                 to={menu.link}
                 key={index}
@@ -108,7 +114,7 @@ export const Dashboard = () => {
 
               <ul
                 className={`${
-                  menu?.children?.length > 0 && menuOpen
+                  menu?.children?.length > 0 && menuOpen === menu?.title
                     ? "origin-bottom duration-200 p-2 ml-5 bg-slate-700 mt-2 rounded "
                     : "hidden"
                 }`}
@@ -138,7 +144,7 @@ export const Dashboard = () => {
           ))}
         </ul>
       </div>
-      <div className="flex-1 px-7 ">
+      <div className="flex-1 px-7">
         <Outlet />
       </div>
     </div>

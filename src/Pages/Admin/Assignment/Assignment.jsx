@@ -1,6 +1,7 @@
 // import { DataNotFound } from "../../../components/DataNotFound/DataNotFound";
 // import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
 // import { Loader } from "../../../components/Loader/Loader";
+import DashboardLayout from "../../../Layout/DashboardLayout";
 import { AssignmentTable } from "../../../components/AssignmentTable/AssignmentTable";
 import { useGetAssignmentsQuery } from "../../../features/assignment/assignmentApi";
 
@@ -18,9 +19,7 @@ export const Assignment = () => {
   }
   return (
     <>
-      <section className="relative overflow-x-auto h-screen grid place-content-center my-10">
-        {content}
-      </section>
+      <DashboardLayout>{content}</DashboardLayout>
     </>
   );
 };
