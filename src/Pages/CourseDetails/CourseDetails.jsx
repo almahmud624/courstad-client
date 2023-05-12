@@ -28,7 +28,7 @@ const getVideosLength = (courseVideos, type) => {
 const CourseDetails = () => {
   const { id } = useParams();
   const { data: course, isLoading: courseLoading } = useGetCourseQuery(id);
-  const { data: videos, isLoading: videoLoading } = useGetVideosQuery();
+  const { data: videos, isLoading: videoLoading } = useGetVideosQuery({});
   const { user } = useSelector((state) => state.user);
   const [storeEnrolledCourse, { isLoading: enrollmentLoading, isSuccess }] =
     useStoreEnrolledCourseMutation();

@@ -3,7 +3,7 @@ import { useGetVideosQuery } from "../features/videos/videosApi";
 
 const useGetCourseVideosByTitle = (courseTitle) => {
   const { data } = useGetCoursesQuery({
-    queryText: courseTitle?.split("-").join(" "),
+    queryText: decodeURIComponent(courseTitle),
     size: 14,
   });
   const { courses } = data || {};
@@ -11,7 +11,7 @@ const useGetCourseVideosByTitle = (courseTitle) => {
     data: videos,
     isLoading,
     isError,
-  } = useGetVideosQuery({ id: courses?._id });
+  } = useGetVideosQuery({ id: courses?.[0]?._id });
 
   return [videos, isLoading];
 };

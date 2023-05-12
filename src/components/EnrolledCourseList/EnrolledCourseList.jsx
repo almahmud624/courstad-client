@@ -25,7 +25,7 @@ export const EnrolledCourseList = ({ course = {} }) => {
             </h3>
             {videos?.length > 0 ? (
               <CustomLinkButton
-                link={`/course-video/${courseName?.split(" ").join("-")}/${
+                link={`/course-video/${encodeURIComponent(courseName)}/${
                   videos[0]?._id
                 }`}
                 buttonText={"Start Course"}

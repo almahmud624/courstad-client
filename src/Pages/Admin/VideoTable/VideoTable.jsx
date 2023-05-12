@@ -1,17 +1,28 @@
 import { Link } from "react-router-dom";
-import { useGetVideosQuery } from "../../../features/videos/videosApi";
+import {
+  useDeleteVideoMutation,
+  useGetVideosQuery,
+} from "../../../features/videos/videosApi";
 import DashboardLayout from "../../../Layout/DashboardLayout";
 import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
-// import { useDeleteVideoMutation } from "../../features/videos/videosApi";
+import { AlertModal } from "../../../components/Modal/AlertModal";
+import { useEffect, useState } from "react";
 
 export const VideoTable = () => {
-  // const [deleteVideo, { isSuccess, isError }] = useDeleteVideoMutation();
-  // const handleDeleteVideo = (id) => {
-  //   deleteVideo(id);
-  // };
-  // console.log(isSuccess);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState("");
   const { data: videos } = useGetVideosQuery({});
+  const [deleteVideo, { isSuccess, isError }] = useDeleteVideoMutation();
+  const handleDeleteVideo = () => {
+    deleteVideo(selectedVideo?._id);
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      setShowModal(false);
+      setSelectedVideo("");
+    }
+  }, [isSuccess]);
   return (
     <>
       <DashboardLayout>
@@ -37,13 +48,16 @@ export const VideoTable = () => {
                   <td className="px-6 py-4 flex gap-x-2 items-center">
                     <span
                       className="hover:text-red-600 transition-all duration-200 cursor-pointer"
-                      // onClick={() => handleDeleteVideo(video?.id)}
+                      onClick={() => {
+                        setShowModal(true);
+                        setSelectedVideo(video);
+                      }}
                     >
                       <AiOutlineDelete className="text-2xl" />
                     </span>
                     <Link
                       className="hover:text-green-600 transition-all duration-200"
-                      to={`/admin/video/edit/${video?.id}`}
+                      to={`/admin/video/edit/${video?._id}`}
                     >
                       <FiEdit className="text-xl" />
                     </Link>
@@ -53,6 +67,12 @@ export const VideoTable = () => {
             </tbody>
           </table>
         </div>
+        <AlertModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          selectedTarget={selectedVideo}
+          action={handleDeleteVideo}
+        />
       </DashboardLayout>
     </>
   );

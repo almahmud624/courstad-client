@@ -6,6 +6,7 @@ import { useGetQuizzesQuery } from "../../features/quiz/quizApi";
 import useGetCourseVideosByTitle from "../../hooks/useGetCourseVideosByTitle";
 import { useState } from "react";
 import { getLocalestringDate } from "../../utils/getLocalestringDate";
+import ReactPlayer from "react-player/lazy";
 
 export const VideoPlayer = ({
   video,
@@ -42,20 +43,17 @@ export const VideoPlayer = ({
       setVideoNavigate((prev) => prev - 1);
       navigate(videoNavigateUrl);
     }
-    console.log(videoNavigate);
   };
   return (
     <>
       <div className="col-span-full w-full space-y-8 lg:col-span-2">
-        <iframe
-          width="100%"
-          className="aspect-video"
-          src={url}
-          title={title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
+        <ReactPlayer
+          url={url}
+          width={"100%"}
+          height={"450px"}
+          controls={"controls"}
+          muted={"muted"}
+        />
 
         <div>
           <h1 className="text-lg font-semibold tracking-tight text-slate-100">

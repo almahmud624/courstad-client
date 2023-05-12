@@ -133,7 +133,7 @@ export const AddQuiz = () => {
                 >
                   <option selected>Choose a video</option>
                   {videos?.map((video) => (
-                    <option key={video?.id} value={video?.id}>
+                    <option key={video?.id} value={video?._id}>
                       {video?.title}
                     </option>
                   ))}
