@@ -7,7 +7,7 @@ export const assignmentMarkApi = apiSlice.injectEndpoints({
     }),
     submitAssignment: builder.mutation({
       query: (data) => ({
-        url: "/assignmentMark",
+        url: "/assignmentMark/new",
         method: "POST",
         body: data,
       }),
@@ -43,7 +43,7 @@ export const assignmentMarkApi = apiSlice.injectEndpoints({
               undefined,
               (draft) => {
                 const editableAssignmentMark = draft.find(
-                  (mark) => mark?.id == arg?.id
+                  (mark) => mark?._id == arg?.id
                 );
                 editableAssignmentMark.mark = updatedAssignmentMark.mark;
                 editableAssignmentMark.status = updatedAssignmentMark.status;

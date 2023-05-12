@@ -55,11 +55,11 @@ export const videosApi = apiSlice.injectEndpoints({
               "getVideo",
               arg.videoId.toString(),
               (draft) => {
-                draft.title = updatedVideo.title;
-                draft.description = updatedVideo.description;
-                draft.url = updatedVideo.url;
-                draft.views = updatedVideo.views;
-                draft.duration = updatedVideo.duration;
+                draft.title = updatedVideo?.data?.title;
+                draft.description = updatedVideo?.data?.description;
+                draft.url = updatedVideo?.data?.url;
+                draft.views = updatedVideo?.data?.views;
+                draft.duration = updatedVideo?.data?.duration;
               }
             )
           );

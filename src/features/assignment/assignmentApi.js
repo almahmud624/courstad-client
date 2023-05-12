@@ -62,10 +62,10 @@ export const assignmentApi = apiSlice.injectEndpoints({
               "getAssignment",
               arg.id.toString(),
               (draft) => {
-                draft.title = updatedAssignment.title;
-                draft.video_title = updatedAssignment.video_title;
-                draft.totalMark = updatedAssignment.totalMark;
-                draft.video_id = updatedAssignment.video_id;
+                draft.title = updatedAssignment?.data?.title;
+                draft.video_title = updatedAssignment?.data?.video_title;
+                draft.totalMark = updatedAssignment?.data?.totalMark;
+                draft.video_id = updatedAssignment?.data?.video_id;
               }
             )
           );

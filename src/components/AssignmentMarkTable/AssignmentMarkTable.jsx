@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import DashboardLayout from "../../Layout/DashboardLayout";
-// import { useUpdateAssignmentMarkMutation } from "../../features/assignmentMark/assignmentMarkApi";
+import { useUpdateAssignmentMarkMutation } from "../../features/assignmentMark/assignmentMarkApi";
 
 const getDateAndTime = (date) => {
   const dateAndTime = new Date(date).toLocaleString();
@@ -10,15 +8,16 @@ const getDateAndTime = (date) => {
 
 export const AssignmentMarkTable = ({ assignmentMarks = [] }) => {
   const [assignmentMark, setAssignmentLink] = useState(0);
-  // const [updateAssignmentMark, { isSuccess, isError }] =
-  //   useUpdateAssignmentMarkMutation();
+  const [updateAssignmentMark] = useUpdateAssignmentMarkMutation();
   // getting pending assignment
   const pendingAssignment = assignmentMarks?.filter(
     (mark) => mark?.status === "pending"
   );
   const publishAssigmentHandler = (id) => {
     // find selected student assignment
-    const selectedAssignment = assignmentMarks?.find((mark) => mark?.id === id);
+    const selectedAssignment = assignmentMarks?.find(
+      (mark) => mark?._id === id
+    );
 
     // update assignment mark
     const newAssignmentMark = {
@@ -26,20 +25,15 @@ export const AssignmentMarkTable = ({ assignmentMarks = [] }) => {
       mark: Number(assignmentMark),
       status: "published",
     };
-    // updateAssignmentMark({
-    //   id: selectedAssignment?.id,
-    //   data: newAssignmentMark,
-    // });
-  };
-  const getDateAndTime = (date) => {
-    const dateAndTime = new Date(
-      assignmentMarks[0]?.createdAt
-    ).toLocaleString();
-    console.log(dateAndTime);
+
+    updateAssignmentMark({
+      id: selectedAssignment?._id,
+      data: newAssignmentMark,
+    });
   };
   return (
     <>
-      <div className="px-3 py-10 bg-gray-800 ">
+      <div className="px-3 py-10 bg-gray-800">
         <ul className="flex gap-x-2">
           <li className="bg-gray-500 rounded-3xl px-3 py-1">
             Total <span>{assignmentMarks?.length}</span>
@@ -59,7 +53,7 @@ export const AssignmentMarkTable = ({ assignmentMarks = [] }) => {
                 <th className="px-6 py-4">Assignment</th>
                 <th className="px-6 py-4">Date</th>
                 <th className="px-6 py-4">Student Name</th>
-                <th className="px-6 py-4">Repo Link</th>
+                <th className="px-6 py-4">Doc Link</th>
                 <th className="px-6 py-4">Mark</th>
               </tr>
             </thead>
@@ -69,7 +63,7 @@ export const AssignmentMarkTable = ({ assignmentMarks = [] }) => {
                 <tr key={i}>
                   <td className="px-6 py-4">{mark?.title}</td>
                   <td className="px-6 py-4">
-                    {getDateAndTime(mark?.createdAt)}
+                    {getDateAndTime(mark?.created_at)}
                   </td>
                   <td className="px-6 py-4">{mark?.student_name}</td>
                   <td className="px-6 py-4">{mark?.repo_link}</td>
@@ -81,11 +75,11 @@ export const AssignmentMarkTable = ({ assignmentMarks = [] }) => {
                       <input
                         max="100"
                         defaultValue={0}
-                        className="w-10 h-8 rounded-md text-gray-800"
+                        className="w-10 p-1 h-8 rounded-md text-gray-800"
                         onChange={(e) => setAssignmentLink(e.target.value)}
                       />
 
-                      <span onClick={() => publishAssigmentHandler(mark?.id)}>
+                      <span onClick={() => publishAssigmentHandler(mark?._id)}>
                         <svg
                           fill="none"
                           viewBox="0 0 24 24"

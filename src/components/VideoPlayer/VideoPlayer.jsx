@@ -5,7 +5,6 @@ import { useGetQuizMarkQuery } from "../../features/quizMark/quizMarkApi";
 import { useGetQuizzesQuery } from "../../features/quiz/quizApi";
 import useGetCourseVideosByTitle from "../../hooks/useGetCourseVideosByTitle";
 import { useState } from "react";
-import { getLocalestringDate } from "../../utils/getLocalestringDate";
 import ReactPlayer from "react-player/lazy";
 
 export const VideoPlayer = ({
@@ -15,7 +14,7 @@ export const VideoPlayer = ({
   assignment,
 }) => {
   const navigate = useNavigate();
-  const { id, title, description, createdAt, url } = video || {};
+  const { id, title, description, url } = video || {};
   const { data: quizMarks } = useGetQuizMarkQuery();
   const { data: quizzes } = useGetQuizzesQuery();
   const { user } = useSelector((state) => state.user);
@@ -59,10 +58,6 @@ export const VideoPlayer = ({
           <h1 className="text-lg font-semibold tracking-tight text-slate-100">
             {title}
           </h1>
-          <h2 className=" pb-4 text-sm leading-[1.7142857] text-slate-400">
-            Uploaded on {getLocalestringDate(createdAt)}
-          </h2>
-
           <div className="flex justify-between">
             <div className="flex gap-4">
               {assignment && (

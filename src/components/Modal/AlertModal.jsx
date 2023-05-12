@@ -40,7 +40,7 @@ export const AlertModal = ({
                 >
                   You want to delete{" "}
                   <span className="text-green-600 font-semibold">
-                    {selectedTarget?.title}
+                    {selectedTarget?.title || selectedTarget?.question}
                   </span>{" "}
                   Once you remove this file it can't be undone.
                 </h2>

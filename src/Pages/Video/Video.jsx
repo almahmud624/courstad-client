@@ -36,16 +36,16 @@ export const Video = () => {
   // submit assigenment
   const handleSubmitAssignment = () => {
     const userAssigenment = {
-      student_id: user?.id,
+      student_id: user?._id,
       student_name: user?.name,
-      assignment_id: assignment?.id,
+      assignment_id: assignment?._id,
       title: assignment?.title,
       totalMark: 100,
       mark: 0,
       repo_link: assignmentLink,
       status: "pending",
-      createdAt: new Date(Date.now()).toJSON(),
     };
+    console.log(userAssigenment);
     submitAssignment(userAssigenment);
   };
   useEffect(() => {

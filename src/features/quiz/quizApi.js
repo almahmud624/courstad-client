@@ -10,7 +10,7 @@ export const quizApi = apiSlice.injectEndpoints({
     }),
     addQuiz: builder.mutation({
       query: (data) => ({
-        url: `/quizzes`,
+        url: `/quiz/new`,
         method: "POST",
         body: data,
       }),
@@ -40,12 +40,12 @@ export const quizApi = apiSlice.injectEndpoints({
           dispatch(
             apiSlice.util.updateQueryData("getQuizzes", undefined, (draft) => {
               const editableQuiz = draft.find(
-                (quiz) => quiz?.id == arg?.quizId
+                (quiz) => quiz?._id == arg?.quizId
               );
-              editableQuiz.question = updatedQuiz.question;
-              editableQuiz.video_id = updatedQuiz.video_id;
-              editableQuiz.video_title = updatedQuiz.video_title;
-              editableQuiz.options = updatedQuiz.options;
+              editableQuiz.question = updatedQuiz?.data?.question;
+              editableQuiz.video_id = updatedQuiz?.data?.video_id;
+              editableQuiz.video_title = updatedQuiz?.data?.video_title;
+              editableQuiz.options = updatedQuiz?.data?.options;
             })
           );
           dispatch(
@@ -53,10 +53,10 @@ export const quizApi = apiSlice.injectEndpoints({
               "getQuiz",
               arg.quizId.toString(),
               (draft) => {
-                draft.question = updatedQuiz.question;
-                draft.video_id = updatedQuiz.video_id;
-                draft.video_title = updatedQuiz.video_title;
-                draft.options = updatedQuiz.options;
+                draft.question = updatedQuiz?.data?.question;
+                draft.video_id = updatedQuiz?.data?.video_id;
+                draft.video_title = updatedQuiz?.data?.video_title;
+                draft.options = updatedQuiz?.data?.options;
               }
             )
           );
@@ -73,7 +73,7 @@ export const quizApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         dispatch(
           apiSlice.util.updateQueryData("getQuizzes", undefined, (draft) => {
-            return draft?.filter((quiz) => quiz?.id != arg);
+            return draft?.filter((quiz) => quiz?._id != arg);
           })
         );
       },

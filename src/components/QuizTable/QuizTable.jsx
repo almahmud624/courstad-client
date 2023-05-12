@@ -1,11 +1,24 @@
+import { useEffect, useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useDeleteQuizMutation } from "../../features/quiz/quizApi";
+import { AlertModal } from "../Modal/AlertModal";
 // import { useDeleteQuizMutation } from "../../features/quiz/quizApi";
 
 export const QuizTable = ({ quizzes = [] }) => {
-  // const [deleteQuiz, { isSuccess }] = useDeleteQuizMutation();
-  // console.log(isSuccess);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedQuiz, setSelectedQuiz] = useState("");
+  const [deleteQuiz, { isSuccess }] = useDeleteQuizMutation();
+  const handleDeleteQuiz = () => {
+    deleteQuiz(selectedQuiz?._id);
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      setShowModal(false);
+      setSelectedQuiz("");
+    }
+  }, [isSuccess]);
   return (
     <>
       <div className="overflow-x-auto mt-4 bg-gray-800">
@@ -30,7 +43,10 @@ export const QuizTable = ({ quizzes = [] }) => {
                 <td className="px-6 py-4 flex gap-x-2 items-center">
                   <span
                     className="hover:text-red-600 transition-all duration-200 cursor-pointer"
-                    // onClick={() => handleDeleteVideo(video?.id)}
+                    onClick={() => {
+                      setShowModal(true);
+                      setSelectedQuiz(quiz);
+                    }}
                   >
                     <AiOutlineDelete className="text-2xl" />
                   </span>
@@ -46,6 +62,12 @@ export const QuizTable = ({ quizzes = [] }) => {
           </tbody>
         </table>
       </div>
+      <AlertModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        selectedTarget={selectedQuiz}
+        action={handleDeleteQuiz}
+      />
     </>
   );
 };

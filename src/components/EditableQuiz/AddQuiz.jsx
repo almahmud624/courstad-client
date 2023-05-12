@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { useAddQuizMutation } from "../../features/quiz/quizApi";
 import { useNavigate } from "react-router-dom";
 import { useGetVideosQuery } from "../../features/videos/videosApi";
 import DashboardLayout from "../../Layout/DashboardLayout";
-// import { ErrorDialog } from "../ErrorDialog/ErrorDialog";
+import { ErrorAlert } from "../ErrorAlert/ErrorAlert";
+import { useAddQuizMutation } from "../../features/quiz/quizApi";
 
 export const AddQuiz = () => {
   const { data: videos } = useGetVideosQuery({});
@@ -23,22 +23,19 @@ export const AddQuiz = () => {
     const checkIsCorrectField = options.every(
       (option) => option?.isCorrect === true || option?.isCorrect === false
     );
-    if (!checkIsCorrectField || isNaN(videoId)) {
+    if (!checkIsCorrectField || !videoId) {
       return setIsValid(true);
     }
     // selected video title
-    const video_title = videos?.find(
-      (video) => video.id === Number(videoId)
-    )?.title;
+    const video_title = videos?.find((video) => video._id === videoId)?.title;
 
     // create new quiz
     const quizData = {
       question,
-      video_id: Number(videoId),
+      video_id: videoId,
       video_title,
       options: options,
     };
-
     addQuiz(quizData);
   };
 
@@ -223,15 +220,15 @@ export const AddQuiz = () => {
                 Submit
               </button>
             </form>
-            {/* {(isError || isValid) && (
-            <ErrorDialog
-              message={
-                isValid
-                  ? "Please!! Fill the required field"
-                  : "There was an error!!"
-              }
-            />
-          )} */}
+            {(isError || isValid) && (
+              <ErrorAlert
+                message={
+                  isValid
+                    ? "Please!! Fill the required field"
+                    : "There was an error!!"
+                }
+              />
+            )}
           </div>
         </section>
       </DashboardLayout>

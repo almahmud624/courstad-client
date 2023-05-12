@@ -6,10 +6,10 @@ import {
 } from "../../features/quiz/quizApi";
 import { useNavigate, useParams } from "react-router-dom";
 import DashboardLayout from "../../Layout/DashboardLayout";
-// import { ErrorDialog } from "../ErrorDialog/ErrorDialog";
+import { ErrorAlert } from "../ErrorAlert/ErrorAlert";
 
 export const EditQuiz = () => {
-  const { data: videos } = useGetVideosQuery();
+  const { data: videos } = useGetVideosQuery({});
   const [question, setQuestion] = useState("");
   const [videoId, setVideoId] = useState();
   const [options, setOptions] = useState([]);
@@ -24,20 +24,18 @@ export const EditQuiz = () => {
     e.preventDefault();
 
     // selected video title
-    const video_title = videos?.find(
-      (video) => video.id === Number(videoId)
-    )?.title;
+    const video_title = videos?.find((video) => video._id === videoId)?.title;
 
     // field validation
     const checkIsCorrectField = options.every(
       (option) => option?.isCorrect === true || option?.isCorrect === false
     );
-    if (!checkIsCorrectField || isNaN(videoId)) {
+    if (!checkIsCorrectField || !videoId) {
       return setIsValid(true);
     }
     const quizData = {
       question,
-      video_id: Number(videoId),
+      video_id: videoId,
       video_title,
       options: options,
     };
@@ -46,7 +44,7 @@ export const EditQuiz = () => {
 
   // set editable value in state
   useEffect(() => {
-    if (quiz?.id) {
+    if (quiz?._id) {
       const { question, video_id, options } = quiz || {};
       setQuestion(question);
       setVideoId(video_id);
@@ -135,7 +133,7 @@ export const EditQuiz = () => {
                 </label>
                 <select
                   id="videoId"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-gray-800"
                   value={videoId}
                   onChange={(e) => {
                     setVideoId(e.target.value);
@@ -145,7 +143,7 @@ export const EditQuiz = () => {
                 >
                   <option selected>Choose a video</option>
                   {videos?.map((video) => (
-                    <option key={video?.id} value={video?.id}>
+                    <option key={video?.id} value={video?._id}>
                       {video?.title}
                     </option>
                   ))}
@@ -185,7 +183,7 @@ export const EditQuiz = () => {
                     </label>
                     <select
                       id={`isCorrect_${i + 1}`}
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  text-white"
                       required
                       value={option?.isCorrect}
                       disabled={
@@ -237,15 +235,15 @@ export const EditQuiz = () => {
                 Submit
               </button>
             </form>
-            {/* {(isError || isValid) && (
-            <ErrorDialog
-              message={
-                isValid
-                  ? "Please!! Fill the required field"
-                  : "There was an error!!"
-              }
-            />
-          )} */}
+            {(isError || isValid) && (
+              <ErrorAlert
+                message={
+                  isValid
+                    ? "Please!! Fill the required field"
+                    : "There was an error!!"
+                }
+              />
+            )}
           </div>
         </section>
       </DashboardLayout>

@@ -32,7 +32,7 @@ export const FormModal = ({
                 <div className="">
                   <div className="mt-3 sm:mt-0 sm:text-left">
                     <h2
-                      className="text-base font-semibold leading-6 text-gray-900 text-white capitalize"
+                      className="text-base font-semibold leading-6 text-gray-900 dark:text-white capitalize"
                       id="modal-title"
                     >
                       {assignment?.title}
@@ -43,7 +43,7 @@ export const FormModal = ({
                           className="block text-gray-300 text-sm font-semibold mb-2"
                           htmlFor="repo_link"
                         >
-                          Github repository link
+                          Assignment Document link
                           <sup className="text-red-600 font-bold">*</sup>
                         </label>
                         <input
