@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../Contexts/AuthProvider";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { FaMoon, FaSun, FaTimes } from "react-icons/fa";
@@ -11,13 +11,18 @@ import { SearchInput } from "../../../components/SearchInput/SearchInput";
 import { ProfileIconDropdown } from "../../../components/ProfileIconDropdown/ProfileIconDropdown";
 
 const Navbar = ({ darkSwitch, switchTheme }) => {
+  const { pathname } = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const { userSignOut } = useContext(AuthContext);
   const { user } = useSelector((state) => state.user);
-
+  const home = pathname === "/" || pathname === "/home";
   return (
-    <div className="bg-white dark:bg-gray-800 ">
+    <div
+      className={` dark:from-gray-800  dark:to-green-900 from-green-800 to-green-800 ${
+        home ? "bg-gradient-to-b" : "bg-gradient-to-t"
+      }`}
+    >
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <div className="flex items-center justify-between w-full">
