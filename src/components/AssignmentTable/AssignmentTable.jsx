@@ -33,17 +33,17 @@ export const AssignmentTable = ({ assignments = [] }) => {
 
           <tbody className="divide-y divide-slate-600/50">
             {assignments?.map((assignment) => (
-              <tr class="bg-gray-800 ">
-                <th class="px-6 py-4 font-medium text-white text-left">
+              <tr className="bg-gray-800 ">
+                <th className="px-6 py-4 font-medium text-white text-left">
                   <p className="truncate w-8/12">{assignment?.title}</p>
                 </th>
-                <td class="px-6 py-4 text-white">
+                <td className="px-6 py-4 text-white">
                   <p className="truncate w-64">{assignment?.video_title}</p>
                 </td>
-                <td class="px-6 py-4 text-white">
+                <td className="px-6 py-4 text-white">
                   <span className="line-clamp-1">{assignment?.totalMark}</span>
                 </td>
-                <td class="px-6 py-4 flex gap-x-2 items-center text-white">
+                <td className="px-6 py-4 flex gap-x-2 items-center text-white">
                   {" "}
                   <span
                     className="hover:text-red-600 transition-all duration-200 cursor-pointer"

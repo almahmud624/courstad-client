@@ -8,9 +8,11 @@ import avater from "../../../Assets/avatar.png";
 import logo from "../../../Assets/logo.png";
 import { useSelector } from "react-redux";
 import { SearchInput } from "../../../components/SearchInput/SearchInput";
+import { ProfileIconDropdown } from "../../../components/ProfileIconDropdown/ProfileIconDropdown";
 
 const Navbar = ({ darkSwitch, switchTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const { userSignOut } = useContext(AuthContext);
   const { user } = useSelector((state) => state.user);
 
@@ -103,26 +105,22 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   {user?.email ? (
                     <>
                       <li
-                        onClick={userSignOut}
-                        className="font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 cursor-pointer hover:text:green-700 dark:hover:text-green-700"
-                      >
-                        Sign Out
-                      </li>
-                      <li
-                        className={({ isActive }) =>
-                          isActive
-                            ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
-                            : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
+                        className={
+                          "font-medium relative tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover-text-green-600 "
                         }
                       >
-                        <Link to="/profile-edit">
+                        <span onClick={() => setShowDropdown(!showDropdown)}>
                           <img
                             className="w-10 h-10 rounded-full object-cover cursor-pointer"
                             src={user?.photoURL ? user?.photoURL : avater}
                             alt=""
                             title={user?.displayName}
                           />
-                        </Link>
+                        </span>
+                        <ProfileIconDropdown
+                          showDropdown={showDropdown}
+                          setShowDropdown={setShowDropdown}
+                        />
                       </li>
                     </>
                   ) : (

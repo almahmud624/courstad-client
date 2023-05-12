@@ -22,6 +22,7 @@ import { Quizzes } from "../Pages/Admin/Quizzes/Quizzes";
 import { AddQuiz } from "../components/EditableQuiz/AddQuiz";
 import { EditQuiz } from "../components/EditableQuiz/EditQuiz";
 import { AssignmentMark } from "../Pages/Admin/AssignmentMark/AssignmentMark";
+import { Leaderboard } from "../Pages/Leaderboard/Leaderboard";
 
 export const routes = createBrowserRouter([
   {
@@ -98,6 +99,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Quiz />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/leaderboard",
+        element: (
+          <PrivateRoute>
+            <Leaderboard />
           </PrivateRoute>
         ),
       },
