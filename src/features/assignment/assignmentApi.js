@@ -10,7 +10,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
     }),
     addAssignment: builder.mutation({
       query: (data) => ({
-        url: `/assignments`,
+        url: `/assignment/new`,
         method: "POST",
         body: data,
       }),
@@ -46,12 +46,14 @@ export const assignmentApi = apiSlice.injectEndpoints({
               undefined,
               (draft) => {
                 const editableAssignment = draft.find(
-                  (assignment) => assignment?.id == arg?.id
+                  (assignment) => assignment?._id == arg?.id
                 );
-                editableAssignment.title = updatedAssignment.title;
-                editableAssignment.video_title = updatedAssignment.video_title;
-                editableAssignment.totalMark = updatedAssignment.totalMark;
-                editableAssignment.video_id = updatedAssignment.video_id;
+                editableAssignment.title = updatedAssignment?.data?.title;
+                editableAssignment.video_title =
+                  updatedAssignment?.data?.video_title;
+                editableAssignment.totalMark =
+                  updatedAssignment?.data?.totalMark;
+                editableAssignment.video_id = updatedAssignment?.data?.video_id;
               }
             )
           );
@@ -83,7 +85,7 @@ export const assignmentApi = apiSlice.injectEndpoints({
             "getAssignments",
             undefined,
             (draft) => {
-              return draft?.filter((assignment) => assignment?.id != arg);
+              return draft?.filter((assignment) => assignment?._id != arg);
             }
           )
         );

@@ -1,11 +1,23 @@
 import { Link } from "react-router-dom";
-import { useDeleteAssignmentMutation } from "../../features/assignment/assignmentApi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { FiEdit } from "react-icons/fi";
+import { AlertModal } from "../Modal/AlertModal";
+import { useEffect, useState } from "react";
+import { useDeleteAssignmentMutation } from "../../features/assignment/assignmentApi";
 
 export const AssignmentTable = ({ assignments = [] }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAssignment, setSelectedAssignment] = useState("");
   const [deleteAssignment, { isSuccess }] = useDeleteAssignmentMutation();
-  // console.log(isSuccess);
+  const handleDeleteVideo = () => {
+    deleteAssignment(selectedAssignment?._id);
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      setShowModal(false);
+      setSelectedAssignment("");
+    }
+  }, [isSuccess]);
   return (
     <>
       <div className="overflow-x-auto mt-4 bg-gray-800">
@@ -35,7 +47,10 @@ export const AssignmentTable = ({ assignments = [] }) => {
                   {" "}
                   <span
                     className="hover:text-red-600 transition-all duration-200 cursor-pointer"
-                    // onClick={() => handleDeleteVideo(video?.id)}
+                    onClick={() => {
+                      setShowModal(true);
+                      setSelectedAssignment(assignment);
+                    }}
                   >
                     <AiOutlineDelete className="text-2xl" />
                   </span>
@@ -51,6 +66,12 @@ export const AssignmentTable = ({ assignments = [] }) => {
           </tbody>
         </table>
       </div>
+      <AlertModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        selectedTarget={selectedAssignment}
+        action={handleDeleteVideo}
+      />
     </>
   );
 };

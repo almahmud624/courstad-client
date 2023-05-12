@@ -40,11 +40,11 @@ export const EditableAssignment = () => {
   // filter available video for add assigment
   const existAddAssignmentVideos = videos?.filter(
     (video) =>
-      !assignments?.some((assignment) => assignment?.video_id === video?.id)
+      !assignments?.some((assignment) => assignment?.video_id === video?._id)
   );
 
   // find selected video
-  const selectedVideo = videos?.find((video) => video.id === Number(videoId));
+  const selectedVideo = videos?.find((video) => video._id === videoId);
 
   // available videos for edit assignment
   const existEditAssignmentVideos =
@@ -68,7 +68,7 @@ export const EditableAssignment = () => {
         marks: "Marks should be less than or equal to 100",
       });
     }
-    if (!videoId || isNaN(videoId)) {
+    if (!videoId) {
       return setErr({ ...err, videoId: "Please,select a video." });
     }
 
@@ -76,7 +76,7 @@ export const EditableAssignment = () => {
       title,
       video_title: selectedVideo?.title,
       totalMark: marks,
-      video_id: Number(videoId),
+      video_id: videoId,
     };
     if (addAssignmentPath) {
       addAssignment(assignmentData);
@@ -87,9 +87,9 @@ export const EditableAssignment = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/admin/assignment");
+      navigate("/admin/assignments");
     }
-    if (assignment?.id) {
+    if (assignment?._id) {
       const { title, video_id, totalMark } = assignment || {};
       setTitle(title);
       setVideoId(video_id);
@@ -134,6 +134,7 @@ export const EditableAssignment = () => {
                 >
                   Select video<sup className="text-red-600 font-bold">*</sup>
                 </label>
+
                 <select
                   id="videoId"
                   className="bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
@@ -154,12 +155,13 @@ export const EditableAssignment = () => {
                       : "Choose a video"}
                   </option>
                   {availableVideos?.map((video, i) => (
-                    <option key={i} value={video?.id}>
+                    <option key={i} value={video?._id}>
                       {video?.title}
                     </option>
                   ))}
                 </select>
               </div>
+
               {/* {err?.videoId && <ErrorDialog message={err?.videoId} />} */}
               <div className="">
                 <label
