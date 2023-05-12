@@ -14,7 +14,7 @@ const CourseSection = () => {
   const { courses } = data || {};
   return (
     <>
-      <section className="dark:bg-gray-800 bg-white pt-16">
+      <section className="dark:bg-gray-800 bg-white py-14">
         <div className="">
           <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800">
             Our <span className=" ">Courses</span>
