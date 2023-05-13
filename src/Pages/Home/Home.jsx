@@ -4,6 +4,7 @@ import CourseSection from "../../components/CourseSection/CourseSection";
 import { LearnFun } from "../../components/LearnFun/LearnFun";
 import { TeacherSection } from "../../components/TeacherSection/TeacherSection";
 import { HowCourseWork } from "../../components/HowCourseWork/HowCourseWork";
+import { ElevateSkills } from "../../components/ElevateSkills/ElevateSkills";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <Banner />
       <CourseSection />
       <HowCourseWork />
+      <ElevateSkills />
       <LearnFun />
       <TeacherSection />
     </>
