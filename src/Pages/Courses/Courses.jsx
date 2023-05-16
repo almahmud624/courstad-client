@@ -7,6 +7,7 @@ import { coursePagination } from "../../features/courses/courseSlice";
 import useGetSearchParams from "../../hooks/useGetSearchParams";
 import HashLoader from "react-spinners/HashLoader";
 import { NotFound } from "../../components/NotFound/NotFound";
+import { useSearchParams } from "react-router-dom";
 
 const override = {
   display: "block",
@@ -16,17 +17,26 @@ const override = {
 
 const Courses = () => {
   // const { queryText } = useGetSearchParams();
+  const [searchParams] = useSearchParams();
+  const category = searchParams.get("category");
   let [courses, setCourse] = useState([]);
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(5);
   const dispatch = useDispatch();
   const { enrolled, categories, sort } = useSelector((state) => state.course);
+  const courseCategory = categories?.length > 0 ? categories : [category];
   const {
     data: coursesData,
     isLoading,
     isError,
-  } = useGetCoursesQuery({ page, size, enrolled, categories, sort });
+  } = useGetCoursesQuery({
+    page,
+    size,
+    enrolled,
+    categories: courseCategory,
+    sort,
+  });
   const pages = Math.ceil(parseInt(count) / size);
   useEffect(() => {
     if (coursesData) {

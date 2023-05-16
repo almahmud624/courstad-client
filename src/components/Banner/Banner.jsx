@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import banner from "../../Assets/banner.png";
-import { FaGraduationCap } from "react-icons/fa";
 import logo from "../../Assets/logo.png";
 
 const Banner = () => {
@@ -30,6 +29,20 @@ const Banner = () => {
       >
         <section className="max-w-screen-xl px-4 md:px-8 pt-10 md:pt-0 mx-auto">
           <div className="flex flex-wrap justify-between">
+            <svg
+              width="223"
+              height="272"
+              viewBox="0 0 223 272"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="absolute top-0 left-0"
+            >
+              <path
+                d="M1 11.0378C15 5.37117 49.6 -3.46216 76 6.53784C109 19.0378 106.5 62.0378 81.5 91.0378C56.5 120.038 43 138.038 49 166.538C55 195.038 94 189.038 122.5 152.538C151 116.038 191.5 107.038 211.5 138.538C231.5 170.038 216.5 199.038 196 209.538C175.5 220.038 144 198.538 162.5 176.538C181 154.538 213 183.538 202 213.038C191 242.538 158.5 255.038 152 270.538"
+                stroke="#135840"
+                stroke-width="2"
+              ></path>
+            </svg>
             <div className="w-full lg:w-1/2 text-start flex flex-col justify-center mb-6 sm:mb-12 lg:mb-0">
               <h1 className="dark:text-gray-200 text-gray-800 text-4xl sm:text-5xl md:text-6xl font-bold  mb-4 md:mb-8">
                 Enabling Is What <br></br>We Do

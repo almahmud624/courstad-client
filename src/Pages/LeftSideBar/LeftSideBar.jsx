@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   categorySearch,
@@ -7,8 +7,11 @@ import {
 } from "../../features/courses/courseSlice";
 import { useGetCourseCategoriesQuery } from "../../features/courses/courseApi";
 import "./LeftSideBar.css";
+import { useSearchParams } from "react-router-dom";
 
 const LeftSideBar = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category");
   const dispatch = useDispatch();
   const { data: categories } = useGetCourseCategoriesQuery();
   const {
@@ -17,11 +20,27 @@ const LeftSideBar = () => {
     enrolled,
   } = useSelector((state) => state.course);
   const { user } = useSelector((state) => state.user);
+
+  // course filtering handle
   const handleFilterTypeChange = (value) => {
     dispatch(courseFilter({ student_id: user?._id, type: value }));
   };
+
+  // course sorting handle
   const handleSort = (value) => {
     dispatch(sortCourse(value));
+  };
+
+  // course filter by category handle
+  const categoryHandle = (value) => {
+    dispatch(categorySearch({ category: value }));
+  };
+
+  // handle clear category search param
+  const handleSearchParam = () => {
+    setSearchParams((params) => {
+      params.set("page", "");
+    });
   };
 
   return (
@@ -85,6 +104,20 @@ const LeftSideBar = () => {
               className="py-5 flex flex-col gap-2 overflow-y-scroll h-52"
               id="category"
             >
+              {category ? (
+                <>
+                  <label className="text-gray-200 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="accent-pink-500"
+                      value={"all"}
+                      checked={stateCategories?.includes("all")}
+                      onChange={handleSearchParam}
+                    />{" "}
+                    All
+                  </label>
+                </>
+              ) : undefined}
               {categories?.map((category, i) => (
                 <label key={i} className="text-gray-200 cursor-pointer">
                   <input
@@ -92,9 +125,7 @@ const LeftSideBar = () => {
                     className="accent-pink-500"
                     value={category}
                     checked={stateCategories?.includes(category)}
-                    onChange={(e) =>
-                      dispatch(categorySearch({ category: e.target.value }))
-                    }
+                    onChange={(e) => categoryHandle(e.target.value)}
                   />{" "}
                   {category}
                 </label>
