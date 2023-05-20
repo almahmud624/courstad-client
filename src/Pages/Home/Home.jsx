@@ -6,6 +6,7 @@ import { TeacherSection } from "../../components/TeacherSection/TeacherSection";
 import { HowCourseWork } from "../../components/HowCourseWork/HowCourseWork";
 import { ElevateSkills } from "../../components/ElevateSkills/ElevateSkills";
 import { CourseCategory } from "../../components/CourseCategory/CourseCategory";
+import { UpcomingEvents } from "../../components/UpcomingEvents/UpcomingEvents";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <ElevateSkills />
       <LearnFun />
       <TeacherSection />
+      <UpcomingEvents />
     </>
   );
 };

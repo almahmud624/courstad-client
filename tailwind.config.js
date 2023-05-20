@@ -29,10 +29,15 @@ module.exports = {
             border: "1px solid #2D6D4E",
           },
         },
+        fade: {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
       },
       animation: {
         jumpping: "jumpping 4.5s ease-out infinite",
         jumpping2: "jumpping2 1s ease-out",
+        fade: "fade 1s ease-out",
       },
     },
   },
