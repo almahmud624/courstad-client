@@ -17,17 +17,19 @@ export const MyClasses = () => {
   } = useGetUserEnrolledCourseQuery(user?._id);
 
   return (
-    <div className="bg-white dark:bg-gray-800 px-4 py-5 mx-auto  md:px-24 lg:px-8">
-      <h3 className="text-4xl dark:text-white text-gray-800 font-semibold">
-        Welcome,<span className="text-green-600">{user?.name}</span>
-      </h3>
-      {isLoading ? (
-        <HashLoader color="#36d7b7" cssOverride={override} />
-      ) : isError ? (
-        "There was an error!"
-      ) : (
-        <EnrolledCourse userEnrolledCourse={enrolledCourse} />
-      )}
+    <div className="bg-white dark:bg-gray-800 px-4 py-5 mx-auto md:px-24 lg:px-8 ">
+      <div className="2xl:max-w-7xl mx-auto">
+        <h3 className="text-4xl dark:text-white text-gray-800 font-semibold">
+          Welcome,<span className="text-green-600">{user?.name}</span>
+        </h3>
+        {isLoading ? (
+          <HashLoader color="#36d7b7" cssOverride={override} />
+        ) : isError ? (
+          "There was an error!"
+        ) : (
+          <EnrolledCourse userEnrolledCourse={enrolledCourse} />
+        )}
+      </div>
     </div>
   );
 };

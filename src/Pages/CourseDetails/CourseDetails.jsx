@@ -80,7 +80,10 @@ const CourseDetails = () => {
   return (
     <div>
       <div className="bg-white py-6 sm:py-8 lg:py-12 dark:bg-gray-800">
-        <div ref={ref} className="max-w-screen-md px-4 md:px-8 mx-auto">
+        <div
+          ref={ref}
+          className="max-w-screen-md 2xl:max-w-7xl px-4 md:px-8 mx-auto"
+        >
           <div className="">
             <div className="space-y-4">
               <div className="mb-2 md:mb-3 flex flex-col md:flex-row items-start md:items-center justify-between">

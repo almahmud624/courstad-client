@@ -7,18 +7,20 @@ import { HowCourseWork } from "../../components/HowCourseWork/HowCourseWork";
 import { ElevateSkills } from "../../components/ElevateSkills/ElevateSkills";
 import { CourseCategory } from "../../components/CourseCategory/CourseCategory";
 import { UpcomingEvents } from "../../components/UpcomingEvents/UpcomingEvents";
+import { HappyStudents } from "../../components/HappyStudents/HappyStudents";
 
 const Home = () => {
   return (
     <>
-      <Banner />
+      {/* <Banner />
       <CourseCategory />
       <CourseSection />
       <HowCourseWork />
       <ElevateSkills />
-      <LearnFun />
-      <TeacherSection />
       <UpcomingEvents />
+      <TeacherSection />
+      <HappyStudents />
+      <LearnFun /> */}
     </>
   );
 };

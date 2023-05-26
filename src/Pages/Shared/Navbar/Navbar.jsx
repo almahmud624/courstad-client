@@ -100,6 +100,18 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   FAQ
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to="/about-us"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-medium tracking-wide dark:text-green-600 text-green-600 transition-colors duration-200"
+                      : "font-medium tracking-wide dark:text-gray-100 text-slate-800 transition-colors duration-200 hover:text-teal-accent-400 hover:text-green-600 dark:hover:text-green-600 "
+                  }
+                >
+                  About Us
+                </NavLink>
+              </li>
             </ul>
             <div className="w-64">
               <SearchInput />

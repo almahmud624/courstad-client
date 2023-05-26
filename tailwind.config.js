@@ -21,6 +21,14 @@ module.exports = {
             transform: "translateY(0px)rotate(0deg) ",
           },
         },
+        jumpping3: {
+          "0%, 100%": {
+            transform: "translateY(-20px)rotate(-30deg) ",
+          },
+          "50%": {
+            transform: "translateY(0px)rotate(-30deg) ",
+          },
+        },
         border: {
           "0%, 100%": {
             border: "1px solid white",
@@ -36,6 +44,7 @@ module.exports = {
       },
       animation: {
         jumpping: "jumpping 4.5s ease-out infinite",
+        jumpping3: "jumpping3 4.5s ease-out infinite",
         jumpping2: "jumpping2 1s ease-out",
         fade: "fade 1s ease-out",
       },

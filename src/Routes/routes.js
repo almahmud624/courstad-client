@@ -23,6 +23,7 @@ import { AddQuiz } from "../components/EditableQuiz/AddQuiz";
 import { EditQuiz } from "../components/EditableQuiz/EditQuiz";
 import { AssignmentMark } from "../Pages/Admin/AssignmentMark/AssignmentMark";
 import { Leaderboard } from "../Pages/Leaderboard/Leaderboard";
+import { AboutUs } from "../Pages/AboutUs/AboutUs";
 
 export const routes = createBrowserRouter([
   {
@@ -107,6 +108,14 @@ export const routes = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Leaderboard />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/about-us",
+        element: (
+          <PrivateRoute>
+            <AboutUs />
           </PrivateRoute>
         ),
       },

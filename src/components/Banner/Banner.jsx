@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import banner from "../../Assets/banner.png";
 import logo from "../../Assets/logo.png";
+import Slide from "react-reveal/Slide";
+import Fade from "react-reveal/Fade";
 
 const Banner = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -43,27 +45,30 @@ const Banner = () => {
                 stroke-width="2"
               ></path>
             </svg>
-            <div className="w-full lg:w-1/2 text-start flex flex-col justify-center mb-6 sm:mb-12 lg:mb-0">
-              <h1 className="dark:text-gray-200 text-gray-800 text-4xl sm:text-5xl md:text-6xl font-bold  mb-4 md:mb-8">
-                Enabling Is What <br></br>We Do
-              </h1>
+            <Slide left>
+              <div className="w-full lg:w-1/2 text-start flex flex-col justify-center mb-6 sm:mb-12 lg:mb-0">
+                <h1 className="dark:text-gray-200 text-gray-800 text-4xl sm:text-5xl md:text-6xl font-bold  mb-4 md:mb-8">
+                  Enabling Is What <br></br>We Do
+                </h1>
 
-              <p className="max-w-md text-start text-gray-800 dark:text-gray-300 xl:text-md  leading-relxed">
-                You Too Can Have A Information Like Mine.Work Hard, Learn Harder
-              </p>
-              <div className="flex mt-8">
-                <Link
-                  className="group relative inline-block focus:outline-none focus:ring"
-                  to="/courses"
-                >
-                  <span className="absolute inset-0 translate-x-0 translate-y-0 bg-green-700 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded"></span>
+                <p className="max-w-md text-start text-gray-800 dark:text-gray-300 xl:text-md  leading-relxed">
+                  You Too Can Have A Information Like Mine.Work Hard, Learn
+                  Harder
+                </p>
+                <div className="flex mt-8">
+                  <Link
+                    className="group relative inline-block focus:outline-none focus:ring"
+                    to="/courses"
+                  >
+                    <span className="absolute inset-0 translate-x-0 translate-y-0 bg-green-700 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded"></span>
 
-                  <span className="relative inline-block border-2 text-green-100 border-green-500 rounded px-8 py-3 text-md font-semibold tracking-widest capitalize">
-                    all courses
-                  </span>
-                </Link>
+                    <span className="relative inline-block border-2 text-green-100 border-green-500 rounded px-8 py-3 text-md font-semibold tracking-widest capitalize">
+                      all courses
+                    </span>
+                  </Link>
+                </div>
               </div>
-            </div>
+            </Slide>
 
             <div className="w-full lg:w-1/2 flex justify-center mb-12 md:mb-16 !relative">
               <div className="relative z-10 top-12 bottom-0 md:top-16 left-12 md:left-16 -ml-12 lg:ml-0">
@@ -73,12 +78,14 @@ const Banner = () => {
                   </div>
                 </div>
 
-                <img
-                  src={banner}
-                  loading="lazy"
-                  alt=""
-                  className="w-full h-full object-cover object-center z-5"
-                />
+                <Fade big>
+                  <img
+                    src={banner}
+                    loading="lazy"
+                    alt=""
+                    className="w-full h-full object-cover object-center z-5"
+                  />
+                </Fade>
                 <div
                   style={{
                     position: "absolute",

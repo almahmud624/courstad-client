@@ -14,9 +14,12 @@ const SingleCourse = ({ course = {} }) => {
     courseThumb,
     courseDescription,
     enrollment,
+    categories,
+    teacherThumb,
   } = course;
   const location = useLocation();
-  const isShowing = location.pathname === "/home" || location.pathname === "/";
+  const isShowingOnHome =
+    location.pathname === "/home" || location.pathname === "/";
   const { user } = useSelector((state) => state.user);
   const { data: courseRating } = useGetCourseRatingQuery(course?._id);
 
@@ -32,29 +35,22 @@ const SingleCourse = ({ course = {} }) => {
       <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
         <div
           className={`flex flex-col bg-transparent border border-gray-300 shadow dark:border-gray-200 dark:bg-gray-900 rounded-lg overflow-hidden group-hover:animate-border ${
-            isShowing ? " md:flex-col-reverse  " : `md:h-68 sm:flex-row`
-          } ${findEnrolledCourse && "!border-2 !border-green-600"}`}
+            isShowingOnHome ? " md:flex-col-reverse  " : `md:h-68 sm:flex-row`
+          } ${findEnrolledCourse && "!border-2 !border-red-600"}`}
         >
-          {findEnrolledCourse && (
-            <div className="w-full absolute top-10 left-96 rotate-[40deg]">
-              <p className="block dark:text-green-500 text-gray-800 text-sm md:text-base font-semibold text-center bg-gray-700 dark:bg-gray-800 py-1 rounded mr-10">
-                Already Enrolled
-              </p>
-            </div>
-          )}
           <div
-            className={`md:h-52 w-full flex flex-col p-4 sm:p-4${
-              isShowing ? "" : "md:w-7/12"
+            className={`md:h-56 w-full flex flex-col p-4 sm:p-4${
+              isShowingOnHome ? "" : "md:w-7/12 md:h-72"
             }`}
           >
-            <h2 className="dark:text-white text-gray-900 text-xl md:text-xl font-semibold mb-4">
+            <h2 className="dark:text-white text-gray-900 text-xl md:text-xl font-semibold mb-4 pt-5">
               <Link to={`/courses/${_id}`}>
-                {showingCourseNameConditionally(courseName, isShowing)}
+                {showingCourseNameConditionally(courseName, isShowingOnHome)}
               </Link>
             </h2>
 
-            {!isShowing ? (
-              <p className="max-w-md text-gray-800 dark:text-gray-400">
+            {!isShowingOnHome ? (
+              <p className="max-w-md text-gray-800 dark:text-gray-400 mb-5">
                 {courseDescription?.length > 100 ? (
                   <>
                     {courseDescription.slice(0, 100)}
@@ -92,8 +88,8 @@ const SingleCourse = ({ course = {} }) => {
             )}
           </div>
           <div
-            className={`order-first sm:order-none bg-gray-700 ${
-              isShowing ? "w-full h-44" : "w-full md:w-1/2"
+            className={`order-first sm:order-none bg-gray-700 relative ${
+              isShowingOnHome ? "w-full h-44" : "w-full md:w-1/2"
             }`}
           >
             <Link to={`/courses/${_id}`}>
@@ -104,6 +100,25 @@ const SingleCourse = ({ course = {} }) => {
                 className="w-full h-full object-cover object-center"
               />
             </Link>
+            <span className="absolute top-2 right-2 px-2 py-1 rounded bg-gray-800 text-green-500 font-semibold">
+              {categories}
+            </span>
+            {isShowingOnHome && (
+              <div className="h-14 w-14">
+                <img
+                  src={teacherThumb}
+                  alt=""
+                  className="w-full h-full rounded-full object-cover border-2 border-white -mt-7 ml-5"
+                />
+              </div>
+            )}
+            {findEnrolledCourse && !isShowingOnHome && (
+              <div className="w-40 absolute top-14 -left-20 rotate-[90deg]">
+                <p className="block dark:text-red-700 text-gray-800 text-sm md:text-base font-semibold text-center bg-gray-900 py-1 rounded">
+                  Already Enrolled
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

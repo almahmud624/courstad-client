@@ -18,8 +18,13 @@ const content = [
 export const LearnFun = () => {
   return (
     <>
-      <section className="dark:bg-gray-800 bg-white pt-10">
-        <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 grid grid-cols-2 gap-5 h-96">
+      <section className="dark:bg-gray-800 bg-white pt-8 sm:pt-14">
+        <div className="">
+          <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800">
+            Which One is Suitable For You?
+          </h1>
+        </div>
+        <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 grid grid-cols-2 gap-5 h-80">
           {content?.map(({ title, image, buttonText }, i) => (
             <div key={i} class="flex relative w-full h-52">
               <div
