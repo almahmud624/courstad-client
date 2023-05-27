@@ -1,0 +1,10 @@
+.progressVisualFull {
+  display: flex;
+  height: 10px;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+
+.progressVisualPart {
+  transition: width 2s;
+}

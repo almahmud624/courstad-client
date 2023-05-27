@@ -1,66 +1,48 @@
+import { FutureEducation } from "../../components/FutureEducation/FutureEducation";
+
 export const AboutUs = () => {
   return (
     <>
-      <div className="bg-gray-800 py-24 sm:py-32 relative">
-        <div className="mx-auto flex max-w-7xl px-6 justify-evenly bg-gray-900 items-center gap-20 rounded-lg">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            version="1.1"
-            width="1240"
-            height="560"
-            preserveAspectRatio="none"
-            viewBox="0 0 1240 560"
-            className="absolute left-0 bottom-0"
-          >
-            <g mask='url("#SvgjsMask1075")' fill="none">
-              <path
-                d="M-105.05 247.53C28.55 255.25 166.12 487.44 367.21 499.53 568.3 511.62 535.85 627.19 603.34 631.57"
-                stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
-              ></path>
-              <path
-                d="M-84.43 392.6C6.53 392.93 94.1 462.6 272.63 462.6 451.16 462.6 447.02 391.72 629.69 392.6 812.36 393.48 881.66 608.28 986.75 617.38"
-                stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
-              ></path>
-              <path
-                d="M-38.84 421.57C133.25 417.69 359.8 179.91 606.2 180.77 852.6 181.63 803.67 560.91 928.72 609.26"
-                stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
-              ></path>
-              <path
-                d="M-3.83 191.15C81.53 188.71 126.29 46.2 312.55 62.35 498.8 78.5 494.02 515.94 628.92 589.69"
-                stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
-              ></path>
-              <path
-                d="M-195.66 200.42C-86.07 205.3-27.33 375.36 199.66 390.82 426.65 406.28 477.2 639.76 594.98 651.1"
-                stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
-              ></path>
-            </g>
-            <defs>
-              <mask id="SvgjsMask1075">
-                <rect width="1240" height="560" fill="#ffffff"></rect>
-              </mask>
-            </defs>
-          </svg>
-          <div className="w-[40%] relative">
+      <div className="bg-gradient-to-b dark:from-gray-800 dark:via-teal-800 dark:to-green-900 from-white  to-green-800 relative pt-10 z-10">
+        <div className="mx-auto flex max-w-7xl px-6 justify-evenly items-center gap-20 rounded-lg py-24">
+          <div className="w-[50%] relative text-center">
             <h2 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl text-gray-100">
-              Upcoming Educational Events
+              We share knowledge with the world
             </h2>
             <p className="my-5 dark:text-gray-400 text-gray-800">
               <span className="font-base text-sm md:text-base">
-                A teacher who truly cares about their students and their success
-                can make all the difference in the world. They have the ability
-                to connect with their students, understand their unique
-                strengths and weaknesses and provide the guidance and support
-                needed for them to reach their full potential.
+                Whether you want to learn or to share what you know, you’ve come
+                to the right place. As a global destination for online learning,
+                we connect people through knowledge.
               </span>
             </p>
           </div>
         </div>
+        <div className="w-full h-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            width="1440"
+            height="560"
+            preserveAspectRatio="none"
+            viewBox="0 0 1440 560"
+            className="absolute bottom-0 left-0 w-full h-full z-1"
+          >
+            <g mask='url("#SvgjsMask1048")' fill="none">
+              <path
+                d="M1464 560L0 560 L0 541.39Q47.38 468.77, 120 516.16Q146.48 422.64, 240 449.12Q287.44 424.56, 312 472Q411.16 499.16, 384 598.33Q369.32 463.65, 504 448.98Q557.45 430.44, 576 483.89Q649.83 437.72, 696 511.55Q781.49 477.04, 816 562.54Q860.46 487, 936 531.45Q983.53 458.98, 1056 506.51Q1162.12 492.63, 1176 598.75Q1177.55 528.3, 1248 529.85Q1259.94 469.8, 1320 481.74Q1364.86 454.6, 1392 499.45Q1474.97 510.42, 1464 593.39z"
+                fill="#14532D"
+              ></path>
+            </g>
+            <defs>
+              <mask id="SvgjsMask1048">
+                <rect width="1440" height="560" fill="#ffffff"></rect>
+              </mask>
+            </defs>
+          </svg>
+        </div>
       </div>
+      <FutureEducation />
     </>
   );
 };

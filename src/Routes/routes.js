@@ -113,11 +113,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/about-us",
-        element: (
-          <PrivateRoute>
-            <AboutUs />
-          </PrivateRoute>
-        ),
+        element: <AboutUs />,
       },
     ],
   },

@@ -19,7 +19,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
   const home = pathname === "/" || pathname === "/home";
   return (
     <div
-      className={` dark:from-gray-800  dark:to-green-900 from-green-800 to-green-800 ${
+      className={` dark:from-gray-800  dark:to-green-900 from-green-800 to-green-800 z-50 ${
         home ? "bg-gradient-to-b" : "bg-gradient-to-t"
       }`}
     >

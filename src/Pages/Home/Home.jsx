@@ -12,7 +12,7 @@ import { HappyStudents } from "../../components/HappyStudents/HappyStudents";
 const Home = () => {
   return (
     <>
-      {/* <Banner />
+      <Banner />
       <CourseCategory />
       <CourseSection />
       <HowCourseWork />
@@ -20,7 +20,7 @@ const Home = () => {
       <UpcomingEvents />
       <TeacherSection />
       <HappyStudents />
-      <LearnFun /> */}
+      <LearnFun />
     </>
   );
 };
