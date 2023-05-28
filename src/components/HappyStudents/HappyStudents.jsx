@@ -6,27 +6,27 @@ export const HappyStudents = () => {
         <div className="mx-auto flex flex-col max-w-7xl px-6 justify-center items-center rounded-lg">
           <div className="bg-gray-800 shadow-xl w-72 h-32 flex justify-center items-center z-20 rounded-lg relative">
             <div className="flex flex-col space-y-5 justify-center items-center">
-              <h2 className="text-3xl font-semibold text-gray-200">
+              <h2 className="md:text-3xl text-2xl font-semibold text-gray-200">
                 <span className="text-[#C8483A] font-bold">Happy</span> Students
               </h2>
-              <div class="flex -space-x-4">
+              <div className="flex -space-x-4">
                 <img
-                  class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 object-cover"
+                  className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 object-cover"
                   src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?w=740&t=st=1685027352~exp=1685027952~hmac=d6e1cf124079b3e9c29b12557f2e781868b3ebd1de8ff6c8d920565805f24b68"
                   alt=""
                 />
                 <img
-                  class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 object-cover"
+                  className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 object-cover"
                   src="https://img.freepik.com/free-photo/portrait-young-tender-woman-with-healthy-freckled-skin_158595-3947.jpg?w=740&t=st=1685027387~exp=1685027987~hmac=cd9a3ca411dded2e60300897b6e69ec4da1003a96342ec6f6884ae3424a67a7b"
                   alt=""
                 />
                 <img
-                  class="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 object-cover"
+                  className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800 object-cover"
                   src="https://img.freepik.com/free-photo/international-medical-student-man-blue-uniform-doctor-with-stethoscope_1157-43732.jpg?w=360&t=st=1685027403~exp=1685028003~hmac=a898a87068638e6b332628dd77603be9bb48b7e794b4650e4a2b9219202cb42e"
                   alt=""
                 />
                 <a
-                  class="font-medium text-xl text-white ml-10  w-10 h-10 pl-10 flex justify-center items-center"
+                  className="font-medium text-xl text-white ml-10  w-10 h-10 pl-10 flex justify-center items-center"
                   href="/"
                 >
                   +99K
@@ -38,13 +38,13 @@ export const HappyStudents = () => {
               viewBox="0 -2.5 21 21"
               version="1.1"
               fill="#000000"
-              className="absolute -top-5 -left-7 h-20 w-20 animate-jumpping3"
+              className="absolute md:-top-5 md:-left-7 top-0 left-0 md:h-20 w-10 md:w-20 h-10 animate-jumpping3"
             >
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
                 id="SVGRepo_tracerCarrier"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></g>
               <g id="SVGRepo_iconCarrier">
                 {" "}
@@ -52,9 +52,9 @@ export const HappyStudents = () => {
                 <g
                   id="Page-1"
                   stroke="none"
-                  stroke-width="1"
+                  strokeWidth="1"
                   fill="none"
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                 >
                   {" "}
                   <g
@@ -77,7 +77,7 @@ export const HappyStudents = () => {
               </g>
             </svg>
           </div>
-          <div className="w-full h-full -mt-20">
+          <div className="w-full h-full md:-mt-20 -mt-8">
             <img src={worldMapSvg} alt="" />
           </div>
         </div>

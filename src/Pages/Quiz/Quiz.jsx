@@ -112,7 +112,7 @@ export const Quiz = () => {
             </div>
             {videoQuizzes?.map((quiz, i) => (
               <QuizList
-                key={quiz.id}
+                key={quiz._id}
                 quiz={quiz}
                 questionNo={i + 1}
                 checkAns={checkAns}

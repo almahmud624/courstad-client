@@ -46,20 +46,21 @@ export const VideoPlayer = ({
   return (
     <>
       <div className="col-span-full w-full space-y-8 lg:col-span-2">
-        <ReactPlayer
-          url={url}
-          width={"100%"}
-          height={"450px"}
-          controls={"controls"}
-          muted={"muted"}
-        />
-
+        <div className="md:h-[450px] h-[250px]">
+          <ReactPlayer
+            url={url}
+            width={"100%"}
+            height={"100%"}
+            controls={true}
+            muted={true}
+          />
+        </div>
         <div>
-          <h1 className="text-lg font-semibold tracking-tight text-slate-100">
+          <h1 className="text-lg font-semibold tracking-tight text-slate-100 mb-4">
             {title}
           </h1>
-          <div className="flex justify-between">
-            <div className="flex gap-4">
+          <div className="flex md:flex-row flex-col-reverse gap-y-5 justify-between">
+            <div className="flex gap-4 md:justify-center justify-between">
               {assignment && (
                 <button
                   className={`px-3 font-bold py-1 border rounded text-sm disabled:border-slate-700 disabled:text-slate-700 disabled:cursor-not-allowed border-cyan text-teal-500 hover:bg-cyan-500 hover:text-gray-900  disabled:hover:text-slate-700 transition-all duration-300 ${
@@ -77,9 +78,10 @@ export const VideoPlayer = ({
               )}
               {videoQuizzes?.length !== 0 && (
                 <button
-                  className={`px-3 font-bold py-1 border rounded text-sm border-cyan text-teal-500 hover:bg-cyan-500 hover:text-gray-900 transition-all duration-300 ${
-                    checkQuizSubmisson &&
-                    "bg-green-600 border-green-600 !text-gray-800 hover:bg-green-700"
+                  className={`px-3 font-bold py-1 border rounded text-sm border-cyan text-teal-500 hover:text-gray-900 transition-all duration-300 ${
+                    checkQuizSubmisson
+                      ? "bg-green-600 border-green-600 !text-gray-800 hover:bg-green-700"
+                      : "hover:bg-cyan-500"
                   }`}
                   onClick={() =>
                     navigate(`/course-video/${courseName}/${videoId}/quiz`)
@@ -89,7 +91,7 @@ export const VideoPlayer = ({
                 </button>
               )}
             </div>
-            <div className="flex gap-5">
+            <div className="flex gap-5 md:justify-center justify-between">
               <button
                 className={`px-3 font-bold py-1 border rounded text-sm disabled:border-slate-600 disabled:text-slate-600 disabled:cursor-not-allowed border-cyan text-teal-500 hover:bg-cyan-500 hover:text-gray-900  disabled:hover:text-slate-700 transition-all duration-300 ${
                   videoNavigate === 0 && " disabled:hover:bg-transparent"

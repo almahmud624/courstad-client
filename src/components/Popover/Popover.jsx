@@ -10,7 +10,7 @@ export const Popover = ({
   return (
     <>
       <div className="popover absolute bottom-[120%] w-full z-10 bg-white rounded shadow-md p-4">
-        <div className="flex justify-between items-center">
+        <div className="flex md:flex-row flex-col gap-y-2 justify-between items-center">
           <div className="font-semibold flex justify-center items-center">
             Your Rating: {rating}
             <BsFillStarFill className="inline-block ml-1" />

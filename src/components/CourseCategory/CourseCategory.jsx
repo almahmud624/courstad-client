@@ -27,10 +27,6 @@ export const CourseCategory = () => {
           <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800">
             Explore <span className=" ">Popular</span> Categories
           </h1>
-          {/* <p className="text-center my-3 text-sm md:text-base md:my-5 dark:text-gray-400 text-gray-800 max-w-sm m-auto ">
-            Learn more skills, be more competitive,Affordable online courses for
-            everyone
-          </p> */}
         </div>
         <div
           className={
@@ -39,6 +35,7 @@ export const CourseCategory = () => {
         >
           {categories?.map((category, i) => (
             <Link
+              key={i}
               className="group flex flex-col justify-center items-center text-center rounded-xl border border-gray-800 bg-gray-900 shadow-xl h-40"
               to={`/courses?category=${category}`}
             >

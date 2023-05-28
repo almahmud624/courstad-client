@@ -4,8 +4,8 @@ export const AboutUs = () => {
   return (
     <>
       <div className="bg-gradient-to-b dark:from-gray-800 dark:via-teal-800 dark:to-green-900 from-white  to-green-800 relative pt-10 z-10">
-        <div className="mx-auto flex max-w-7xl px-6 justify-evenly items-center gap-20 rounded-lg py-24">
-          <div className="w-[50%] relative text-center">
+        <div className="mx-auto flex max-w-7xl px-6 justify-evenly items-center gap-20 rounded-lg lg:py-24">
+          <div className="lg:w-[50%] w-full relative text-center">
             <h2 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl text-gray-100">
               We share knowledge with the world
             </h2>

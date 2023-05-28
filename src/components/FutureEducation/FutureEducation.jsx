@@ -3,8 +3,8 @@ import { ProgressLine } from "../ProgressLine/ProgressLine";
 export const FutureEducation = () => {
   return (
     <>
-      <div className="bg-gray-800 pb-24 sm:pb-32 pt-10 sm:pt-16 bg-gradient-to-t dark:from-gray-800 dark:to-green-900 from-white to-green-800 relative">
-        <div className="mx-auto max-w-7xl flex gap-x-8 gap-y-20 px-6 lg:px-8">
+      <div className="bg-gray-800 lg:pb-24 pb-5 pt-10 sm:pt-16 bg-gradient-to-t dark:from-gray-800 dark:to-green-900 from-white to-green-800 relative">
+        <div className="mx-auto max-w-7xl flex lg:flex-row flex-col-reverse gap-x-8 lg:gap-y-20 gap-y-10 px-6 lg:px-8">
           <div className="flex-1 relative">
             <h2 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl text-gray-100">
               We are Future of Education

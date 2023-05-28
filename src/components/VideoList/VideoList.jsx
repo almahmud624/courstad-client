@@ -18,9 +18,11 @@ export const VideoList = () => {
     content = <span>Video not found</span>;
   } else if (!isLoading && !isError && videos?.length > 0) {
     content = videos
-      ?.filter((video) => video?.title.includes(queryText))
+      ?.filter((video) =>
+        video?.title.toLowerCase().includes(queryText.toLowerCase())
+      )
       ?.map((video) => (
-        <VideoListItem key={video.id} video={video} courseName={courseName} />
+        <VideoListItem key={video._id} video={video} courseName={courseName} />
       ));
   }
 

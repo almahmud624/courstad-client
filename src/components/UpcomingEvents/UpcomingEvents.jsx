@@ -45,8 +45,8 @@ export const UpcomingEvents = () => {
   };
   return (
     <>
-      <div className="bg-gray-800 py-24 sm:py-32 relative">
-        <div className="mx-auto flex max-w-7xl px-6 justify-evenly bg-gray-900 items-center gap-20 rounded-lg">
+      <div className="bg-gray-800 py-20 sm:py-24 relative">
+        <div className="mx-auto flex lg:flex-row flex-col max-w-7xl px-6 justify-evenly bg-gray-900 items-center lg:gap-20 gap-10 lg:rounded-lg">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             version="1.1"
@@ -54,33 +54,33 @@ export const UpcomingEvents = () => {
             height="560"
             preserveAspectRatio="none"
             viewBox="0 0 1240 560"
-            className="absolute left-0 bottom-0"
+            className="absolute left-0 bottom-0 w-full h-full hidden lg:block"
           >
             <g mask='url("#SvgjsMask1075")' fill="none">
               <path
                 d="M-105.05 247.53C28.55 255.25 166.12 487.44 367.21 499.53 568.3 511.62 535.85 627.19 603.34 631.57"
                 stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
+                strokeWidth="2"
               ></path>
               <path
                 d="M-84.43 392.6C6.53 392.93 94.1 462.6 272.63 462.6 451.16 462.6 447.02 391.72 629.69 392.6 812.36 393.48 881.66 608.28 986.75 617.38"
                 stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
+                strokeWidth="2"
               ></path>
               <path
                 d="M-38.84 421.57C133.25 417.69 359.8 179.91 606.2 180.77 852.6 181.63 803.67 560.91 928.72 609.26"
                 stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
+                strokeWidth="2"
               ></path>
               <path
                 d="M-3.83 191.15C81.53 188.71 126.29 46.2 312.55 62.35 498.8 78.5 494.02 515.94 628.92 589.69"
                 stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
+                strokeWidth="2"
               ></path>
               <path
                 d="M-195.66 200.42C-86.07 205.3-27.33 375.36 199.66 390.82 426.65 406.28 477.2 639.76 594.98 651.1"
                 stroke="rgba(31, 41, 55, 1)"
-                stroke-width="2"
+                strokeWidth="2"
               ></path>
             </g>
             <defs>
@@ -89,7 +89,7 @@ export const UpcomingEvents = () => {
               </mask>
             </defs>
           </svg>
-          <div className="w-[40%] relative">
+          <div className="w-full lg:w-[40%] relative mt-10 lg:mt-0">
             <h2 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl text-gray-100">
               Upcoming Educational Events
             </h2>
@@ -103,7 +103,7 @@ export const UpcomingEvents = () => {
               </span>
             </p>
           </div>
-          <div className="w-[25%] h-[500px]  overflow-hidden relative justify-self-center">
+          <div className="w-full lg:w-[25%] h-[500px]  overflow-hidden relative justify-self-center">
             <div className="bg-gradient-to-b dark:from-gray-800 dark:to-transparent  absolute top-0 w-full h-16 z-50"></div>
             <div className="bg-gradient-to-t dark:from-gray-800 dark:to-transparent  absolute bottom-0 w-full h-20 z-50"></div>
             <link
@@ -120,7 +120,8 @@ export const UpcomingEvents = () => {
             <Slider {...settings}>
               {events?.map(({ title, image, date, time, location }, i) => (
                 <center
-                  class={`group rounded-lg border border-gray-500 relative cursor-pointer !w-full`}
+                  key={i}
+                  className={`group rounded-lg border border-gray-500 relative cursor-pointer !w-full`}
                 >
                   <img
                     src={image}
@@ -129,7 +130,7 @@ export const UpcomingEvents = () => {
                   />
                   <div className="bg-gradient-to-t dark:from-gray-800/75 dark:to-green-900/25 !h-80 backdrop-brightness-50 overflow-hidden">
                     <div className="absolute -bottom-[75px] group-hover:bottom-0 p-4 transition-all duration-300">
-                      <p class="text-gray-200 font-semibold text-2xl delay-50 duration-500  rounded-lg my-3 group-hover:text-left transition-all">
+                      <p className="text-gray-200 font-semibold text-2xl delay-50 duration-500  rounded-lg my-3 group-hover:text-left transition-all">
                         {title}
                       </p>
                       <div className="flex justify-between text-gray-400 mb-2">

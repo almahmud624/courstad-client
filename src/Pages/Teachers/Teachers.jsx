@@ -4,7 +4,7 @@ const Teachers = ({ teacher }) => {
   const { courseTutor, teacherSkills, teacherThumb } = teacher;
 
   return (
-    <div class="flex-shrink-0 relative overflow-hidden border border-green-800 rounded-lg max-w-xs shadow-lg">
+    <div className="flex-shrink-0 relative overflow-hidden border border-green-800 rounded-lg w-full lg:max-w-xs shadow-lg">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
@@ -12,7 +12,7 @@ const Teachers = ({ teacher }) => {
         height="560"
         preserveAspectRatio="none"
         viewBox="0 0 560 560"
-        class="absolute bottom-0 left-0 mb-8 w-full h-full"
+        className="absolute bottom-0 left-0 mb-8 w-full h-full"
         style={{ transform: "scale(1.5)", opacity: 1 }}
       >
         <g mask='url("#SvgjsMask1008")' fill="none">
@@ -32,9 +32,9 @@ const Teachers = ({ teacher }) => {
           </mask>
         </defs>
       </svg>
-      <div class="relative pt-3 px-10 flex items-center justify-center">
+      <div className="relative pt-3 px-10 flex items-center justify-center">
         <div
-          class="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+          className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
           style={{
             background: "radial-gradient(black, transparent 60%)",
             transform: " rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)",
@@ -42,14 +42,14 @@ const Teachers = ({ teacher }) => {
           }}
         ></div>
         <img
-          class="relative w-20 h-20 rounded-full object-cover"
+          className="relative w-20 h-20 rounded-full object-cover"
           src={teacherThumb}
           alt=""
         />
       </div>
-      <div class="relative text-white px-6 pb-3 mt-6 text-center">
-        <span class="block opacity-75 mb-1">{teacherSkills}</span>
-        <span class="block font-semibold text-xl">{courseTutor}</span>
+      <div className="relative text-white px-6 pb-3 mt-6 text-center">
+        <span className="block opacity-75 mb-1">{teacherSkills}</span>
+        <span className="block font-semibold text-xl">{courseTutor}</span>
       </div>
     </div>
   );

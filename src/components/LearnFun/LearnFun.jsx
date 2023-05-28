@@ -18,24 +18,24 @@ const content = [
 export const LearnFun = () => {
   return (
     <>
-      <section className="dark:bg-gray-800 bg-white pt-8 sm:pt-14">
+      <section className="dark:bg-gray-800 bg-white pt-8 sm:pt-14 md:pb-0 pb-14">
         <div className="">
-          <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800">
+          <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800 mb-5 md:mb-0">
             Which One is Suitable For You?
           </h1>
         </div>
-        <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 grid grid-cols-2 gap-5 h-80">
+        <div className="px-4 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20 grid lg:grid-cols-2 gap-5 h-80">
           {content?.map(({ title, image, buttonText }, i) => (
-            <div key={i} class="flex relative w-full h-52">
+            <div key={i} className="flex relative w-full md:h-52 h-40">
               <div
-                class={`dark:bg-gray-900/75 w-full h-full transform transition-all absolute rounded-lg ${
+                className={`dark:bg-gray-900/75 w-full h-full transform transition-all absolute rounded-lg ${
                   i % 2 === 0
                     ? "origin-top-left rotate-2"
                     : "origin-top-right -rotate-2"
                 }`}
               ></div>
-              <div class="bg-gray-900 flex flex-row-reverse justify-center items-center transform transition-all absolute rounded-lg w-full h-full px-2 shadow-lg shadow-green-900/25">
-                <div className="lg:w-1/2">
+              <div className="bg-gray-900 flex flex-row-reverse justify-center items-center transform transition-all absolute rounded-lg w-full h-full px-2 shadow-lg shadow-green-900/25">
+                <div className="md:w-1/2 w-72">
                   <img
                     src={image}
                     alt=""
@@ -43,7 +43,7 @@ export const LearnFun = () => {
                   />
                 </div>
                 <div className="flex flex-col justify-center px-2 dark:text-gray-200 lg:w-7/12">
-                  <h5 className="mb-3 text-xl md:text-2xl font-semibold">
+                  <h5 className="mb-3 text-lg md:text-2xl font-semibold">
                     {title}
                   </h5>
 
@@ -55,7 +55,7 @@ export const LearnFun = () => {
                       >
                         <span className="absolute inset-0 translate-x-0 translate-y-0 bg-green-700 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded"></span>
 
-                        <span className="relative inline-block border-2 text-green-100 border-green-500 rounded px-4 py-2 text-sm font-semibold tracking-widest capitalize">
+                        <span className="relative inline-block border-2 text-green-100 border-green-500 rounded md:px-4 px-3 md:py-2 py-1.5 text-sm font-semibold tracking-widest capitalize">
                           {buttonText}
                         </span>
                       </Link>

@@ -44,7 +44,7 @@ const LeftSideBar = () => {
   };
 
   return (
-    <div className="w-1/4 p-8 hidden lg:block">
+   
       <div className=" bg-white dark:bg-gray-900 border border-gray-300 shadow rounded-md sticky top-8">
         <div className="flex flex-col  sm:justify-around ">
           <div className="mt-10 px-6 ">
@@ -55,7 +55,7 @@ const LeftSideBar = () => {
               {user?._id && (
                 <>
                   <label
-                    for="countries"
+                    htmlFor="countries"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Select view type
@@ -76,7 +76,7 @@ const LeftSideBar = () => {
             <div className="my-5">
               <>
                 <label
-                  for="countries"
+                  htmlFor="countries"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Select Sort type
@@ -134,7 +134,7 @@ const LeftSideBar = () => {
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 

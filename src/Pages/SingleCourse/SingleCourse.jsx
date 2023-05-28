@@ -113,9 +113,9 @@ const SingleCourse = ({ course = {} }) => {
               </div>
             )}
             {findEnrolledCourse && !isShowingOnHome && (
-              <div className="w-40 absolute top-14 -left-20 rotate-[90deg]">
-                <p className="block dark:text-red-700 text-gray-800 text-sm md:text-base font-semibold text-center bg-gray-900 py-1 rounded">
-                  Already Enrolled
+              <div className="md:w-40  absolute md:top-14 top-2 left-2 md:-left-20 md:rotate-[90deg]">
+                <p className="block dark:text-red-500 text-gray-800 md:text-base font-semibold text-center bg-gray-900 py-1 p-2 rounded">
+                  Enrolled
                 </p>
               </div>
             )}

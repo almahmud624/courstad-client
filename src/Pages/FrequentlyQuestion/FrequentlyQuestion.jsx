@@ -1,80 +1,128 @@
-import React from "react";
+const faq = [
+  {
+    question: "What is distance education?",
+    answer:
+      "Colleges offer only undergraduate degrees while universities offer graduate degrees as well, but the terms are often used interchangeably.",
+  },
+  {
+    question: "What do I need to know about mobile?",
+    answer:
+      "Colleges offer only undergraduate degrees while universities offer graduate degrees as well, but the terms are often used interchangeably.",
+  },
+  {
+    question: "Can you work while studying in the United States?",
+    answer:
+      "Colleges offer only undergraduate degrees while universities offer graduate degrees as well, but the terms are often used interchangeably.",
+  },
+  {
+    question: "Can you work while studying in the United States?",
+    answer:
+      "Colleges offer only undergraduate degrees while universities offer graduate degrees as well, but the terms are often used interchangeably.",
+  },
+];
 
 const FrequentlyQuestion = () => {
   return (
-    <div className="dark:bg-gray-800 bg-white">
-      <div className="max-w-screen-xl mx-auto p-8 ">
-        <h2 className="text-3xl font-bold leading-9 dark:text-gray-200 border-b-2 border-green-100 text-gray-800 dark:text-gray-200 mb-12">
-          Frequently Asked Questions
-        </h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          <li className="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3">
-            <p className="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
-              How is the Courstad Membership better than just enrolling in
-              Quests separately??
-            </p>
-            <p className="mt-2">
-              <p className="text-base leading-6 text-gray-500 dark:text-gray-400">
-                Firstly, you’re saving a lot of money. You’re getting an
-                unlimited access to all Quests that you can consume anytime
-                within the next 12 months, for a small annual or monthly fee.
-                You’re saving up to $15,000 off the original enrollment fees.
-                It’s a great way to experience amazing transformations in every
-                aspect of your life while saving big. And you’ll even get to
-                experience all our best Quests. Money aside, you’re putting
-                yourself in a state of perpetual growth by locking in your
-                education for the next 12 months. Plus, you’re joining a
-                community of the most passionate and committed Courstad
-                students, who will uplift and support you through each Quest you
-                take.
-              </p>
-            </p>
-          </li>
-          <li className="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3 shadow-sm">
-            <p className="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
-              How do I choose the Quests I want to take?
-            </p>
-            <p className="mt-2">
-              <p className="text-base leading-6 text-gray-500 dark:text-gray-400">
-                Upon confirming your subscription on this page, you’ll
-                immediately have access to our entire library of Quests in your
-                Courstad account.
-              </p>
-            </p>
-          </li>
-          <li className="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3 shadow-sm">
-            <p className="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
-              How do I cancel or get a refund if I’m not satisfied?
-            </p>
-            <p className="mt-2">
-              <p className="text-base leading-6 text-gray-500 dark:text-gray-400">
-                You get a 15-day money back guarantee on your first subscription
-                fee whether annual or monthly. If in this time you decide it’s
-                not for you, get your easy refund at Courstad.com/refund. Upon
-                refunding, you will lose access to all Quests acquired through
-                your Membership (but you will still have access to any Quests
-                previously purchased, since you invested in them separately).
-              </p>
-            </p>
-          </li>
-          <li className="question  shadow dark:shadow-green-80 shadow-green-300 rounded p-3 shadow-sm">
-            <p className="text-lg font-medium leading-6 text-gray-800 dark:text-gray-200">
-              Can I pay in instalments?
-            </p>
-            <p className="mt-2">
-              <p className="text-base leading-6 text-gray-500 dark:text-gray-400">
-                Unfortunately, we are unable to provide this offer with
-                installments. Since this offer is not a single product but an
-                annual or monthly subscription that gives you access to almost
-                all of our programs. However, we provide you with a 15-day
-                money-back guarantee. If you are not fully satisfied, we will
-                refund you, no questions asked.
-              </p>
-            </p>
-          </li>
-        </ul>
+    <>
+      <div className="bg-gradient-to-b dark:from-gray-800 dark:via-teal-800 dark:to-green-900 from-white  to-green-800  relative pt-5 z-10">
+        <div className="mx-auto flex max-w-7xl px-6 justify-evenly items-center gap-20 rounded-lg lg:py-16">
+          <div className="lg:w-[50%] w-full relative text-center">
+            <h2 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl text-gray-100">
+              Get Your Answers
+            </h2>
+          </div>
+        </div>
+        <div className="w-full h-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.1"
+            width="1440"
+            height="560"
+            preserveAspectRatio="none"
+            viewBox="0 0 1440 560"
+            className="absolute bottom-0 left-0 w-full h-full z-1"
+          >
+            <g mask='url("#SvgjsMask1048")' fill="none">
+              <path
+                d="M1464 560L0 560 L0 541.39Q47.38 468.77, 120 516.16Q146.48 422.64, 240 449.12Q287.44 424.56, 312 472Q411.16 499.16, 384 598.33Q369.32 463.65, 504 448.98Q557.45 430.44, 576 483.89Q649.83 437.72, 696 511.55Q781.49 477.04, 816 562.54Q860.46 487, 936 531.45Q983.53 458.98, 1056 506.51Q1162.12 492.63, 1176 598.75Q1177.55 528.3, 1248 529.85Q1259.94 469.8, 1320 481.74Q1364.86 454.6, 1392 499.45Q1474.97 510.42, 1464 593.39z"
+                fill="#14532D"
+              ></path>
+            </g>
+            <defs>
+              <mask id="SvgjsMask1048">
+                <rect width="1440" height="560" fill="#ffffff"></rect>
+              </mask>
+            </defs>
+          </svg>
+        </div>
       </div>
-    </div>
+      <div className="bg-gray-800 pb-5 sm:pb-5 pt-10 sm:pt-10 bg-gradient-to-t dark:from-gray-800 dark:to-green-900 from-white to-green-800 relative">
+        <div className="mx-auto max-w-7xl flex lg:flex-row flex-col px-6 lg:px-8 justify-evenly gap-10">
+          <div className="space-y-4 flex-1">
+            {faq?.map(({ question, answer }, i) => (
+              <details
+                key={i}
+                className=" p-6 py-3 border-l-4 border-green-500 bg-teal-800 group transition-all duration-300 rounded"
+                close="true"
+              >
+                <summary className="flex items-center justify-between cursor-pointer">
+                  <h5 className="text-lg font-medium text-gray-200">
+                    {question}
+                  </h5>
+
+                  <span className="flex-shrink-0 ml-1.5 p-1 text-green-500 bg-[#174530] rounded-full sm:p-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="flex-shrink-0 w-5 h-5 transition duration-300 group-open:-rotate-45"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+                <p className="mt-4 leading-relaxed text-gray-300">{answer}</p>
+              </details>
+            ))}
+          </div>
+          <div className="space-y-4 flex-1">
+            {faq?.map(({ question, answer }, i) => (
+              <details
+                key={i}
+                className=" p-6 py-3 border-l-4 border-green-500 bg-teal-800 group transition-all duration-300 rounded"
+                close
+              >
+                <summary className="flex items-center justify-between cursor-pointer">
+                  <h5 className="text-lg font-medium text-gray-200">
+                    {question}
+                  </h5>
+
+                  <span className="flex-shrink-0 ml-1.5 p-1 text-green-500 bg-[#174530] rounded-full sm:p-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="flex-shrink-0 w-5 h-5 transition duration-300 group-open:-rotate-45"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </span>
+                </summary>
+                <p className="mt-4 leading-relaxed text-gray-300">{answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

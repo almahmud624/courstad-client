@@ -8,6 +8,7 @@ import useGetSearchParams from "../../hooks/useGetSearchParams";
 import HashLoader from "react-spinners/HashLoader";
 import { NotFound } from "../../components/NotFound/NotFound";
 import { useSearchParams } from "react-router-dom";
+import { BsArrowDown } from "react-icons/bs";
 
 const override = {
   display: "block",
@@ -46,8 +47,22 @@ const Courses = () => {
     }
   }, [page, size, coursesData, dispatch]);
   return (
-    <div className="flex gap-x-5 dark:bg-gray-800 bg-white">
-      {<LeftSideBar className="relative" key={Math.random()} />}
+    <div className="flex lg:flex-row flex-col gap-x-5 dark:bg-gray-800 bg-white">
+      <details
+        className=" lg:hidden block mx-8 group transition-all duration-300 rounded mt-5"
+        close="true"
+      >
+        <summary className="flex bg-slate-900 items-center justify-between cursor-pointer px-3 py-3 rounded-md mb-3 border border-white">
+          <h5 className="text-lg font-medium text-gray-200">Filter Course</h5>
+          <span className="flex-shrink-0 ml-1.5 p-1 text-slate-200  sm:p-2">
+            <BsArrowDown className="flex-shrink-0 w-5 h-5 transition duration-300 group-open:rotate-180" />
+          </span>
+        </summary>
+        <LeftSideBar />
+      </details>
+      <div className="lg:w-1/4 lg:p-8 lg:block hidden">
+        <LeftSideBar className="relative" key={Math.random()} />
+      </div>
       {isLoading ? (
         <HashLoader color="#36d7b7" cssOverride={override} />
       ) : isError ? (

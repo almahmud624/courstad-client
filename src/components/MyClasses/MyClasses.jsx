@@ -19,7 +19,7 @@ export const MyClasses = () => {
   return (
     <div className="bg-white dark:bg-gray-800 px-4 py-5 mx-auto md:px-24 lg:px-8 ">
       <div className="2xl:max-w-7xl mx-auto">
-        <h3 className="text-4xl dark:text-white text-gray-800 font-semibold">
+        <h3 className="lg:text-4xl text-2xl dark:text-white text-gray-800 font-semibold truncate">
           Welcome,<span className="text-green-600">{user?.name}</span>
         </h3>
         {isLoading ? (

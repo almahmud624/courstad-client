@@ -11,9 +11,9 @@ export const EnrolledCourseList = ({ course = {} }) => {
   const { courseName, courseTutor, courseThumb } = enrolledCourse || {};
   return (
     <>
-      <div className="p-4 w-full">
-        <div className="flex items-center justify-between p-4  rounded-lg bg-gradient-to-r dark:from-gray-800 dark:via-teal-800 dark:to-green-700 from-white  to-green-800 shadow-green-700 shadow">
-          <div className="w-64">
+      <div className="md:p-4 w-full">
+        <div className="flex md:flex-row flex-col-reverse gap-y-3 items-center justify-between p-4 rounded-lg md:bg-gradient-to-r bg-gradient-to-t dark:from-gray-800 dark:via-teal-800 dark:to-green-700 from-white  to-green-800 shadow-green-700 shadow">
+          <div className="md:w-64 w-full">
             <h2
               className="text-gray-900 dark:text-gray-200 text-lg font-bold"
               title={courseName}
@@ -37,10 +37,10 @@ export const EnrolledCourseList = ({ course = {} }) => {
               </span>
             )}
           </div>
-          <div className="w-56 rounded-full shadow-2xl shadow-gray-700 flex justify-center items-center ">
+          <div className="md:w-56 w-full rounded-full shadow-2xl shadow-gray-700 flex justify-center items-center ">
             <img
               src={courseThumb}
-              className="w-full h-40 object-cover"
+              className="w-full h-40 object-cover rounded-md"
               alt="thumbnail"
             />
           </div>
