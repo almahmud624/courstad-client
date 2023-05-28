@@ -17,7 +17,6 @@ const Login = () => {
   const from = location?.state?.from?.pathname || "/";
   const [storeUser] = useStoreUserMutation();
   const [state, setState] = useState("initial");
-  console.log(location);
   // login with email and password
   const handleSubmit = (e) => {
     e.preventDefault();

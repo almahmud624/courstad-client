@@ -21,7 +21,7 @@ export const SearchInput = () => {
         onChange={(e) => setQueryText(e.target.value)}
       />
       {queryText?.length > 0 && (
-        <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-lg overflow-y-scroll max-h-52">
+        <div className="absolute z-50 mt-1 w-full bg-white rounded-md shadow-lg overflow-y-scroll max-h-52">
           {courses?.map((course) => (
             <div
               key={course._id}

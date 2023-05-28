@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Footer from "../Pages/Shared/Footer/Footer";
 import Navbar from "../Pages/Shared/Navbar/Navbar";
+import ScrollTop from "../utils/ScrollToTop/ScrollTop";
 
 const Main = () => {
   const [theme, setTheme] = useState(null);
@@ -26,7 +27,7 @@ const Main = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
   return (
-    <div>
+    <ScrollTop>
       <Navbar
         darkSwitch={handleThemeSwitch}
         key={Math.random()}
@@ -34,7 +35,7 @@ const Main = () => {
       />
       <Outlet />
       <Footer />
-    </div>
+    </ScrollTop>
   );
 };
 

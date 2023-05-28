@@ -1,3 +1,4 @@
+import { CompanyStory } from "../../components/CompanyStory/CompanyStory";
 import { FutureEducation } from "../../components/FutureEducation/FutureEducation";
 
 export const AboutUs = () => {
@@ -43,6 +44,7 @@ export const AboutUs = () => {
         </div>
       </div>
       <FutureEducation />
+      <CompanyStory />
     </>
   );
 };
