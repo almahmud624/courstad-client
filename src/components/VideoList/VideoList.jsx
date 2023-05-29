@@ -4,6 +4,7 @@ import { VideoListItem } from "./VideoListItem";
 import useGetCourseVideosByTitle from "../../hooks/useGetCourseVideosByTitle";
 import { BiSearchAlt } from "react-icons/bi";
 import { useState } from "react";
+import { VideoListLoader } from "../VideoListLoader/VideoListLoader";
 
 export const VideoList = () => {
   const { courseName } = useParams();
@@ -11,7 +12,7 @@ export const VideoList = () => {
   const [queryText, setQueryText] = useState("");
   let content;
   if (isLoading) {
-    content = "loading...";
+    content = <VideoListLoader />;
   } else if (!isLoading && isError) {
     content = <span>There was an error</span>;
   } else if (!isLoading && !isError && videos?.length === 0) {

@@ -114,7 +114,7 @@ const Footer = () => {
 
                 <div>
                   <Link
-                    to="/About"
+                    to="/about-us"
                     className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
                   >
                     About
@@ -123,7 +123,7 @@ const Footer = () => {
 
                 <div>
                   <Link
-                    to="/"
+                    to="/contact"
                     className="text-gray-500 dark:text-gray-400 hover:text-green-700 dark:hover:text-green-500 active:text-green-700 transition duration-100"
                   >
                     Contact

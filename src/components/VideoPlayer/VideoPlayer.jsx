@@ -14,7 +14,7 @@ export const VideoPlayer = ({
   assignment,
 }) => {
   const navigate = useNavigate();
-  const { id, title, description, url } = video || {};
+  const { title, description, url } = video || {};
   const { data: quizMarks } = useGetQuizMarkQuery();
   const { data: quizzes } = useGetQuizzesQuery();
   const { user } = useSelector((state) => state.user);

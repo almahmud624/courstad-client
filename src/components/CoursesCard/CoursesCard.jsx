@@ -1,18 +1,25 @@
 import SingleCourse from "../../Pages/SingleCourse/SingleCourse";
-import HashLoader from "react-spinners/HashLoader";
 import { NotFound } from "../NotFound/NotFound";
+import { CardLoader } from "../Loader/CardLoader/CardLoader";
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  height: "100vh",
-};
-
+const loadingCell = 6;
 export const CoursesCard = ({ courses, isLoading, isError }) => {
   return (
     <>
       {isLoading ? (
-        <HashLoader color="#36d7b7" cssOverride={override} />
+        <div className="flex gap-x-5 dark:bg-gray-800 bg-white">
+          <div
+            className={
+              "grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 max-w-screen-xl m-auto gap-5"
+            }
+          >
+            {Array(loadingCell)
+              .fill()
+              ?.map((i) => (
+                <CardLoader key={i} />
+              ))}
+          </div>
+        </div>
       ) : isError ? (
         <span>Somthing Happend!</span>
       ) : courses?.length <= 0 ? (

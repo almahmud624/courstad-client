@@ -15,7 +15,8 @@ const menus = [
   { name: "home", href: "/home" },
   { name: "courses", href: "/courses" },
   { name: "my classes", href: "/my-class" },
-  { name: "about us", href: "/about-us" },
+  { name: "about", href: "/about-us" },
+  { name: "contact", href: "/contact" },
   { name: "FAQ", href: "/faq" },
 ];
 

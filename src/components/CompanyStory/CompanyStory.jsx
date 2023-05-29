@@ -22,7 +22,7 @@ const data = [
 export const CompanyStory = () => {
   return (
     <>
-      <div className="bg-gray-800 pb-24 sm:pb-32">
+      <div className="bg-gray-800 md:pb-10 pb-10">
         <div className="mx-auto flex lg:flex-row flex-col max-w-7xl gap-x-8 lg:gap-y-20 gap-y-10 px-6 lg:px-8">
           <div className="max-w-xl relative">
             <h2 className="mb-3 text-center text-3xl md:text-5xl font-semibold leading-none sm:text-3xl text-gray-100">

@@ -49,7 +49,7 @@ export const ProgressLine = ({
 
                 backgroundColor: item.color,
               }}
-              className={`progressVisualPart rounded-lg bg-gradient-to-l dark:from-blue-800  dark:to-blue-400 `}
+              className={`progressVisualPart rounded-lg bg-gradient-to-l dark:from-green-800  dark:to-red-400 `}
             />
           );
         })}

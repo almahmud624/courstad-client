@@ -4,20 +4,14 @@ import SingleCourse from "../SingleCourse/SingleCourse";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
 import { useDispatch, useSelector } from "react-redux";
 import { coursePagination } from "../../features/courses/courseSlice";
-import useGetSearchParams from "../../hooks/useGetSearchParams";
-import HashLoader from "react-spinners/HashLoader";
 import { NotFound } from "../../components/NotFound/NotFound";
 import { useSearchParams } from "react-router-dom";
 import { BsArrowDown } from "react-icons/bs";
+import { CardLoader2 } from "../../components/Loader/CardLoader2/CardLoader2";
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  height: "100vh",
-};
+const loadingCell = 4;
 
 const Courses = () => {
-  // const { queryText } = useGetSearchParams();
   const [searchParams] = useSearchParams();
   const category = searchParams.get("category");
   let [courses, setCourse] = useState([]);
@@ -64,7 +58,13 @@ const Courses = () => {
         <LeftSideBar className="relative" key={Math.random()} />
       </div>
       {isLoading ? (
-        <HashLoader color="#36d7b7" cssOverride={override} />
+        <div className="grid grid-cols-1 gap-y-5 my-5 w-full px-4">
+          {Array(loadingCell)
+            .fill()
+            .map((i) => (
+              <CardLoader2 key={i} cardStyle={"flex-row-reverse"} />
+            ))}
+        </div>
       ) : isError ? (
         "Something wrong"
       ) : courses?.length <= 0 ? (

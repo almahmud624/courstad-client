@@ -1,22 +1,12 @@
-import { CompanyStory } from "../../components/CompanyStory/CompanyStory";
-import { FutureEducation } from "../../components/FutureEducation/FutureEducation";
-
-export const AboutUs = () => {
+export const PageHeader = ({ title }) => {
   return (
     <>
-      <div className="bg-gradient-to-b dark:from-gray-800 dark:via-teal-800 dark:to-green-900 from-white  to-green-800 relative pt-10 z-10">
-        <div className="mx-auto flex max-w-7xl px-6 justify-evenly items-center gap-20 rounded-lg lg:py-24">
+      <div className="bg-gradient-to-b dark:from-gray-800 dark:via-teal-800 dark:to-green-900 from-white  to-green-800  relative pt-5 z-10">
+        <div className="mx-auto flex max-w-7xl px-6 justify-evenly items-center gap-20 rounded-lg lg:py-16">
           <div className="lg:w-[50%] w-full relative text-center">
             <h2 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl text-gray-100">
-              We share knowledge with the world
+              {title}
             </h2>
-            <p className="my-5 dark:text-gray-300 text-gray-800">
-              <span className="font-base text-sm md:text-base">
-                Whether you want to learn or to share what you know, you’ve come
-                to the right place. As a global destination for online learning,
-                we connect people through knowledge.
-              </span>
-            </p>
           </div>
         </div>
         <div className="w-full h-10">
@@ -43,8 +33,6 @@ export const AboutUs = () => {
           </svg>
         </div>
       </div>
-      <FutureEducation />
-      <CompanyStory />
     </>
   );
 };

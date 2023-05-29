@@ -10,6 +10,7 @@ import {
 import { VideoPlayer } from "../../components/VideoPlayer/VideoPlayer";
 import { VideoList } from "../../components/VideoList/VideoList";
 import { FormModal } from "../../components/Modal/FormModal";
+import { VideoPlayerLoader } from "../../components/Loader/VideoPlayerLoader/VideoPlayerLoader";
 export const Video = () => {
   const { videoId } = useParams();
   const { data: video, isLoading, isError } = useGetVideoQuery(videoId);
@@ -57,12 +58,16 @@ export const Video = () => {
       <section className="py-6 bg-gray-800">
         <div className="mx-auto max-w-7xl px-5 lg:px-0">
           <div className="grid grid-cols-3 gap-2 lg:gap-8">
-            <VideoPlayer
-              video={video}
-              setShowModal={setShowModal}
-              assignmentSubmisson={assignmentSubmisson}
-              assignment={assignment}
-            />
+            {isLoading ? (
+              <VideoPlayerLoader />
+            ) : (
+              <VideoPlayer
+                video={video}
+                setShowModal={setShowModal}
+                assignmentSubmisson={assignmentSubmisson}
+                assignment={assignment}
+              />
+            )}
 
             <VideoList />
           </div>

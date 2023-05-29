@@ -9,7 +9,7 @@ export const FutureEducation = () => {
             <h2 className="mb-3 text-3xl md:text-5xl font-semibold leading-none sm:text-4xl text-gray-100">
               We are Future of Education
             </h2>
-            <p className="my-5 dark:text-gray-400 text-gray-800">
+            <p className="my-5 dark:text-gray-300 text-gray-800">
               <span className="font-base text-sm md:text-base">
                 You are definitely intrigued to discover who we are. We are
                 Scrate Education – future of education. We have the best
