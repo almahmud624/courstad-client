@@ -10,17 +10,17 @@ const override = {
   margin: "0 auto",
   height: "100vh",
 };
-const PrivateRoute = ({ children }) => {
-  const { loading } = useContext(AuthContext);
+const AdminPrivateRoute = ({ children }) => {
+  const { loading, isLoading } = useContext(AuthContext);
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
-  if (loading) {
+  if (loading || isLoading) {
     return <HashLoader color="#36d7b7" cssOverride={override} />;
   }
-  if (user?.role === "student" && user?.email) {
+  if (user?.role === "admin" && user?.email) {
     return children;
   }
   return <Navigate to="/login" state={{ from: location }} />;
 };
 
-export default PrivateRoute;
+export default AdminPrivateRoute;

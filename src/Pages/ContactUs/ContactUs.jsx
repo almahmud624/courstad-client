@@ -7,7 +7,7 @@ export const ContactUs = () => {
     <>
       <PageHeader title={"Contact Us"} />
       <section class="bg-white dark:bg-gray-900 bg-gradient-to-t dark:from-gray-800 dark:to-green-900 from-white to-green-800 relative">
-        <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md relative">
+        <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md relative overflow-hidden">
           <h2 class="mb-4 text-4xl tracking-tight font-bold text-center text-gray-900 dark:text-white">
             Keep in touch
           </h2>

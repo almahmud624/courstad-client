@@ -24,11 +24,17 @@ import { AssignmentMark } from "../Pages/Admin/AssignmentMark/AssignmentMark";
 import { Leaderboard } from "../Pages/Leaderboard/Leaderboard";
 import { AboutUs } from "../Pages/AboutUs/AboutUs";
 import { ContactUs } from "../Pages/ContactUs/ContactUs";
+import AdminPrivateRoute from "../PrivateRoute/AdminPrivateRoute";
+import PublicRoute from "../PrivateRoute/PublicRoute";
 
 export const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Main />,
+    element: (
+      <PublicRoute>
+        <Main />
+      </PublicRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
@@ -118,31 +124,93 @@ export const routes = createBrowserRouter([
       },
     ],
   },
-  { path: "/admin", element: <VideoTable /> },
-  { path: "/admin/videos", element: <VideoTable /> },
-  { path: "/admin/video/add", element: <EditableVideo /> },
-  { path: "/admin/video/edit/:videoId", element: <EditableVideo /> },
-  { path: "/admin/assignments", element: <Assignment /> },
-  { path: "/admin/assignment/add", element: <EditableAssignment /> },
+  {
+    path: "/admin",
+    element: (
+      <AdminPrivateRoute>
+        <VideoTable />
+      </AdminPrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/videos",
+    element: (
+      <AdminPrivateRoute>
+        <VideoTable />
+      </AdminPrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/video/add",
+    element: (
+      <AdminPrivateRoute>
+        <EditableVideo />
+      </AdminPrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/video/edit/:videoId",
+    element: (
+      <AdminPrivateRoute>
+        <EditableVideo />
+      </AdminPrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/assignments",
+    element: (
+      <AdminPrivateRoute>
+        <Assignment />
+      </AdminPrivateRoute>
+    ),
+  },
+  {
+    path: "/admin/assignment/add",
+    element: (
+      <AdminPrivateRoute>
+        <EditableAssignment />
+      </AdminPrivateRoute>
+    ),
+  },
   {
     path: "/admin/assignment/edit/:assignmentId",
-    element: <EditableAssignment />,
+    element: (
+      <AdminPrivateRoute>
+        <EditableAssignment />
+      </AdminPrivateRoute>
+    ),
   },
   {
     path: "/admin/quizzes",
-    element: <Quizzes />,
+    element: (
+      <AdminPrivateRoute>
+        <Quizzes />
+      </AdminPrivateRoute>
+    ),
   },
   {
     path: "/admin/quiz/add",
-    element: <AddQuiz />,
+    element: (
+      <AdminPrivateRoute>
+        <AddQuiz />
+      </AdminPrivateRoute>
+    ),
   },
   {
     path: "/admin/quiz/edit/:quizId",
-    element: <EditQuiz />,
+    element: (
+      <AdminPrivateRoute>
+        <EditQuiz />
+      </AdminPrivateRoute>
+    ),
   },
   {
     path: "/admin/assignmentMark",
-    element: <AssignmentMark />,
+    element: (
+      <AdminPrivateRoute>
+        <AssignmentMark />
+      </AdminPrivateRoute>
+    ),
   },
   { path: "*", element: <ErrorPage /> },
 ]);

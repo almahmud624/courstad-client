@@ -1,9 +1,10 @@
-export const AlertModal = ({
-  showModal,
-  setShowModal,
-  selectedTarget,
-  action,
-}) => {
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Contexts/AuthProvider";
+
+export const RoleAlertModal = ({ showModal, setShowModal }) => {
+  const { userSignOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -16,7 +17,7 @@ export const AlertModal = ({
         role="dialog"
         aria-modal="true"
       >
-        <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+        <div className="fixed inset-0 bg-gray-700 bg-opacity-75 transition-opacity"></div>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div
@@ -26,41 +27,35 @@ export const AlertModal = ({
                 : "ease-in duration-200 opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             }`}
           >
-            <div className="relative transform overflow-hidden rounded-lg bg-slate-800  text-center shadow-xl transition-all sm:my-8 md:p-0 p-5 w-full md:max-w-lg">
-              <div className="bg-slate-800 px-4 pt-5  sm:pb-4">
+            <div className="relative transform overflow-hidden rounded-lg bg-slate-800  text-center shadow-xl transition-all sm:my-8 p-5 w-full md:max-w-lg">
+              <div className="bg-slate-800 px-4 pt-5 text-center sm:pb-4">
                 <h2
                   className="text-base font-semibold leading-6  text-white capitalize"
                   id="modal-title"
                 >
-                  Confirm your delete process?
-                </h2>
-                <h2
-                  className="text-md font-normal leading-6 mt-2.5 text-gray-400"
-                  id="modal-title"
-                >
-                  You want to delete{" "}
-                  <span className="text-green-600 font-semibold">
-                    {selectedTarget?.title || selectedTarget?.question}
-                  </span>{" "}
-                  Once you remove this file it can't be undone.
+                  Currently you logged in as ADMIN.
                 </h2>
               </div>
 
-              <div className="bg-slate-800 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 flex gap-3">
+              <div className="bg-slate-800 px-4 py-3 flex flex-col-reverse md:mt-0 mt-5 md:flex-row-reverse justify-center items-center sm:px-6 gap-3">
                 <button
                   type="button"
                   className="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-gray-50 shadow-sm ring-1 ring-inset ring-red-400 bg-red-600 hover:bg-red-800 sm:mt-0 sm:w-auto transition-all duration-150"
-                  onClick={() => setShowModal(false)}
+                  onClick={() => {
+                    userSignOut();
+                    navigate("/");
+                  }}
                 >
-                  Close
+                  Logout
                 </button>
-                <button
+                <span className="font-semibold text-white">Or</span>
+                <Link
                   type="button"
                   className="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-gray-50 shadow-sm ring-1 ring-inset ring-green-400 bg-green-600 hover:bg-green-800 sm:mt-0 sm:w-auto transition-all duration-150"
-                  onClick={action}
+                  to="/admin"
                 >
-                  Delete
-                </button>
+                  Continue as Admin
+                </Link>
               </div>
             </div>
           </div>

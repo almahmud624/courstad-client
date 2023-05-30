@@ -1,4 +1,4 @@
-export const CardLoader = ({ style }) => {
+export const CardLoader = ({ cardStyle }) => {
   return (
     <>
       <div

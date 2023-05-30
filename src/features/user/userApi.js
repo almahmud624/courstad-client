@@ -6,6 +6,19 @@ export const userApi = apiSlice.injectEndpoints({
     getUser: builder.query({
       query: () => "/users",
     }),
+    verifyUser: builder.mutation({
+      query: (data) => ({
+        url: "/user/verify",
+        method: "POST",
+        body: data,
+      }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(userSignIn(data));
+        } catch (err) {}
+      },
+    }),
     storeUser: builder.mutation({
       query: (data) => ({
         url: "/user/new",
@@ -22,4 +35,5 @@ export const userApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetUserQuery, useStoreUserMutation } = userApi;
+export const { useGetUserQuery, useStoreUserMutation, useVerifyUserMutation } =
+  userApi;

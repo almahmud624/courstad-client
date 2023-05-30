@@ -5,7 +5,6 @@ import { CgDesignmodo } from "react-icons/cg";
 import { MdDeveloperMode, MdOutlineScience } from "react-icons/md";
 import { SiMarketo, SiStorybook } from "react-icons/si";
 import { GiVirtualMarker } from "react-icons/gi";
-import { HashLoader } from "react-spinners";
 import { NotFound } from "../NotFound/NotFound";
 
 const colorIcons = [
@@ -20,11 +19,7 @@ const colorIcons = [
 const categoryIcons = (i) => {
   return colorIcons?.[i]?.icon;
 };
-const override = {
-  display: "block",
-  margin: "0 auto",
-  height: "100vh",
-};
+
 export const CourseCategory = () => {
   const {
     data: categories,
@@ -34,13 +29,13 @@ export const CourseCategory = () => {
 
   let content;
   if (isLoading) {
-    content = <HashLoader color="#36d7b7" cssOverride={override} />;
+    content = <CategoryLoader />;
   } else if (!isLoading && isError) {
     content = "There wan an error";
   } else if (!isLoading && !isError && categories?.length === 0) {
     content = <NotFound message={"Category not found!"} hideBtn={"hidden"} />;
   } else if (!isLoading && !isError && categories?.length > 0) {
-    content = <SearchResult categories={categories} />;
+    content = <Category categories={categories} />;
   }
   return (
     <section className=" dark:bg-gray-800 bg-white">
@@ -62,7 +57,7 @@ export const CourseCategory = () => {
   );
 };
 
-const SearchResult = ({ categories }) => {
+const Category = ({ categories }) => {
   return (
     <>
       {categories?.map((category, i) => (
@@ -94,6 +89,28 @@ const SearchResult = ({ categories }) => {
           </h3>
         </div>
       </Link>
+    </>
+  );
+};
+
+const CategoryLoader = () => {
+  const loadingCell = 8;
+  return (
+    <>
+      {Array(loadingCell)
+        .fill()
+        .map((i) => (
+          <div
+            key={i}
+            className="group flex flex-col justify-center items-center text-center rounded-xl border border-gray-800 bg-gray-900 shadow-xl h-40 animate-pulse"
+          >
+            <div className=" p-2 bg-gray-800 rounded-full h-20 w-20">
+              <span className="text-3xl flex justify-center rounded-full p-4 bg-gray-900/80  shadow-xl shadow-gray-700/25 h-16 w-16"></span>
+            </div>
+
+            <div class="h-4 w-20 bg-gray-200 rounded dark:bg-gray-800 my-2.5"></div>
+          </div>
+        ))}
     </>
   );
 };

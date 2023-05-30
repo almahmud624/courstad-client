@@ -2,8 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetQuizzesQuery } from "../../features/quiz/quizApi";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import { Loader } from "../../components/Loader/Loader";
-// import { DataNotFound } from "../../components/DataNotFound/DataNotFound";
 import { QuizList } from "../../components/QuizList/QuizList";
 import {
   useGetQuizMarkQuery,
@@ -13,7 +11,14 @@ import { getQuizMark } from "../../utils/getQuizMark";
 
 import toast from "react-hot-toast";
 import { ConfirmationModal } from "../../components/Modal/ConfirmationModal";
+import { NotFound } from "../../components/NotFound/NotFound";
+import { HashLoader } from "react-spinners";
 
+const override = {
+  display: "block",
+  margin: "0 auto",
+  height: "100vh",
+};
 export const Quiz = () => {
   const { videoId } = useParams();
   const { data: quizzes, isLoading, isError } = useGetQuizzesQuery();
@@ -67,9 +72,13 @@ export const Quiz = () => {
     <>
       <section className="py-6 bg-gray-800">
         {isLoading ? (
-          "<Loader />"
+          <HashLoader color="#36d7b7" cssOverride={override} />
         ) : contentNotFound ? (
-          '<DataNotFound message={"Quiz Not Found"} />'
+          <NotFound
+            message={"Quizzes not found"}
+            link={"/my-class"}
+            linkText={"Back to Class"}
+          />
         ) : (
           <div className="mx-auto max-w-7xl px-5 lg:px-0">
             <div className="mb-8">

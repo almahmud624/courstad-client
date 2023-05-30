@@ -7,14 +7,7 @@ import Navbar from "../Pages/Shared/Navbar/Navbar";
 import ScrollTop from "../utils/ScrollToTop/ScrollTop";
 
 const Main = () => {
-  const [theme, setTheme] = useState(null);
-  useEffect(() => {
-    if (window.matchMedia("(prefers-color-scheme:dark)").matches) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  }, []);
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     if (theme === "dark") {
@@ -23,16 +16,9 @@ const Main = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
-  const handleThemeSwitch = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
   return (
     <ScrollTop>
-      <Navbar
-        darkSwitch={handleThemeSwitch}
-        key={Math.random()}
-        switchTheme={theme}
-      />
+      <Navbar />
       <Outlet />
       <Footer />
     </ScrollTop>

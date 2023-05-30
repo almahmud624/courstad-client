@@ -5,7 +5,7 @@ import { AuthContext } from "../../Contexts/AuthProvider";
 import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
 import toast from "react-hot-toast";
-import { useStoreUserMutation } from "../../features/user/userApi";
+import { useVerifyUserMutation } from "../../features/user/userApi";
 import { Spinner } from "../../components/Spinner/Spinner";
 
 const Login = () => {
@@ -15,7 +15,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location?.state?.from?.pathname || "/";
-  const [storeUser] = useStoreUserMutation();
+  const [verifyUser] = useVerifyUserMutation();
   const [state, setState] = useState("initial");
   // login with email and password
   const handleSubmit = (e) => {
@@ -27,9 +27,14 @@ const Login = () => {
     const password = form.password.value;
     userLogIn(email, password)
       .then((res) => {
-        storeUser({ name: res?.user?.displayName, email, role: "student" });
-        setState("success");
-        navigate(from, { replace: true });
+        verifyUser({ email }).then((res) => {
+          if (res?.data?.role === "admin") {
+            navigate("/admin");
+          } else {
+            setState("success");
+            navigate(from, { replace: true });
+          }
+        });
         setErr("");
         form.reset();
       })
@@ -57,8 +62,15 @@ const Login = () => {
           <div className="flex flex-col justify-center items-center flex-1 px-4 py-12 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div className="w-full max-w-xl mx-auto lg:w-96">
               <div>
+                {from.includes("/admin") && (
+                  <small className="-mt-3 text-gray-300">
+                    Currently, you trying to access Admin Dashboard
+                  </small>
+                )}
                 <h2 className="mt-6 text-3xl font-bold text-neutral-600 dark:text-gray-200">
-                  Login Your Account
+                  {from.includes("/admin")
+                    ? "Login as Admin"
+                    : "Login Your Account"}
                 </h2>
               </div>
               {err && (

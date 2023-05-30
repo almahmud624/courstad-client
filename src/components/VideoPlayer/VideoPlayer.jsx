@@ -19,8 +19,7 @@ export const VideoPlayer = ({
   const { data: quizzes } = useGetQuizzesQuery();
   const { user } = useSelector((state) => state.user);
   const { courseName, videoId } = useParams();
-  const [userCourses, isLoading, isError] =
-    useGetCourseVideosByTitle(courseName);
+  const [userCourses] = useGetCourseVideosByTitle(courseName);
   const [videoNavigate, setVideoNavigate] = useState(0);
 
   // check users quiz submission

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-import { AuthContext } from "../../../Contexts/AuthProvider";
+import { NavLink, useLocation } from "react-router-dom";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { FaTimes } from "react-icons/fa";
 import avater from "../../../Assets/avatar.png";
@@ -9,7 +7,6 @@ import logo from "../../../Assets/logo.png";
 import { useSelector } from "react-redux";
 import { SearchInput } from "../../../components/SearchInput/SearchInput";
 import { ProfileIconDropdown } from "../../../components/ProfileIconDropdown/ProfileIconDropdown";
-import { DarkMode } from "../../../components/DarkMode/DarkMode";
 
 const menus = [
   { name: "home", href: "/home" },
@@ -20,7 +17,7 @@ const menus = [
   { name: "FAQ", href: "/faq" },
 ];
 
-const Navbar = ({ darkSwitch, switchTheme }) => {
+const Navbar = () => {
   const { pathname } = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -63,7 +60,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               ))}
             </ul>
             <div className="w-64 lg:block hidden">
-              <SearchInput />
+              <SearchInput setIsMenuOpen={false} />
             </div>
             <div className="flex items-center gap-2">
               <div>
@@ -75,11 +72,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                   />
                 </ul>
               </div>
-              <DarkMode
-                switchTheme={switchTheme}
-                darkSwitch={darkSwitch}
-                display={"lg:block hidden"}
-              />
             </div>
           </div>
 
@@ -99,11 +91,6 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
               >
                 <HiOutlineMenuAlt1 className="dark:text-gray-200 text-2xl text-gray-800" />
               </button>
-              <DarkMode
-                switchTheme={switchTheme}
-                darkSwitch={darkSwitch}
-                display={"lg:hidden block"}
-              />
             </div>
             {isMenuOpen && (
               <div className="absolute top-0 z-50 left-0 w-full">
@@ -157,7 +144,7 @@ const Navbar = ({ darkSwitch, switchTheme }) => {
                           </NavLink>
                         </li>
                       ))}
-                      <SearchInput />
+                      <SearchInput setIsMenuOpen={setIsMenuOpen} />
                     </ul>
                   </nav>
                 </div>
@@ -194,7 +181,7 @@ const UserProfile = ({ user, showDropdown, setShowDropdown }) => {
         </>
       ) : (
         <>
-          <li className="w-20 lg:w-full">
+          <div className={"relative tracking-wide duration-200 w-12 lg:w-full"}>
             <NavLink
               to="/login"
               aria-label="Log in"
@@ -207,7 +194,7 @@ const UserProfile = ({ user, showDropdown, setShowDropdown }) => {
             >
               Log in
             </NavLink>
-          </li>
+          </div>
         </>
       )}
     </>

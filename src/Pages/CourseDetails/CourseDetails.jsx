@@ -63,7 +63,7 @@ const CourseDetails = () => {
       student_id: user?._id,
       student_name: user?.name,
     };
-    if (user?._id) {
+    if (user?.email && user?.role === "student") {
       storeEnrolledCourse(enrolledCourse);
     } else {
       navigate("/login");
@@ -199,7 +199,7 @@ const CourseDetails = () => {
               <button
                 className="group relative inline-block focus:outline-none focus:ring-0  disabled:cursor-not-allowed"
                 onClick={handleEnroll}
-                disabled={enrollmentLoading || enrollCheck}
+                disabled={enrollmentLoading || enrollCheck || user?.role === 'admin'}
               >
                 <span
                   className={`absolute inset-0 translate-x-0 translate-y-0 bg-green-700 transition-transform group-hover:translate-y-1.5 group-hover:translate-x-1.5 rounded ${

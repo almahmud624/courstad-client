@@ -9,7 +9,7 @@ export const ProfileIconDropdown = ({ showDropdown, setShowDropdown }) => {
   return (
     <>
       <div
-        className={`absolute top-12 -right-16 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ${
+        className={`absolute top-12 lg:-right-16 -right-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ${
           showDropdown
             ? "ease-out duration-300 opacity-100 z-50 translate-y-0"
             : "ease-in duration-200 opacity-0 -z-10 -translate-y-5"
