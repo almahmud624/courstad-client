@@ -1,10 +1,14 @@
-// import { DataNotFound } from "../../../components/DataNotFound/DataNotFound";
-// import { ErrorMessage } from "../../../components/ErrorMessage/ErrorMessage";
-// import { Loader } from "../../../components/Loader/Loader";
 import DashboardLayout from "../../../Layout/DashboardLayout";
 import { AssignmentMarkTable } from "../../../components/AssignmentMarkTable/AssignmentMarkTable";
 import { useGetAssignmentMarkQuery } from "../../../features/assignmentMark/assignmentMarkApi";
+import { NotFound } from "../../../components/NotFound/NotFound";
+import { HashLoader } from "react-spinners";
 
+const override = {
+  display: "block",
+  margin: "0 auto",
+  height: "100vh",
+};
 export const AssignmentMark = () => {
   const {
     data: assignmentMarks,
@@ -14,11 +18,11 @@ export const AssignmentMark = () => {
 
   let content;
   if (isLoading) {
-    content = "<Loader />";
+    content = <HashLoader color="#36d7b7" cssOverride={override} />;
   } else if (!isLoading && isError) {
-    content = "<ErrorMessage />";
+    content = <span>There was an error</span>;
   } else if (!isLoading && !isError && assignmentMarks?.length === 0) {
-    content = '<DataNotFound message={"Assignment Marks not found"} />';
+    content = <NotFound message={"Marks not found"} hideBtn={"hidden"} />;
   } else if (!isLoading && !isError && assignmentMarks?.length > 0) {
     content = <AssignmentMarkTable assignmentMarks={assignmentMarks} />;
   }

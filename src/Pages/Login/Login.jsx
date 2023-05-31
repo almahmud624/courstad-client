@@ -39,6 +39,7 @@ const Login = () => {
         form.reset();
       })
       .catch((error) => {
+        setState("error");
         setErr(error.code);
       });
   };
@@ -63,7 +64,7 @@ const Login = () => {
             <div className="w-full max-w-xl mx-auto lg:w-96">
               <div>
                 {from.includes("/admin") && (
-                  <small className="-mt-3 text-gray-300">
+                  <small className="-mt-3 text-red-600">
                     Currently, you trying to access Admin Dashboard
                   </small>
                 )}

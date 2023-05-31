@@ -2,20 +2,24 @@ import React from "react";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider";
-import { FaLink, FaUserAlt } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useStoreUserMutation } from "../../features/user/userApi";
 import { Spinner } from "../../components/Spinner/Spinner";
+import { FiUploadCloud } from "react-icons/fi";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
+import { storage } from "../../Firebase/firebase.init";
 
 const Register = () => {
   const { createUser, updateUserProfie } = useContext(AuthContext);
   const [err, setErr] = useState("");
   const location = useLocation();
   const [userName, setUserName] = useState("");
-  const [userPhoto, setUserPhoto] = useState("");
+  const [imgPath, setImgPath] = useState(null);
   const navigate = useNavigate();
   const [storeUser] = useStoreUserMutation();
   const [state, setState] = useState("initial");
@@ -25,24 +29,29 @@ const Register = () => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photo = form.picUrl.value;
     const email = form.email.value;
     const password = form.password.value;
     setErr("");
     setState("loading");
-
-    createUser(email, password)
-      .then((res) => {
-        if (res?.user?.uid) {
-          handleUserProfileUpdate(name, photo);
-          storeUser({ name, email, photoURL: photo, role: "student" });
-          setState("success");
-          form.reset();
-        }
-      })
-      .catch((error) => {
-        setErr(error.code);
-      });
+    uploadImage().then((url) => {
+      if (url) {
+        const photo = url;
+        createUser(email, password)
+          .then((res) => {
+            if (res?.user?.uid) {
+              handleUserProfileUpdate(name, photo);
+              storeUser({ name, email, photoURL: photo });
+              setState("success");
+              navigate("/");
+              form.reset();
+            }
+          })
+          .catch((error) => {
+            setErr(error.code);
+            setState("error");
+          });
+      }
+    });
   };
 
   // update user profile
@@ -58,9 +67,36 @@ const Register = () => {
   };
   // Edit Profile
   const editProfile = () => {
-    handleUserProfileUpdate(userName, userPhoto);
-    toast.success("You Successfully Update your Profile");
-    navigate("/");
+    setState("loading");
+    try {
+      uploadImage().then((url) => {
+        if (url) {
+          const userPhoto = url;
+          handleUserProfileUpdate(userName, userPhoto);
+          setState("success");
+          toast.success("You Successfully Update your Profile");
+          navigate("/");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      setState("error");
+    }
+  };
+
+  const handleImgPath = (e) => {
+    e.preventDefault();
+    const imgFile = e.target.files[0];
+    const imgSrc = URL.createObjectURL(imgFile);
+    setImgPath({ imgSrc, imgFile });
+  };
+
+  // upload image in firebase storage
+  const uploadImage = () => {
+    const imgRef = ref(storage, `images/${imgPath?.imgFile?.name + v4()}`);
+    return uploadBytes(imgRef, imgPath?.imgFile).then((res) =>
+      getDownloadURL(res.ref)
+    );
   };
   return (
     <div>
@@ -109,22 +145,7 @@ const Register = () => {
                         </span>
                       </div>
                     </div>
-                    <div className="flex flex-col mb-2">
-                      <div className="flex relative ">
-                        <input
-                          type="text"
-                          id="picUrl"
-                          name="picUrl"
-                          className=" rounded-l-md flex-1 appearance-none  w-full py-2 px-4  text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:border-transparent  ring-0 bg-white border-t border-l border-b  border-gray-300 transition duration-500 ease-in-out transform"
-                          placeholder="Profile Picture URL"
-                          required
-                          onBlur={(e) => setUserPhoto(e.target.value)}
-                        />
-                        <span className="rounded-r-lg inline-flex  items-center px-3 border-t bg-white border border-gray-300 text-gray-500 shadow-sm text-sm">
-                          <FaLink />
-                        </span>
-                      </div>
-                    </div>
+
                     {location.pathname !== "/profile-edit" && (
                       <>
                         <div className="flex flex-col mb-2">
@@ -159,7 +180,55 @@ const Register = () => {
                         </div>
                       </>
                     )}
-
+                    <div className="flex flex-col mb-2">
+                      <div class="flex items-center justify-center w-full">
+                        <label
+                          for="dropzone-file"
+                          class={`flex items-center justify-center w-full h-20  rounded-lg cursor-pointer bg-gray-50 ${
+                            imgPath?.imgSrc
+                              ? "bg-transparent flex-row justify-center gap-x-5"
+                              : "flex-col"
+                          }`}
+                        >
+                          {imgPath?.imgSrc ? (
+                            <>
+                              <img
+                                src={imgPath?.imgSrc}
+                                alt=""
+                                className={
+                                  "w-20 h-20 rounded-full object-cover"
+                                }
+                              />
+                              <span
+                                className="flex items-center justify-center px-5 py-2 text-sm font-medium text-center text-green-500 transition duration-500 ease-in-out transform border border-green-700 rounded hover:bg-green-800 hover:text-white focus:outline-none focus:border-transparent ring-0"
+                                onClick={() => setImgPath(null)}
+                              >
+                                Reselect
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <FiUploadCloud
+                                  className={"h-6 w-6 text-gray-600"}
+                                />
+                                <p class="mb-2 text-sm text-gray-600">
+                                  <span class="font-semibold">
+                                    Click to upload
+                                  </span>{" "}
+                                </p>
+                              </div>
+                              <input
+                                id="dropzone-file"
+                                type="file"
+                                class="hidden"
+                                onChange={handleImgPath}
+                              />
+                            </>
+                          )}
+                        </label>
+                      </div>
+                    </div>
                     {location.pathname !== "/profile-edit" && (
                       <div>
                         <button
@@ -180,7 +249,7 @@ const Register = () => {
                       <button
                         type="submit"
                         onClick={editProfile}
-                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:border-transparent ring-0"
+                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:border-transparent ring-0 mt-7"
                       >
                         {state === "loading" ? <Spinner /> : "Update Profile"}
                       </button>

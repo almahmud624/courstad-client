@@ -17,7 +17,7 @@ const PrivateRoute = ({ children }) => {
   if (loading) {
     return <HashLoader color="#36d7b7" cssOverride={override} />;
   }
-  if (user?.role === "student" && user?.email) {
+  if (user && user?.email) {
     return children;
   }
   return <Navigate to="/login" state={{ from: location }} />;
