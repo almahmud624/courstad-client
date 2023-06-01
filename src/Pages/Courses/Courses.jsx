@@ -62,7 +62,7 @@ const Courses = () => {
           {Array(loadingCell)
             .fill()
             .map((i) => (
-              <CardLoader2 key={i} cardStyle={"flex-row-reverse"} />
+              <CardLoader2 key={Math.random()} cardStyle={"flex-row-reverse"} />
             ))}
         </div>
       ) : isError ? (

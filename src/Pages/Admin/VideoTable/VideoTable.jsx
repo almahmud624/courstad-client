@@ -8,22 +8,13 @@ import { FiEdit } from "react-icons/fi";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AlertModal } from "../../../components/Modal/AlertModal";
 import { useEffect, useState } from "react";
-import { HashLoader } from "react-spinners";
 
 import { NotFound } from "../../../components/NotFound/NotFound";
-const override = {
-  display: "block",
-  margin: "0 auto",
-  height: "100vh",
-};
+import { Loader } from "../../../components/Loader/Loader";
 export const VideoTable = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState("");
-  const {
-    data: videos,
-    isLoading,
-    isError: patchError,
-  } = useGetVideosQuery({});
+  const { data: videos, isLoading } = useGetVideosQuery({});
   const [deleteVideo, { isSuccess, isError }] = useDeleteVideoMutation();
   const handleDeleteVideo = () => {
     deleteVideo(selectedVideo?._id);
@@ -38,7 +29,7 @@ export const VideoTable = () => {
     <>
       <DashboardLayout>
         {isLoading ? (
-          <HashLoader color="#36d7b7" cssOverride={override} />
+          <Loader />
         ) : isError ? (
           <span>There was an error</span>
         ) : videos?.length === 0 ? (
@@ -60,7 +51,7 @@ export const VideoTable = () => {
 
               <tbody className="divide-y divide-slate-600/50">
                 {videos?.map((video) => (
-                  <tr key={video?.id}>
+                  <tr key={video?._id}>
                     <td className="px-6 py-4 font-medium">
                       <p className="truncate w-8/12">{video?.title}</p>
                     </td>

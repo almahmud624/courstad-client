@@ -25,7 +25,23 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    userLogIn(email, password)
+    handleUserLogin(email, password, form);
+  };
+
+  // password reset
+  const handleResetPassword = () => {
+    resetPassword(userEmail)
+      .then(() => {
+        setErr("");
+        toast.success("Password reset email sent to your email");
+      })
+      .catch((error) => {
+        setErr(error.code);
+      });
+  };
+
+  const handleUserLogin = (email, password, form) => {
+    return userLogIn(email, password)
       .then((res) => {
         verifyUser({ email }).then((res) => {
           if (res?.data?.role === "admin") {
@@ -40,18 +56,6 @@ const Login = () => {
       })
       .catch((error) => {
         setState("error");
-        setErr(error.code);
-      });
-  };
-
-  // password reset
-  const handleResetPassword = () => {
-    resetPassword(userEmail)
-      .then(() => {
-        setErr("");
-        toast.success("Password reset email sent to your email");
-      })
-      .catch((error) => {
         setErr(error.code);
       });
   };
@@ -125,14 +129,33 @@ const Login = () => {
                     </div>
 
                     <div>
-                      <button
-                        type="submit"
-                        className="flex items-center justify-center w-full px-10 py-3 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-700 rounded hover:bg-green-800 focus:outline-none focus:border-transparent ring-0"
-                      >
-                        {state === "loading" ? <Spinner /> : "Login"}
-                      </button>
+                      <LoginButton
+                        state={state}
+                        buttonText={"Login"}
+                        customStyle={"border border-green-700"}
+                      />
                     </div>
                   </form>
+                  <div className="mt-5">
+                    <span className="text-center block font-semibold">
+                      Demo Login
+                    </span>
+                    <span className="w-64 mx-auto block h-[1px] bg-gradient-to-r from-gray-800 via-green-600 to-gray-800 mb-2"></span>
+                    <div className="md:flex-row flex flex-col justify-center items-center gap-5">
+                      <LoginButton
+                        buttonText={"Learner"}
+                        action={handleUserLogin}
+                        email={"learner@gmail.com"}
+                        password={123456}
+                      />
+                      <LoginButton
+                        buttonText={"Admin"}
+                        action={handleUserLogin}
+                        email={"admin@gmail.com"}
+                        password={123456}
+                      />
+                    </div>
+                  </div>
                   <div className="text-sm text-center mt-5">
                     <button
                       onClick={handleResetPassword}
@@ -165,3 +188,24 @@ const Login = () => {
 };
 
 export default Login;
+
+const LoginButton = ({
+  state,
+  buttonText,
+  action,
+  email,
+  password,
+  customStyle,
+}) => {
+  return (
+    <>
+      <button
+        type="submit"
+        className={`flex items-center justify-center w-full px-10 py-2 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-green-800 rounded hover:bg-green-700 focus:outline-none focus:border-transparent ring-0 ${customStyle}`}
+        onClick={() => action(email, password)}
+      >
+        {state === "loading" ? <Spinner /> : buttonText}
+      </button>
+    </>
+  );
+};

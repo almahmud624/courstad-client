@@ -31,15 +31,15 @@ export const CompanyStory = () => {
             <p className="text-center my-3 text-sm md:text-base md:my-5 dark:text-gray-400 text-gray-800 max-w-sm m-auto ">
               One Year of Transforming Education and Empowering Minds
             </p>
-            <div class="mx-auto flex items-center justify-center">
+            <div className="mx-auto flex items-center justify-center">
               <div
-                class="w-full rounded-md bg-gradient-to-r from-red-700 via-green-500 to-green-700 p-1"
+                className="w-full rounded-md bg-gradient-to-r from-red-700 via-green-500 to-green-700 p-1"
                 style={{
                   borderRadius: "30% 70% 42% 58% / 30% 41% 59% 70% ",
                 }}
               >
                 <div
-                  class="flex h-full w-full items-center justify-center bg-gray-900 back"
+                  className="flex h-full w-full items-center justify-center bg-gray-900 back"
                   style={{
                     borderRadius: "30% 70% 42% 58% / 30% 41% 59% 70% ",
                   }}

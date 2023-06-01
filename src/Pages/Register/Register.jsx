@@ -181,10 +181,10 @@ const Register = () => {
                       </>
                     )}
                     <div className="flex flex-col mb-2">
-                      <div class="flex items-center justify-center w-full">
+                      <div className="flex items-center justify-center w-full">
                         <label
                           for="dropzone-file"
-                          class={`flex items-center justify-center w-full h-20  rounded-lg cursor-pointer bg-gray-50 ${
+                          className={`flex items-center justify-center w-full h-20  rounded-lg cursor-pointer bg-gray-50 ${
                             imgPath?.imgSrc
                               ? "bg-transparent flex-row justify-center gap-x-5"
                               : "flex-col"
@@ -208,20 +208,20 @@ const Register = () => {
                             </>
                           ) : (
                             <>
-                              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                              <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                 <FiUploadCloud
                                   className={"h-6 w-6 text-gray-600"}
                                 />
-                                <p class="mb-2 text-sm text-gray-600">
-                                  <span class="font-semibold">
-                                    Click to upload
+                                <p className="mb-2 text-sm text-gray-600">
+                                  <span className="font-semibold">
+                                    Choose Your Profile Photo
                                   </span>{" "}
                                 </p>
                               </div>
                               <input
                                 id="dropzone-file"
                                 type="file"
-                                class="hidden"
+                                className="hidden"
                                 onChange={handleImgPath}
                               />
                             </>

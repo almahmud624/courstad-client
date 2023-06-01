@@ -2,13 +2,8 @@ import DashboardLayout from "../../../Layout/DashboardLayout";
 import { AssignmentMarkTable } from "../../../components/AssignmentMarkTable/AssignmentMarkTable";
 import { useGetAssignmentMarkQuery } from "../../../features/assignmentMark/assignmentMarkApi";
 import { NotFound } from "../../../components/NotFound/NotFound";
-import { HashLoader } from "react-spinners";
+import { Loader } from "../../../components/Loader/Loader";
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  height: "100vh",
-};
 export const AssignmentMark = () => {
   const {
     data: assignmentMarks,
@@ -18,7 +13,7 @@ export const AssignmentMark = () => {
 
   let content;
   if (isLoading) {
-    content = <HashLoader color="#36d7b7" cssOverride={override} />;
+    content = <Loader />;
   } else if (!isLoading && isError) {
     content = <span>There was an error</span>;
   } else if (!isLoading && !isError && assignmentMarks?.length === 0) {

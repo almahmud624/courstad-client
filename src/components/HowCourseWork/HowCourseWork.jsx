@@ -32,7 +32,7 @@ const content = [
 export const HowCourseWork = () => {
   return (
     <>
-      <section className="dark:bg-gray-800 bg-white py-14">
+      <section className="dark:bg-gray-800 bg-white py-14 overflow-hidden">
         <div className="">
           <h1 className="text-center text-3xl md:text-5xl font-semibold dark:text-gray-200 text-gray-800">
             How will the <span className=" ">course work?</span>

@@ -62,7 +62,7 @@ const Category = ({ categories }) => {
     <>
       {categories?.map((category, i) => (
         <Link
-          key={i}
+          key={Math.random()}
           className="group flex flex-col justify-center items-center text-center rounded-xl border border-gray-800 bg-gray-900 shadow-xl h-40"
           to={`/courses?category=${category}`}
         >
@@ -101,14 +101,14 @@ const CategoryLoader = () => {
         .fill()
         .map((i) => (
           <div
-            key={i}
+            key={Math.random()}
             className="group flex flex-col justify-center items-center text-center rounded-xl border border-gray-800 bg-gray-900 shadow-xl h-40 animate-pulse"
           >
             <div className=" p-2 bg-gray-800 rounded-full h-20 w-20">
               <span className="text-3xl flex justify-center rounded-full p-4 bg-gray-900/80  shadow-xl shadow-gray-700/25 h-16 w-16"></span>
             </div>
 
-            <div class="h-4 w-20 bg-gray-200 rounded dark:bg-gray-800 my-2.5"></div>
+            <div className="h-4 w-20 bg-gray-200 rounded dark:bg-gray-800 my-2.5"></div>
           </div>
         ))}
     </>

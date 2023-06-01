@@ -10,10 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.init";
-import {
-  useStoreUserMutation,
-  useVerifyUserMutation,
-} from "../features/user/userApi";
+import { useVerifyUserMutation } from "../features/user/userApi";
 import { useDispatch } from "react-redux";
 import { userLogOut } from "../features/user/userSlice";
 

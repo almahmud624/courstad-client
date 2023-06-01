@@ -12,13 +12,8 @@ import { getQuizMark } from "../../utils/getQuizMark";
 import toast from "react-hot-toast";
 import { ConfirmationModal } from "../../components/Modal/ConfirmationModal";
 import { NotFound } from "../../components/NotFound/NotFound";
-import { HashLoader } from "react-spinners";
+import { Loader } from "../../components/Loader/Loader";
 
-const override = {
-  display: "block",
-  margin: "0 auto",
-  height: "100vh",
-};
 export const Quiz = () => {
   const { videoId } = useParams();
   const { data: quizzes, isLoading, isError } = useGetQuizzesQuery();
@@ -72,7 +67,7 @@ export const Quiz = () => {
     <>
       <section className="py-6 bg-gray-800">
         {isLoading ? (
-          <HashLoader color="#36d7b7" cssOverride={override} />
+          <Loader />
         ) : contentNotFound ? (
           <NotFound
             message={"Quizzes not found"}

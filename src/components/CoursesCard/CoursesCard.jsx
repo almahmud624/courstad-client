@@ -16,7 +16,7 @@ export const CoursesCard = ({ courses, isLoading, isError }) => {
             {Array(loadingCell)
               .fill()
               ?.map((i) => (
-                <CardLoader key={i} />
+                <CardLoader key={Math.random()} />
               ))}
           </div>
         </div>

@@ -9,7 +9,7 @@ import {
 } from "../../features/assignment/assignmentApi";
 import { useGetVideosQuery } from "../../features/videos/videosApi";
 import DashboardLayout from "../../Layout/DashboardLayout";
-// import { ErrorDialog } from "../ErrorDialog/ErrorDialog";
+import { ErrorAlert } from "../ErrorAlert/ErrorAlert";
 
 export const EditableAssignment = () => {
   const [title, setTitle] = useState("");
@@ -162,7 +162,7 @@ export const EditableAssignment = () => {
                 </select>
               </div>
 
-              {/* {err?.videoId && <ErrorDialog message={err?.videoId} />} */}
+              {err?.videoId && <ErrorAlert message={err?.videoId} />}
               <div className="">
                 <label
                   htmlFor="marks"
@@ -185,7 +185,7 @@ export const EditableAssignment = () => {
                   }}
                 />
               </div>
-              {/* {err?.marks && <ErrorDialog message={err?.marks} />} */}
+              {err?.marks && <ErrorAlert message={err?.marks} />}
               <button
                 type="submit"
                 className="text-white border border-2 border-green-600 hover:bg-green-800 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-500 mt-6"
@@ -194,7 +194,7 @@ export const EditableAssignment = () => {
                 Submit
               </button>
             </form>
-            {/* {isError && <ErrorDialog message={"There was an error"} />} */}
+            {isError && <ErrorAlert message={"There was an error"} />}
           </div>
         </section>
       </DashboardLayout>

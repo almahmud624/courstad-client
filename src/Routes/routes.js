@@ -8,7 +8,6 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import FrequentlyQuestion from "../Pages/FrequentlyQuestion/FrequentlyQuestion";
-import CheckOut from "../Pages/Checkout/CheckOut";
 import UpdateProfile from "../Pages/UpdateProfile/UpdateProfile";
 import { MyClasses } from "../components/MyClasses/MyClasses";
 import { Video } from "../Pages/Video/Video";
@@ -74,14 +73,7 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "/checkout/:id",
-        element: (
-          <PrivateRoute>
-            <CheckOut />
-          </PrivateRoute>
-        ),
-      },
+
       {
         path: "/my-class",
         element: (

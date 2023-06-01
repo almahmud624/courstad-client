@@ -7,11 +7,9 @@ const useGetCourseVideosByTitle = (courseTitle) => {
     size: 14,
   });
   const { courses } = data || {};
-  const {
-    data: videos,
-    isLoading,
-    isError,
-  } = useGetVideosQuery({ id: courses?.[0]?._id });
+  const { data: videos, isLoading } = useGetVideosQuery({
+    id: courses?.[0]?._id,
+  });
 
   return [videos, isLoading];
 };

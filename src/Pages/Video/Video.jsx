@@ -13,7 +13,7 @@ import { FormModal } from "../../components/Modal/FormModal";
 import { VideoPlayerLoader } from "../../components/Loader/VideoPlayerLoader/VideoPlayerLoader";
 export const Video = () => {
   const { videoId } = useParams();
-  const { data: video, isLoading, isError } = useGetVideoQuery(videoId);
+  const { data: video, isLoading } = useGetVideoQuery(videoId);
   const { user } = useSelector((state) => state.user);
   const { data: assignments } = useGetAssignmentsQuery();
   const [submitAssignment, { isSuccess, isError: submissonErr }] =

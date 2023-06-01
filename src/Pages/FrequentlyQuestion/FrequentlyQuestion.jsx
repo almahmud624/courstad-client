@@ -86,7 +86,7 @@ const FrequentlyQuestion = () => {
               <details
                 key={i}
                 className=" p-6 py-3 border-l-4 border-green-500 bg-teal-800 group transition-all duration-300 rounded"
-                close
+                close="true"
               >
                 <summary className="flex items-center justify-between cursor-pointer">
                   <h5 className="text-lg font-medium text-gray-200">
@@ -103,7 +103,7 @@ const FrequentlyQuestion = () => {
                       <path
                         fillRule="evenodd"
                         d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                        clip-rule="evenodd"
+                        clipRule="evenodd"
                       />
                     </svg>
                   </span>

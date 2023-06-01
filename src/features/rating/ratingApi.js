@@ -1,5 +1,4 @@
 import { apiSlice } from "../api/apiSlice";
-import { courseApi } from "../courses/courseApi";
 
 export const ratingApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

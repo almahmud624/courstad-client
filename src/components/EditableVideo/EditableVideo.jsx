@@ -8,17 +8,13 @@ import {
 } from "../../features/videos/videosApi";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
-// import { ErrorDialog } from "../ErrorDialog/ErrorDialog";
+import { ErrorAlert } from "../ErrorAlert/ErrorAlert";
 
 export const EditableVideo = () => {
-  const [
-    addVideo,
-    { isSuccess: addSuccess, isError: addError, isLoading: addLoading },
-  ] = useAddVideoMutation();
-  const [
-    editVideo,
-    { isSuccess: editSuccess, isError: editError, isLoading: editLoading },
-  ] = useEditVideoMutation();
+  const [addVideo, { isSuccess: addSuccess, isError: addError }] =
+    useAddVideoMutation();
+  const [editVideo, { isSuccess: editSuccess, isError: editError }] =
+    useEditVideoMutation();
   const { data: courses } = useGetCoursesQuery({ size: 14 });
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -34,7 +30,6 @@ export const EditableVideo = () => {
   // mutation response shown by conditionally
   const isSuccess = addSuccess || editSuccess;
   const isError = addError || editError;
-  const isLoading = addLoading || editLoading;
 
   // checking form validation
   const formValidation = (url, duration, views) => {
@@ -106,8 +101,8 @@ export const EditableVideo = () => {
                   type="text"
                   id="title"
                   name="title"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-                  placeholder="lorem ipsum dolar emmet"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  placeholder="Video title..."
                   value={title}
                   required
                   onChange={(e) => setTitle(e.target.value)}
@@ -175,7 +170,7 @@ export const EditableVideo = () => {
                   type="text"
                   id="url"
                   name="url"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="https://example.com"
                   value={url}
                   required
@@ -185,7 +180,7 @@ export const EditableVideo = () => {
                   }}
                 />
               </div>
-              {/* {err?.url && <ErrorDialog message={err?.url} />} */}
+              {err?.url && <ErrorAlert message={err?.url} />}
 
               <div className="mb-6">
                 <label
@@ -198,7 +193,7 @@ export const EditableVideo = () => {
                   type="text"
                   id="duration"
                   name="duration"
-                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-800 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   placeholder="12:12"
                   value={duration}
                   required
@@ -208,7 +203,7 @@ export const EditableVideo = () => {
                   }}
                 />
               </div>
-              {/* {err?.duration && <ErrorDialog message={err?.duration} />} */}
+              {err?.duration && <ErrorAlert message={err?.duration} />}
               <button
                 type="submit"
                 className="text-white border border-2 border-green-600 hover:bg-green-800 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center transition-all duration-500 mb-5"
@@ -217,7 +212,7 @@ export const EditableVideo = () => {
                 Submit
               </button>
             </form>
-            {/* {isError && <ErrorDialog message={"There was an error"} />} */}
+            {isError && <ErrorAlert message={"There was an error"} />}
           </div>
         </section>
       </DashboardLayout>

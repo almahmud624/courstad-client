@@ -23,7 +23,7 @@ export const MyClasses = () => {
             {Array(loadingCell)
               .fill()
               ?.map((i) => (
-                <CardLoader2 key={i} />
+                <CardLoader2 key={Math.random()} />
               ))}
           </div>
         ) : isError ? (

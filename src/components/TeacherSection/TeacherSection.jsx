@@ -2,7 +2,7 @@ import Teachers from "../../Pages/Teachers/Teachers";
 import { useGetCoursesQuery } from "../../features/courses/courseApi";
 
 export const TeacherSection = () => {
-  const { data, isLoading, isError } = useGetCoursesQuery({ size: 4 });
+  const { data } = useGetCoursesQuery({ size: 4 });
   const { courses } = data || {};
   return (
     <>

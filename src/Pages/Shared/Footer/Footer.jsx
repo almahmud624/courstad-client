@@ -15,7 +15,7 @@ const Footer = () => {
       <div className="bg-white dark:bg-gray-800 pt-4  sm:pt-10 lg:pt-12">
         <footer className="max-w-screen-2xl px-4 md:px-8   mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 border-t border-gray-600 lg:grid-cols-6 gap-12 lg:gap-8 pt-10 lg:pt-12 mb-16">
-            <div className="col-span-full lg:col-span-2 mt-6">
+            <div className="col-span-full lg:col-span-2">
               <Link
                 to="/"
                 aria-label="courstad"
