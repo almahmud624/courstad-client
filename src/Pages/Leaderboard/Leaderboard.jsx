@@ -1,6 +1,6 @@
 import { LeaderboardTopPosition } from "../../components/LeaderboardPosition/LeaderboardTopPosition";
 import { LoggedInPosition } from "../../components/LeaderboardPosition/LoggedInPosition";
-// import { Loader } from "../../components/Loader/Loader";
+import { Loader } from "../../components/Loader/Loader";
 import { NotFound } from "../../components/NotFound/NotFound";
 import { useGetAssignmentMarkQuery } from "../../features/assignmentMark/assignmentMarkApi";
 import { useGetQuizMarkQuery } from "../../features/quizMark/quizMarkApi";
@@ -23,7 +23,7 @@ export const Leaderboard = () => {
   );
 
   // find users of student
-  const students = users?.filter((student) => student.role === "student");
+  const students = users?.filter((student) => student.role !== "admin");
 
   // calculate multiple assignment & quiz marks
   const finalAssignmentMark = calculateMark(
@@ -50,7 +50,7 @@ export const Leaderboard = () => {
   return (
     <>
       {isLoading ? (
-        "<Loader />"
+        <Loader />
       ) : rankedStd?.length === 0 ? (
         <NotFound message={"Data not found"} />
       ) : (

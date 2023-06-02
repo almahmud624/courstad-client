@@ -2,13 +2,10 @@ import { useSelector } from "react-redux";
 
 export const LoggedInPosition = ({ studentsMark = [] }) => {
   // find LoggedIn user mark
-  const auth = useSelector((state) => state.auth);
-  const loggedInUserRank = studentsMark?.find(
-    (std) => std?._id === auth?.user?._id
-  );
+  const { user } = useSelector((state) => state.user);
+  const loggedInUserRank = studentsMark?.find((std) => std?.id === user?._id);
   const { name, rank, assignmentMark, quizMark, totalMark } =
     loggedInUserRank || {};
-
   return (
     <>
       <div>
