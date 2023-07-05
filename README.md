@@ -5,17 +5,19 @@ choice the best course, make you more and more skillful.
 
 ## Features:
 
-- Authetication
+- Email & Password Authetication
 - Course filter like most enrolled, most rated course etc
 - Category filter also included
-- Seach functionality
+- User can search course by course title
 - All filtering done form backend
-- Course Rating system. User can rate a course
-- Enrolled course list
+- Course Rating system. User can rate a course. Also user can update and remove the rating.
+- User can access Enrolled course list in my classes page
 - Course video player, assignment, quiz
-- Student leaderboard
-- Pagination
-- In backend Video, Quiz, Assignment & Quiz Mark managable
+- User can search course video in the video list
+- User can also submit the quiz and get the quiz result with identified right & wrong answer.
+- User can track their improvment in student leaderboard
+- Pagination also added in courses page
+- In admin portion Video, Quiz, Assignment & Quiz Mark managable
 
 ## Technology:
 
